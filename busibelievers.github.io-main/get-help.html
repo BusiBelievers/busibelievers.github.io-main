@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Request Assistance | Busi Believers</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0b1220;
+color:white;
+margin:0;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:40px 20px;
+text-align:center;
+}
+
+form{
+margin-top:30px;
+}
+
+input,select,textarea{
+width:100%;
+padding:12px;
+margin-bottom:12px;
+border-radius:8px;
+border:none;
+}
+
+button{
+padding:14px 22px;
+background:#d4af37;
+border:none;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Request Assistance</h1>
+
+<p style="max-width:650px;margin:auto">
+If you are experiencing hardship and need help with home repair,
+vehicle repair, property maintenance, or other essential needs,
+please submit a request below.
+</p>
+
+<form id="busiHelpForm">
+
+<input type="text" name="name" placeholder="Full Name" required>
+
+<input type="email" name="email" placeholder="Email Address" required>
+
+<input type="text" name="phone" placeholder="Phone Number">
+
+<select name="assistance">
+
+<option value="">Type of Assistance</option>
+<option>Home Repair</option>
+<option>Vehicle Repair</option>
+<option>Tree Removal</option>
+<option>Lawn Care</option>
+<option>Plumbing</option>
+<option>Other</option>
+
+</select>
+
+<textarea name="description" placeholder="Describe the help needed"></textarea>
+
+<button type="submit">Submit Request</button>
+
+</form>
+
+</div>
+
+<script>
+
+let cases = JSON.parse(localStorage.getItem("busiCases")) || [];
+
+function generateCase(){
+
+let number = cases.length + 1;
+return "BUSI-" + number.toString().padStart(3,"0");
+
+}
+
+document.getElementById("busiHelpForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+let form = e.target;
+
+let caseID = generateCase();
+
+let newCase = {
+caseID: caseID,
+project: form.assistance.value,
+location: "San Antonio",
+status: "Pending Review"
+};
+
+cases.push(newCase);
+
+localStorage.setItem("busiCases", JSON.stringify(cases));
+
+alert("Request submitted. Your case number is "+caseID);
+
+form.reset();
+
+});
+
+</script>
+
+</body>
+</html>
