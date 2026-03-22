@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contribution Form | Busi Believers Incorporated</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #0b1220, #121a2f);
+      color: #ffffff;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+      border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .nonprofit-notice {
+      background: rgba(212, 175, 55, 0.1);
+      border: 2px solid rgba(212, 175, 55, 0.3);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .nonprofit-notice strong {
+      color: #d4af37;
+    }
+
+    form {
+      background: rgba(255, 255, 255, 0.06);
+      padding: 30px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-row.full {
+      grid-template-columns: 1fr;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    input,
+    select,
+    textarea {
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #d4af37;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .amount-display {
+      font-size: 24px;
+      font-weight: bold;
+      color: #d4af37;
+      padding: 15px;
+      background: rgba(212, 175, 55, 0.1);
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    button {
+      flex: 1;
+      padding: 14px 22px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-submit {
+      background: linear-gradient(90deg, #d4af37, #f0c85f);
+      color: #0b1220;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-back {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-back:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .tax-notice {
+      background: rgba(46, 204, 113, 0.1);
+      border: 1px solid rgba(46, 204, 113, 0.3);
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.7;
+    }
+
+    .tax-notice strong {
+      color: #2ecc71;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: bold;
+      color: #d4af37;
+      margin-top: 20px;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    a {
+      color: #d4af37;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>BUSI Contribution Form</h1>
+      <p><strong>Busi Believers Incorporated</strong></p>
+      <p>Bonding Using Stewardship and Integrity</p>
+      <p style="margin-top: 10px; font-style: italic;">"No voice nor invoice will go unheard."</p>
+    </header>
+
+    <!-- Nonprofit Legal Notice -->
+    <div class="nonprofit-notice">
+      <p>
+        <strong>IMPORTANT:</strong> Busi Believers Incorporated is a
+        <strong>federally recognized 501(c)(3) nonprofit organization</strong>
+        (EIN: 88-1788881). Your contribution is <strong>tax-deductible</strong>
+        to the extent allowed by law.
+      </p>
+      <p style="margin-top: 12px;">
+        <strong>No goods or services of value are being provided in exchange for
+        this contribution.</strong> This contribution is voluntary and is used
+        solely to support BUSI faith and community curriculum programming,
+        mentorship initiatives, and community assistance projects.
+      </p>
+    </div>
+
+    <form id="contributionForm">
+      <!-- Contribution Information -->
+      <div class="section-title">Contribution Information</div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="contributionNumber">Contribution Record Number</label>
+          <input
+            type="text"
+            id="contributionNumber"
+            name="contributionNumber"
+            placeholder="Auto-generated"
+            readonly
+          />
+        </div>
+        <div class="form-group">
+          <label for="contributionDate">Contribution Date</label>
+          <input
+            type="date"
+            id="contributionDate"
+            name="contributionDate"
+            required
+          />
+        </div>
+      </div>
+
+      <!-- Contributor Information -->
+      <div class="section-title">Contributor Information</div>
+
+      <div class="form-row full">
+        <div class="form-group">
+          <label for="participantName">Full Name</label>
+          <input
+            type="text"
+            id="participantName"
+            name="participantName"
+            placeholder="Enter your full name"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="your@email.com"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="(555) 123-4567"
+          />
+        </div>
+      </div>
+
+      <!-- Program Selection -->
+      <div class="section-title">Program Support</div>
+
+      <div class="form-row full">
+        <div class="form-group">
+          <label for="programModule">Program Module / Area</label>
+          <select id="programModule" name="programModule" required>
+            <option value="">-- Select Program Module --</option>
+            <option value="mentorship">Mentorship & Leadership Development</option>
+            <option value="stewardship">Stewardship Education</option>
+            <option value="home-assistance">Home Repair Assistance</option>
+            <option value="vehicle-assistance">Vehicle Repair Assistance</option>
+            <option value="community-outreach">Community Outreach & Service</option>
+            <option value="curriculum">BUSI Curriculum Program</option>
+            <option value="volunteer">Volunteer Support & Coordination</option>
+            <option value="general">General BUSI Operations</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row full">
+        <div class="form-group">
+          <label for="description">Program Participation Summary</label>
+          <textarea
+            id="description"
+            name="description"
+            placeholder="Briefly describe your participation, program involvement, or reason for supporting this area (optional)"
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- Contribution Amount -->
+      <div class="section-title">Contribution Amount</div>
+
+      <div class="form-row full">
+        <div class="form-group">
+          <label for="suggestedAmount"
+            >Suggested Contribution Amount ($)</label
+          >
+          <input
+            type="number"
+            id="suggestedAmount"
+            name="suggestedAmount"
+            placeholder="0.00"
+            min="0"
+            step="0.01"
+            value="0.00"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-row full">
+        <div class="form-group">
+          <label for="actualAmount"
+            >Actual Contribution Amount ($)</label
+          >
+          <input
+            type="number"
+            id="actualAmount"
+            name="actualAmount"
+            placeholder="0.00"
+            min="0"
+            step="0.01"
+            value="0.00"
+            required
+          />
+        </div>
+      </div>
+
+      <!-- Payment Method -->
+      <div class="section-title">Contribution Method</div>
+
+      <div class="form-row full">
+        <div class="form-group">
+          <label for="paymentMethod">How will you contribute?</label>
+          <select id="paymentMethod" name="paymentMethod" required>
+            <option value="">-- Select Contribution Method --</option>
+            <option value="paypal">PayPal Donation</option>
+            <option value="check">Check (Mail)</option>
+            <option value="direct-transfer">Direct Bank Transfer</option>
+            <option value="cash">Cash (In-person)</option>
+            <option value="goods">In-kind Gift / Goods</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Tax/Legal Notice -->
+      <div class="tax-notice">
+        <p>
+          <strong>Tax Deductibility:</strong> Your contribution to Busi
+          Believers Incorporated (EIN: 88-1788881), a federally recognized
+          501(c)(3) nonprofit organization, is tax-deductible to the extent
+          allowed by law. Please retain this contribution record for your tax
+          records and consult your tax advisor regarding deductibility. No
+          goods or services of value have been provided in return for this
+          contribution.
+        </p>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="button-group">
+        <button type="reset" class="btn-back">Clear Form</button>
+        <button type="submit" class="btn-submit">Submit Contribution Record</button>
+      </div>
+    </form>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        <strong>Busi Believers Incorporated</strong><br />
+        Bonding Using Stewardship and Integrity<br />
+        San Antonio, Texas<br />
+        <br />
+        EIN: 88-1788881 | Phone: 888-287-4215 |
+        <a href="mailto:admin@busib.net">Email: admin@busib.net</a><br />
+        <br />
+        © 2026 Busi Believers Incorporated. All rights reserved.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // Auto-generate contribution record number
+    function generateContributionNumber() {
+      const date = new Date();
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const random = Math.floor(Math.random() * 10000)
+        .toString()
+        .padStart(4, "0");
+      return `BUSI-${year}${month}${day}-${random}`;
+    }
+
+    // Set today's date
+    function setTodayDate() {
+      const today = new Date().toISOString().split("T")[0];
+      document.getElementById("contributionDate").value = today;
+    }
+
+    // Initialize form
+    function initializeForm() {
+      document.getElementById("contributionNumber").value =
+        generateContributionNumber();
+      setTodayDate();
+    }
+
+    // Handle form submission
+    document.getElementById("contributionForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const formData = {
+        contributionNumber: document.getElementById("contributionNumber").value,
+        contributionDate: document.getElementById("contributionDate").value,
+        participantName: document.getElementById("participantName").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        programModule: document.getElementById("programModule").value,
+        description: document.getElementById("description").value,
+        suggestedAmount: parseFloat(
+          document.getElementById("suggestedAmount").value
+        ),
+        actualAmount: parseFloat(document.getElementById("actualAmount").value),
+        paymentMethod: document.getElementById("paymentMethod").value,
+        submittedAt: new Date().toISOString(),
+      };
+
+      // Store in localStorage for records
+      let contributions = JSON.parse(
+        localStorage.getItem("busiContributions")
+      ) || [];
+      contributions.push(formData);
+      localStorage.setItem("busiContributions", JSON.stringify(contributions));
+
+      // Show confirmation
+      alert(
+        `Thank you for your contribution!\n\nContribution Record: ${formData.contributionNumber}\n\nYour contribution supports BUSI's mission of serving individuals and families through mentorship and community assistance.`
+      );
+
+      // Reset form
+      this.reset();
+      initializeForm();
+    });
+
+    // Initialize on page load
+    window.addEventListener("DOMContentLoaded", initializeForm);
+  </script>
+</body>
+</html>
