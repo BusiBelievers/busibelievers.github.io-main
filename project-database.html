@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BUSI Project Database</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0b1220;
+color:white;
+margin:0;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:30px;
+}
+
+th, td{
+padding:12px;
+border-bottom:1px solid rgba(255,255,255,0.2);
+text-align:left;
+}
+
+th{
+background:rgba(255,255,255,0.08);
+}
+
+.status-complete{
+color:#2ecc71;
+font-weight:bold;
+}
+
+.status-active{
+color:#3498db;
+font-weight:bold;
+}
+
+.status-hold{
+color:#ffb347;
+font-weight:bold;
+}
+
+.status-pending{
+color:#f1c40f;
+font-weight:bold;
+}
+
+.sync-status{
+display:inline-block;
+margin-top:14px;
+padding:10px 14px;
+border-radius:999px;
+font-size:14px;
+font-weight:bold;
+}
+
+.sync-live{
+background:rgba(46,204,113,0.18);
+color:#7dffb1;
+}
+
+.sync-fallback{
+background:rgba(241,196,15,0.18);
+color:#ffe08a;
+}
+
+.org-header{display:flex;align-items:center;gap:20px;padding:14px 20px;background:#0b1220;border-bottom:3px solid #d4af37;}
+.org-header img{height:92px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px #d4af37);}
+.org-info{display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.5;color:white;}
+.org-info strong{font-size:18px;}
+.org-info em{color:#d4af37;}
+@media print{body{background:white!important;color:black!important;}.org-header{background:white!important;border-bottom:3px solid #d4af37;}.org-info strong,.org-info span{color:black!important;}}</style>
+
+</head>
+
+<body>
+<div class="org-header"><img src="logo.png" alt="Busi Believers Incorporated"><div class="org-info"><strong>Busi Believers Incorporated</strong><span>Bonding Using Stewardship and Integrity</span><span>San Antonio, Texas</span><em>"No voice nor invoice will go unheard."</em></div><a href="index.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#d4af37;color:#0b1220;font-weight:bold;font-size:14px;border-radius:999px;text-decoration:none;">&#127968; Home</a></div>
+
+<div class="container">
+
+<h1>BUSI Project Database</h1>
+
+<p>
+This page tracks approved public-facing assistance requests and projects served by
+Busi Believers Incorporated.
+</p>
+
+<div id="syncStatus" class="sync-status sync-fallback">Checking live sync...</div>
+
+<table>
+
+<tr>
+<th>Case</th>
+<th>Project Type</th>
+<th>Status</th>
+<th>Location</th>
+</tr>
+
+<tbody id="casesTableBody"></tbody>
+
+</table>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+
+const sampleCases = [
+{ case_number: "BUSI-006", need_type: "Tree Removal", status: "Completed", city: "San Antonio", is_public: true },
+{ case_number: "BUSI-007", need_type: "Lawn Care", status: "In Progress", city: "San Antonio", is_public: true },
+{ case_number: "BUSI-008", need_type: "Vehicle Assistance", status: "Approved", city: "San Antonio", is_public: true }
+];
+
+const staffParam = new URLSearchParams(window.location.search).get("staff");
+if(staffParam === "1") localStorage.setItem("busiStaffMode", "1");
+if(staffParam === "0") localStorage.removeItem("busiStaffMode");
+const SHOW_SYNC_STATUS = staffParam === "1" || (staffParam !== "0" && localStorage.getItem("busiStaffMode") === "1");
+const syncStatusElement = document.getElementById("syncStatus");
+if(syncStatusElement && !SHOW_SYNC_STATUS){
+syncStatusElement.style.display = "none";
+}
+
+const PUBLIC_STATUSES = ["Approved", "In Progress", "Completed", "Active"];
+
+function normalizeStatus(status){
+const normalized = String(status || "Pending Review").toLowerCase();
+if(normalized === "active") return "In Progress";
+if(normalized === "pending") return "Pending Review";
+if(normalized === "closed") return "Completed";
+if(normalized === "on hold") return "On Hold";
+if(normalized === "approved") return "Approved";
+if(normalized === "in progress") return "In Progress";
+if(normalized === "completed") return "Completed";
+return "Pending Review";
+}
+
+function isPublicCase(row){
+const status = normalizeStatus(row.status);
+const publicFlag = row.is_public ?? row.isPublic;
+return publicFlag === false ? false : PUBLIC_STATUSES.includes(status);
+}
+
+function escapeHtml(value){
+return String(value ?? "")
+.replace(/&/g, "&amp;")
+.replace(/</g, "&lt;")
+.replace(/>/g, "&gt;")
+.replace(/\"/g, "&quot;")
+.replace(/'/g, "&#39;");
+}
+
+function statusClass(status){
+const normalized = normalizeStatus(status).toLowerCase();
+if(normalized === "completed") return "status-complete";
+if(normalized === "approved" || normalized === "in progress") return "status-active";
+if(normalized === "on hold") return "status-hold";
+return "status-pending";
+}
+
+function normalizeRow(row){
+return {
+case_number: row.case_number || row.caseID || row.case || "BUSI-UNASSIGNED",
+need_type: row.need_type || row.project || row.project_type || "General Assistance",
+status: normalizeStatus(row.status),
+city: row.city || row.location || "San Antonio",
+is_public: Boolean(row.is_public ?? row.isPublic ?? false)
+};
+}
+
+function setSyncStatus(message,isLive){
+const status = document.getElementById("syncStatus");
+if(!status || !SHOW_SYNC_STATUS) return;
+status.className = `sync-status ${isLive ? "sync-live" : "sync-fallback"}`;
+status.textContent = message;
+}
+
+function renderCases(rows){
+const body = document.getElementById("casesTableBody");
+if(!body) return;
+
+if(!rows.length){
+body.innerHTML = "<tr><td colspan=\"4\">No cases found.</td></tr>";
+return;
+}
+
+body.innerHTML = rows.map((row) => {
+const safeCase = escapeHtml(row.case_number);
+const safeType = escapeHtml(row.need_type);
+const safeStatus = escapeHtml(row.status);
+const safeCity = escapeHtml(row.city);
+const statusCss = statusClass(row.status);
+
+return `
+<tr>
+<td><a href="impact-map.html?case=${encodeURIComponent(row.case_number)}">${safeCase}</a></td>
+<td>${safeType}</td>
+<td class="${statusCss}">${safeStatus}</td>
+<td>${safeCity}</td>
+</tr>
+`;
+}).join("");
+}
+
+function loadLocalCases(){
+try{
+const stored = JSON.parse(localStorage.getItem("busiCases") || "[]");
+if(Array.isArray(stored) && stored.length){
+return stored.map(normalizeRow).filter(isPublicCase);
+}
+}catch(_){
+}
+return sampleCases.map(normalizeRow).filter(isPublicCase);
+}
+
+async function loadCases(){
+const client = window.BUSI_SUPABASE ? window.BUSI_SUPABASE.createClient() : null;
+
+if(!client){
+setSyncStatus("Using browser-only local data. Live sharing not confirmed.", false);
+renderCases(loadLocalCases());
+return;
+}
+
+try{
+const { data, error } = await client
+.from("cases")
+.select("case_number, need_type, status, city, is_public")
+.order("created_at", { ascending: false })
+.limit(200);
+
+if(error){
+setSyncStatus("Supabase connection failed. Showing local fallback data.", false);
+renderCases(loadLocalCases());
+return;
+}
+
+setSyncStatus("Connected to Supabase live data.", true);
+renderCases((data || []).map(normalizeRow).filter(isPublicCase));
+}catch(_){
+setSyncStatus("Supabase connection failed. Showing local fallback data.", false);
+renderCases(loadLocalCases());
+}
+}
+
+loadCases();
+
+</script>
+
+</body>
+</html>

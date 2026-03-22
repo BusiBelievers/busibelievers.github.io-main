@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUSI Leadership Reporting Dashboard</title>
+<style>
+body{font-family:Arial;background:#0b1220;color:white;margin:0;}
+.container{max-width:1100px;margin:auto;padding:40px 20px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px;}
+.card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:22px;}
+.metric{font-size:36px;font-weight:bold;color:#f1d988;display:block;}
+.btn{display:inline-block;padding:12px 16px;background:#d4af37;color:black;border-radius:10px;text-decoration:none;font-weight:bold;margin:6px 8px 6px 0;}
+.quick-links{margin:0 0 12px;}
+.sync-status{display:inline-block;margin:14px 0 0;padding:10px 14px;border-radius:999px;font-size:14px;font-weight:bold;}
+.sync-live{background:rgba(46,204,113,0.18);color:#7dffb1;}
+.sync-fallback{background:rgba(241,196,15,0.18);color:#ffe08a;}
+ul{padding-left:20px;} li{margin-bottom:8px;} h1,h2,h3{margin-top:0;}
+.org-header{display:flex;align-items:center;gap:20px;padding:14px 20px;background:#0b1220;border-bottom:3px solid #d4af37;}
+.org-header img{height:92px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px #d4af37);}
+.org-info{display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.5;color:white;}
+.org-info strong{font-size:18px;}
+.org-info em{color:#d4af37;}
+@media print{body{background:white!important;color:black!important;}.org-header{background:white!important;border-bottom:3px solid #d4af37;}.org-info strong,.org-info span{color:black!important;}}.quick-actions-strip{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.05);border-bottom:1px solid rgba(212,175,55,0.35);} 
+.quick-actions-strip strong{color:#f4e2a7;font-size:14px;}
+.quick-actions-links{display:flex;flex-wrap:wrap;gap:8px;}
+.quick-actions-links a{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.45);color:#f7e6b0;text-decoration:none;font-size:13px;font-weight:bold;}
+.quick-actions-links a:hover{background:rgba(212,175,55,0.22);} 
+@media print{.quick-actions-strip{display:none!important;}}
+</style>
+</head>
+<body>
+<div class="org-header"><img src="logo.png" alt="Busi Believers Incorporated"><div class="org-info"><strong>Busi Believers Incorporated</strong><span>Bonding Using Stewardship and Integrity</span><span>San Antonio, Texas</span><em>"No voice nor invoice will go unheard."</em></div><a href="index.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#d4af37;color:#0b1220;font-weight:bold;font-size:14px;border-radius:999px;text-decoration:none;">&#127968; Home</a></div>
+<div class="quick-actions-strip" aria-label="Internal quick actions">
+<strong>Quick Actions:</strong>
+<div class="quick-actions-links">
+<a href="operations-hub.html">Operations Hub</a>
+<a href="founder-dashboard.html">Founder Dashboard</a>
+<a href="invoice-center.html">Invoice Center</a>
+<a href="curriculum-implementation.html">Curriculum</a>
+<a href="community-service-timesheet.html">Time Sheet</a>
+<a href="quote-comparison.html">Quote &amp; Comparison</a>
+</div>
+</div>
+<div class="container">
+<div class="quick-links">
+<a class="btn" href="founder-dashboard.html">Back to Founder Dashboard</a>
+<a class="btn" href="program-operations-policy.html">Operations Policy</a>
+<a class="btn" href="operations-hub.html">Operations Hub</a>
+</div>
+<h1>BUSI Leadership Reporting Dashboard</h1>
+<p style="max-width:860px;color:#d7d7d7;">Board-ready snapshot of open service load, completion flow, funding movement, and public visibility across BUSI cases.</p>
+<div id="syncStatus" class="sync-status sync-fallback">Checking live sync...</div>
+<div class="grid">
+<div class="card"><span class="metric" id="metricTotal">0</span><div>Total Cases</div></div>
+<div class="card"><span class="metric" id="metricReview">0</span><div>Under Review</div></div>
+<div class="card"><span class="metric" id="metricActive">0</span><div>Active / Delivery</div></div>
+<div class="card"><span class="metric" id="metricCompleted">0</span><div>Completed</div></div>
+<div class="card"><span class="metric" id="metricPublic">0</span><div>Public Listings</div></div>
+<div class="card"><span class="metric" id="metricFunding">$0</span><div>Funding Raised</div></div>
+</div>
+<div class="grid">
+<div class="card">
+<h2>Status Breakdown</h2>
+<div id="statusBreakdown">Loading...</div>
+</div>
+<div class="card">
+<h2>Leadership Review Cadence</h2>
+<ul>
+<li>Weekly: intake volume, urgent cases, blocked work, volunteer capacity.</li>
+<li>Monthly: completions, funding gap, public case visibility, donor-facing highlights.</li>
+<li>Quarterly: curriculum outcomes, sponsorship performance, process revisions, board packet.</li>
+</ul>
+</div>
+</div>
+<div class="grid">
+<div class="card">
+<h2>Board Packet Checklist</h2>
+<ul>
+<li>Cases opened, completed, and still pending.</li>
+<li>Funding raised versus funding goal.</li>
+<li>Participant outcomes and curriculum completion trend.</li>
+<li>Operational risks, escalations, and policy decisions needed.</li>
+</ul>
+</div>
+<div class="card">
+<h2>Leadership Actions</h2>
+<a class="btn" href="participant-journey-map.html">Participant Journey Maps</a>
+<a class="btn" href="sponsorship-tiers.html">Sponsorship Tiers</a>
+<a class="btn" href="curriculum-implementation.html">Program Implementation</a>
+</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+const supabaseClient = window.BUSI_SUPABASE ? window.BUSI_SUPABASE.createClient() : null;
+const STATUS_LABELS = ["Pending Review","Approved","In Progress","On Hold","Completed"];
+const staffParam = new URLSearchParams(window.location.search).get("staff");
+if(staffParam === "1") localStorage.setItem("busiStaffMode", "1");
+if(staffParam === "0") localStorage.removeItem("busiStaffMode");
+const SHOW_SYNC_STATUS = staffParam === "1" || (staffParam !== "0" && localStorage.getItem("busiStaffMode") === "1");
+const syncStatusElement = document.getElementById("syncStatus");
+if(syncStatusElement && !SHOW_SYNC_STATUS){
+syncStatusElement.style.display = "none";
+}
+function setSyncStatus(message,isLive){
+const status = document.getElementById("syncStatus");
+if(!status || !SHOW_SYNC_STATUS) return;
+status.className = `sync-status ${isLive ? "sync-live" : "sync-fallback"}`;
+status.textContent = message;
+}
+function normalizeStatus(value){
+const raw = String(value || "Pending Review").trim().toLowerCase();
+if(raw === "pending") return "Pending Review";
+if(raw === "active") return "In Progress";
+if(raw === "closed") return "Completed";
+if(raw === "approved") return "Approved";
+if(raw === "in progress") return "In Progress";
+if(raw === "on hold") return "On Hold";
+if(raw === "completed") return "Completed";
+return "Pending Review";
+}
+function currency(amount){
+return new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:0}).format(amount || 0);
+}
+function localCases(){
+try{
+return JSON.parse(localStorage.getItem("busiCases") || "[]");
+}catch(_){
+return [];
+}
+}
+function render(rows){
+const normalized = rows.map((row) => ({
+status: normalizeStatus(row.status),
+isPublic: Boolean(row.is_public ?? row.isPublic ?? false),
+fundingRaised: Number(row.funding_raised ?? row.fundingRaised ?? 0)
+}));
+const counts = {"Pending Review":0,"Approved":0,"In Progress":0,"On Hold":0,"Completed":0};
+let totalFunding = 0;
+let publicCount = 0;
+normalized.forEach((row) => {
+counts[row.status] = (counts[row.status] || 0) + 1;
+if(row.isPublic) publicCount += 1;
+if(Number.isFinite(row.fundingRaised)) totalFunding += row.fundingRaised;
+});
+document.getElementById("metricTotal").textContent = String(normalized.length);
+document.getElementById("metricReview").textContent = String(counts["Pending Review"]);
+document.getElementById("metricActive").textContent = String((counts["Approved"] || 0) + (counts["In Progress"] || 0) + (counts["On Hold"] || 0));
+document.getElementById("metricCompleted").textContent = String(counts["Completed"] || 0);
+document.getElementById("metricPublic").textContent = String(publicCount);
+document.getElementById("metricFunding").textContent = currency(totalFunding);
+document.getElementById("statusBreakdown").innerHTML = STATUS_LABELS.map((label) => `<p><strong>${label}:</strong> ${counts[label] || 0}</p>`).join("");
+}
+async function load(){
+if(!supabaseClient){
+setSyncStatus("Supabase not active. Leadership dashboard is using local fallback data.", false);
+render(localCases());
+return;
+}
+try{
+const { data, error } = await supabaseClient
+.from("cases")
+.select("status, funding_raised, is_public")
+.order("created_at", { ascending: false })
+.limit(500);
+if(error){
+setSyncStatus("Supabase read failed. Showing local fallback data.", false);
+render(localCases());
+return;
+}
+setSyncStatus("Connected to Supabase live data.", true);
+render(data || []);
+}catch(_){
+setSyncStatus("Supabase read failed. Showing local fallback data.", false);
+render(localCases());
+}
+}
+load();
+</script>
+<footer style="background:#0b1220;color:white;text-align:center;padding:40px 20px;margin-top:60px;border-top:2px solid #d4af37;">
+<p><strong>Busi Believers Incorporated</strong></p>
+<p>Bonding Using Stewardship and Integrity</p>
+<p style="font-style:italic;color:#d4af37;">"No voice nor invoice will go unheard."</p>
+<p>Empowering Faith &bull; Responsibility &bull; Leadership &bull; Community</p>
+<p>San Antonio, Texas</p>
+<p style="margin-top:20px;color:#aaa;">&copy; 2026 Busi Believers Incorporated</p>
+</footer>
+</body>
+</html>
+

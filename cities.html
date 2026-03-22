@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BUSI Service Cities</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0b1220;
+color:white;
+margin:0;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+text-align:center;
+}
+
+#map{
+height:550px;
+border-radius:16px;
+margin-top:30px;
+}
+
+.card{
+background:rgba(255,255,255,0.06);
+padding:20px;
+border-radius:16px;
+border:1px solid rgba(255,255,255,0.1);
+margin-top:30px;
+}
+
+.org-header{display:flex;align-items:center;gap:20px;padding:14px 20px;background:#0b1220;border-bottom:3px solid #d4af37;}
+.org-header img{height:92px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px #d4af37);}
+.org-info{display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.5;color:white;}
+.org-info strong{font-size:18px;}
+.org-info em{color:#d4af37;}
+@media print{body{background:white!important;color:black!important;}.org-header{background:white!important;border-bottom:3px solid #d4af37;}.org-info strong,.org-info span{color:black!important;}}</style>
+
+</head>
+
+<body>
+<div class="org-header"><img src="logo.png" alt="Busi Believers Incorporated"><div class="org-info"><strong>Busi Believers Incorporated</strong><span>Bonding Using Stewardship and Integrity</span><span>San Antonio, Texas</span><em>"No voice nor invoice will go unheard."</em></div><a href="index.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#d4af37;color:#0b1220;font-weight:bold;font-size:14px;border-radius:999px;text-decoration:none;">&#127968; Home</a></div>
+
+<div class="container">
+
+<h1>BUSI Service Cities</h1>
+
+<p style="max-width:700px;margin:auto">
+Busi Believers Incorporated serves communities through mentorship,
+stewardship education, and community assistance programs.
+</p>
+
+<div id="map"></div>
+
+<div class="card">
+
+<h2>Current Service Areas</h2>
+
+<p>
+San Antonio, Texas
+</p>
+
+</div>
+
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+/* Create Map */
+
+var map = L.map('map').setView([29.4241, -98.4936], 6);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+attribution:'© OpenStreetMap'
+}).addTo(map);
+
+/* BUSI Cities */
+
+let cities = [
+
+{
+name:"San Antonio, TX",
+lat:29.4241,
+lng:-98.4936,
+description:"BUSI Headquarters — mentorship and community support programs."
+},
+
+{
+name:"Houston, TX",
+lat:29.7604,
+lng:-95.3698,
+description:"Future BUSI expansion city."
+},
+
+{
+name:"Dallas, TX",
+lat:32.7767,
+lng:-96.7970,
+description:"Future BUSI expansion city."
+}
+
+];
+
+cities.forEach(city=>{
+
+L.marker([city.lat,city.lng]).addTo(map)
+
+.bindPopup(`
+
+<b>${city.name}</b><br>
+${city.description}
+
+`);
+
+});
+
+</script>
+
+<footer style="background:#0b1220;color:white;text-align:center;padding:40px 20px;margin-top:60px;border-top:2px solid #d4af37;">
+<p><strong>Busi Believers Incorporated</strong></p>
+<p>Bonding Using Stewardship and Integrity</p>
+<p style="font-style:italic;color:#d4af37;">"No voice nor invoice will go unheard."</p>
+<p>Empowering Faith &bull; Responsibility &bull; Leadership &bull; Community</p>
+<p>San Antonio, Texas</p>
+<p style="margin-top:20px;color:#aaa;">&copy; 2026 Busi Believers Incorporated</p>
+</footer>
+
+</body>
+</html>

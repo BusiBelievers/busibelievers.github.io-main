@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>BUSI Community Impact Map</title>
+
+ <p style="margin-top:10px;font-size:14px;color:#d4af37">
+🟡 Pending Review • 🟠 Approved • 🔵 In Progress • 🟢 Completed
+</p>
+ 
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0b1220;
+color:white;
+margin:0;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+text-align:center;
+}
+
+#map{
+height:550px;
+border-radius:16px;
+margin-top:30px;
+}
+
+.org-header{display:flex;align-items:center;gap:20px;padding:14px 20px;background:#0b1220;border-bottom:3px solid #d4af37;}
+.org-header img{height:92px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px #d4af37);}
+.org-info{display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.5;color:white;}
+.org-info strong{font-size:18px;}
+.org-info em{color:#d4af37;}
+@media print{body{background:white!important;color:black!important;}.org-header{background:white!important;border-bottom:3px solid #d4af37;}.org-info strong,.org-info span{color:black!important;}}</style>
+
+</head>
+
+<body>
+<div class="org-header"><img src="logo.png" alt="Busi Believers Incorporated"><div class="org-info"><strong>Busi Believers Incorporated</strong><span>Bonding Using Stewardship and Integrity</span><span>San Antonio, Texas</span><em>"No voice nor invoice will go unheard."</em></div><a href="index.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#d4af37;color:#0b1220;font-weight:bold;font-size:14px;border-radius:999px;text-decoration:none;">&#127968; Home</a></div>
+
+<div class="container">
+
+<h1>BUSI Community Impact Map</h1>
+
+<p>
+Community assistance projects coordinated by Busi Believers Incorporated
+across San Antonio.
+</p>
+
+<div id="map"></div>
+
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+/* Load BUSI Cases */
+
+let cases = JSON.parse(localStorage.getItem("busiCases")) || [];
+
+/* Create Map */
+
+var map = L.map('map').setView([29.4241, -98.4936], 11);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+attribution:'© OpenStreetMap'
+}).addTo(map);
+
+/* Marker Colors */
+
+var greenIcon = new L.Icon({
+iconUrl:'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
+shadowUrl:'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+iconSize:[25,41],
+iconAnchor:[12,41]
+});
+
+var blueIcon = new L.Icon({
+iconUrl:'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+shadowUrl:'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+iconSize:[25,41],
+iconAnchor:[12,41]
+});
+
+var yellowIcon = new L.Icon({
+iconUrl:'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png',
+shadowUrl:'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+iconSize:[25,41],
+iconAnchor:[12,41]
+});
+
+var orangeIcon = new L.Icon({
+iconUrl:'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png',
+shadowUrl:'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+iconSize:[25,41],
+iconAnchor:[12,41]
+});
+
+/* Place Projects On Map */
+
+cases.forEach(c => {
+
+let address = encodeURIComponent(c.location);
+
+/* Use OpenStreetMap Geocoder */
+
+fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${address}`)
+.then(response => response.json())
+.then(data => {
+
+if(data.length > 0){
+
+let lat = data[0].lat;
+let lon = data[0].lon;
+
+ let icon = yellowIcon;
+
+if(c.status === "Completed"){
+icon = greenIcon;
+}
+else if(c.status === "In Progress"){
+icon = blueIcon;
+}
+else if(c.status === "Approved"){
+icon = orangeIcon;
+}
+
+L.marker([lat, lon], {icon: icon}).addTo(map)
+.bindPopup(`
+<b>${c.caseID}</b><br>
+Project: ${c.project}<br>
+Location: ${c.location}<br>
+Status: ${c.status}
+`); 
+
+}
+
+});
+
+});
+
+
+</script>
+
+</body>
+</html>

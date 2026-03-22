@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUSI Pre/Post Assessment</title>
+<style>
+body{font-family:Arial;background:#0b1220;color:white;margin:0;}
+.container{max-width:980px;margin:auto;padding:40px 20px;}
+.card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:22px;margin-top:16px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;}
+label{display:block;font-weight:bold;margin-bottom:6px;}
+input,select,textarea{width:100%;padding:10px;border:none;border-radius:8px;box-sizing:border-box;margin-bottom:12px;}
+h1,h2{margin-top:0;}
+.btn{display:inline-block;padding:12px 16px;background:#d4af37;color:black;border:none;border-radius:10px;text-decoration:none;font-weight:bold;cursor:pointer;margin:6px 8px 6px 0;}
+.quick-links{margin:0 0 12px;}
+.score-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:12px;align-items:end;}
+.score-header{font-weight:bold;color:#f1d988;}
+.score-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:18px;}
+.summary-box{background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.24);border-radius:12px;padding:14px;}
+.summary-box strong{display:block;font-size:28px;color:#f1d988;}
+.summary-box small{display:block;margin-top:6px;color:#d7d7d7;line-height:1.4;}
+.rating-declining{background:rgba(231,76,60,0.14);border-color:rgba(231,76,60,0.45);}
+.rating-declining strong{color:#ff8f84;}
+.rating-stable{background:rgba(241,196,15,0.14);border-color:rgba(241,196,15,0.35);}
+.rating-stable strong{color:#ffe08a;}
+.rating-improving{background:rgba(46,204,113,0.14);border-color:rgba(46,204,113,0.35);}
+.rating-improving strong{color:#7dffb1;}
+.rating-strong{background:rgba(52,152,219,0.16);border-color:rgba(52,152,219,0.40);}
+.rating-strong strong{color:#8fd3ff;}
+.print-summary{display:none;}
+@media print{
+body{background:white;color:black;}
+.quick-links,.btn{display:none !important;}
+.container{max-width:none;padding:0;}
+.card,.summary-box,.print-summary{background:white !important;color:black;border:1px solid #bbb;box-shadow:none;}
+.print-summary{display:block;margin:0 0 18px;padding:18px;border-radius:12px;}
+.print-grid{display:grid;grid-template-columns:repeat(2,minmax(220px,1fr));gap:12px;}
+.print-summary strong,.summary-box strong{color:black !important;}
+.summary-box small,p,label,h1,h2,span{color:black !important;}
+footer{border-top:1px solid #bbb !important;color:black !important;}
+}
+@media (max-width: 760px){
+.score-grid{grid-template-columns:1fr;}
+.score-header{display:none;}
+}
+.org-header{display:flex;align-items:center;gap:20px;padding:14px 20px;background:#0b1220;border-bottom:3px solid #d4af37;}
+.org-header img{height:92px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px #d4af37);}
+.org-info{display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.5;color:white;}
+.org-info strong{font-size:18px;}
+.org-info em{color:#d4af37;}
+@media print{body{background:white!important;color:black!important;}.org-header{background:white!important;border-bottom:3px solid #d4af37;}.org-info strong,.org-info span{color:black!important;}}.quick-actions-strip{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.05);border-bottom:1px solid rgba(212,175,55,0.35);} 
+.quick-actions-strip strong{color:#f4e2a7;font-size:14px;}
+.quick-actions-links{display:flex;flex-wrap:wrap;gap:8px;}
+.quick-actions-links a{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.45);color:#f7e6b0;text-decoration:none;font-size:13px;font-weight:bold;}
+.quick-actions-links a:hover{background:rgba(212,175,55,0.22);} 
+@media print{.quick-actions-strip{display:none!important;}}
+</style>
+</head>
+<body>
+<div class="org-header"><img src="logo.png" alt="Busi Believers Incorporated"><div class="org-info"><strong>Busi Believers Incorporated</strong><span>Bonding Using Stewardship and Integrity</span><span>San Antonio, Texas</span><em>"No voice nor invoice will go unheard."</em></div><a href="index.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#d4af37;color:#0b1220;font-weight:bold;font-size:14px;border-radius:999px;text-decoration:none;">&#127968; Home</a></div>
+<div class="quick-actions-strip" aria-label="Internal quick actions">
+<strong>Quick Actions:</strong>
+<div class="quick-actions-links">
+<a href="operations-hub.html">Operations Hub</a>
+<a href="founder-dashboard.html">Founder Dashboard</a>
+<a href="invoice-center.html">Invoice Center</a>
+<a href="curriculum-implementation.html">Curriculum</a>
+<a href="community-service-timesheet.html">Time Sheet</a>
+<a href="quote-comparison.html">Quote &amp; Comparison</a>
+</div>
+</div>
+<div class="container">
+<div class="quick-links">
+<a class="btn" href="founder-dashboard.html">Back to Founder Dashboard</a>
+<a class="btn" href="curriculum-implementation.html">Back to Program Implementation</a>
+<a class="btn" href="operations-hub.html">Operations Hub</a>
+</div>
+
+<h1>BUSI Pre/Post Assessment</h1>
+<p style="max-width:840px;color:#d7d7d7;">Complete this form at intake and at program completion to measure growth in accountability, emotional regulation, stewardship, and community engagement.</p>
+
+<div class="print-summary" aria-hidden="true">
+<h2>Assessment Summary</h2>
+<div class="print-grid">
+<div><strong>Participant:</strong> <span id="printParticipantName">Not entered</span></div>
+<div><strong>Case ID:</strong> <span id="printCaseId">Not entered</span></div>
+<div><strong>Program Track:</strong> <span id="printProgramTrack">Not selected</span></div>
+<div><strong>Assessment Date:</strong> <span id="printAssessmentDate">Not entered</span></div>
+<div><strong>Pre Total:</strong> <span id="printPreTotal">0</span></div>
+<div><strong>Post Total:</strong> <span id="printPostTotal">0</span></div>
+<div><strong>Growth Delta:</strong> <span id="printGrowthDelta">0</span></div>
+<div><strong>Overall Rating:</strong> <span id="printOverallRating">Stable</span></div>
+<div><strong>Recommended Action:</strong> <span id="printRecommendedAction">Maintain current support plan and monitor progress.</span></div>
+</div>
+</div>
+
+<div class="card">
+<h2>Participant Information</h2>
+<div class="grid">
+<div><label>Participant Name</label><input id="participantName" type="text" placeholder="Full name"></div>
+<div><label>Case ID</label><input id="caseId" type="text" placeholder="BUSI-000"></div>
+<div><label>Program Track</label><select id="programTrack"><option>Program A - Anger Management</option><option>Program B - Faith & Community</option></select></div>
+<div><label>Assessment Review Mode</label><select><option>Pre/Post Comparison</option><option>Pre Only</option><option>Post Only</option></select></div>
+<div><label>Assessment Date</label><input id="assessmentDate" type="date"></div>
+<div><label>Facilitator</label><input type="text" placeholder="Facilitator name"></div>
+</div>
+</div>
+
+<div class="card">
+<h2>Score Rubric (1-5)</h2>
+<p style="color:#d7d7d7;">1 = rarely demonstrated, 3 = inconsistent, 5 = consistently demonstrated.</p>
+<div class="score-grid">
+<div class="score-header">Category</div>
+<div class="score-header">Pre</div>
+<div class="score-header">Post</div>
+<div class="score-header">Delta</div>
+
+<div><label for="preAccountability">Accountability</label></div>
+<div><input id="preAccountability" class="score-input pre-score" type="number" min="1" max="5" step="1" placeholder="1-5"></div>
+<div><input id="postAccountability" class="score-input post-score" type="number" min="1" max="5" step="1" placeholder="1-5"></div>
+<div><input id="deltaAccountability" type="text" readonly placeholder="0"></div>
+
+<div><label for="preRegulation">Emotional Regulation</label></div>
+<div><input id="preRegulation" class="score-input pre-score" type="number" min="1" max="5" step="1" placeholder="1-5"></div>
+<div><input id="postRegulation" class="score-input post-score" type="number" min="1" max="5" step="1" placeholder="1-5"></div>
+<div><input id="deltaRegulation" type="text" readonly placeholder="0"></div>
+
+<div><label for="preCommunication">Communication Skills</label></div>
+<div><input id="preCommunication" class="score-input pre-score" type="number" min="1" max="5" step="1" placeholder="1-5"></div>
+<div><input id="postCommunication" class="score-input post-score" type="number" min="1" max="5" step="1" placeholder="1-5"></div>
+<div><input id="deltaCommunication" type="text" readonly placeholder="0"></div>
+
+<div><label for="preStewardship">Stewardship Habits</label></div>
+<div><input id="preStewardship" class="score-input pre-score" type="number" min="1" max="5" step="1" placeholder="1-5"></div>
+<div><input id="postStewardship" class="score-input post-score" type="number" min="1" max="5" step="1" placeholder="1-5"></div>
+<div><input id="deltaStewardship" type="text" readonly placeholder="0"></div>
+
+<div><label for="preEngagement">Community Engagement</label></div>
+<div><input id="preEngagement" class="score-input pre-score" type="number" min="1" max="5" step="1" placeholder="1-5"></div>
+<div><input id="postEngagement" class="score-input post-score" type="number" min="1" max="5" step="1" placeholder="1-5"></div>
+<div><input id="deltaEngagement" type="text" readonly placeholder="0"></div>
+
+<div><label for="preFollowThrough">Follow-Through</label></div>
+<div><input id="preFollowThrough" class="score-input pre-score" type="number" min="1" max="5" step="1" placeholder="1-5"></div>
+<div><input id="postFollowThrough" class="score-input post-score" type="number" min="1" max="5" step="1" placeholder="1-5"></div>
+<div><input id="deltaFollowThrough" type="text" readonly placeholder="0"></div>
+</div>
+
+<div class="score-summary">
+<div class="summary-box">
+<span>Pre Total</span>
+<strong id="preTotal">0</strong>
+</div>
+<div class="summary-box">
+<span>Post Total</span>
+<strong id="postTotal">0</strong>
+</div>
+<div class="summary-box">
+<span>Growth Delta</span>
+<strong id="growthDelta">0</strong>
+</div>
+<div class="summary-box rating-stable" id="overallRatingBox">
+<span>Overall Rating</span>
+<strong id="overallRating">Stable</strong>
+<small id="ratingNote">Little or no measurable change recorded yet.</small>
+<small id="recommendedAction">Maintain current support plan and monitor progress.</small>
+</div>
+</div>
+</div>
+
+<div class="card">
+<h2>Reflection Notes</h2>
+<label>Strengths Observed</label>
+<textarea rows="3" placeholder="Document observed strengths."></textarea>
+<label>Growth Areas</label>
+<textarea rows="3" placeholder="Document areas needing continued support."></textarea>
+<label>Recommended Next Steps</label>
+<textarea rows="3" placeholder="List practical next actions."></textarea>
+<button class="btn" onclick="window.print()">Print / Save PDF</button>
+</div>
+</div>
+
+<footer style="background:#0b1220;color:white;text-align:center;padding:40px 20px;margin-top:60px;border-top:2px solid #d4af37;">
+<p><strong>Busi Believers Incorporated</strong></p>
+<p>Bonding Using Stewardship and Integrity</p>
+<p style="font-style:italic;color:#d4af37;">"No voice nor invoice will go unheard."</p>
+<p>Empowering Faith &bull; Responsibility &bull; Leadership &bull; Community</p>
+<p>San Antonio, Texas</p>
+<p style="margin-top:20px;color:#aaa;">&copy; 2026 Busi Believers Incorporated</p>
+</footer>
+<script>
+function scoreValue(id){
+const value = Number(document.getElementById(id).value || 0);
+return Number.isFinite(value) ? value : 0;
+}
+
+function syncPrintSummary(preTotal, postTotal, delta, ratingLabel, actionLabel){
+document.getElementById("printParticipantName").textContent = document.getElementById("participantName").value || "Not entered";
+document.getElementById("printCaseId").textContent = document.getElementById("caseId").value || "Not entered";
+document.getElementById("printProgramTrack").textContent = document.getElementById("programTrack").value || "Not selected";
+document.getElementById("printAssessmentDate").textContent = document.getElementById("assessmentDate").value || "Not entered";
+document.getElementById("printPreTotal").textContent = String(preTotal);
+document.getElementById("printPostTotal").textContent = String(postTotal);
+document.getElementById("printGrowthDelta").textContent = String(delta);
+document.getElementById("printOverallRating").textContent = ratingLabel;
+document.getElementById("printRecommendedAction").textContent = actionLabel;
+}
+
+function ratingFromDelta(delta){
+if(delta <= -2) return { label: "Declining", note: "Scores show meaningful regression and may require intervention.", action: "Escalate review, increase coaching, and reassess barriers immediately.", className: "rating-declining" };
+if(delta <= 1) return { label: "Stable", note: "Scores show limited movement from baseline.", action: "Maintain current support plan and monitor progress.", className: "rating-stable" };
+if(delta <= 5) return { label: "Improving", note: "Scores show positive measurable growth.", action: "Continue coaching plan and reinforce successful habits.", className: "rating-improving" };
+return { label: "Strong Improvement", note: "Scores show substantial growth across categories.", action: "Advance participant goals and consider step-down support planning.", className: "rating-strong" };
+}
+
+function updateScores(){
+const categories = [
+"Accountability",
+"Regulation",
+"Communication",
+"Stewardship",
+"Engagement",
+"FollowThrough"
+];
+
+let preTotal = 0;
+let postTotal = 0;
+
+categories.forEach((category) => {
+const pre = scoreValue(`pre${category}`);
+const post = scoreValue(`post${category}`);
+preTotal += pre;
+postTotal += post;
+document.getElementById(`delta${category}`).value = String(post - pre);
+});
+
+document.getElementById("preTotal").textContent = String(preTotal);
+document.getElementById("postTotal").textContent = String(postTotal);
+const delta = postTotal - preTotal;
+const rating = ratingFromDelta(delta);
+document.getElementById("growthDelta").textContent = String(delta);
+document.getElementById("overallRating").textContent = rating.label;
+document.getElementById("ratingNote").textContent = rating.note;
+document.getElementById("recommendedAction").textContent = rating.action;
+document.getElementById("overallRatingBox").className = `summary-box ${rating.className}`;
+syncPrintSummary(preTotal, postTotal, delta, rating.label, rating.action);
+}
+
+document.querySelectorAll(".score-input").forEach((input) => {
+input.addEventListener("input", updateScores);
+});
+
+["participantName","caseId","programTrack","assessmentDate"].forEach((id) => {
+document.getElementById(id).addEventListener("input", updateScores);
+document.getElementById(id).addEventListener("change", updateScores);
+});
+
+updateScores();
+</script>
+</body>
+</html>
+
+

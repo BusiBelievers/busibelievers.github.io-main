@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUSI Community Stories</title>
+<style>
+body{
+font-family:Arial;
+background:#0b1220;
+color:white;
+margin:0;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:24px;
+margin-top:40px;
+}
+
+.story{
+background:rgba(255,255,255,0.06);
+padding:20px;
+border-radius:16px;
+border:1px solid rgba(255,255,255,0.1);
+}
+
+.image-pair{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:12px;
+margin-bottom:14px;
+}
+
+.image-card img{
+width:100%;
+height:180px;
+object-fit:cover;
+border-radius:10px;
+background:rgba(255,255,255,0.04);
+}
+
+.image-card span{
+display:block;
+margin-top:6px;
+font-size:12px;
+text-transform:uppercase;
+letter-spacing:.08em;
+color:#d4af37;
+}
+
+.story-meta{
+color:#cfd6e5;
+font-size:14px;
+margin-bottom:10px;
+}
+
+.story-actions{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:14px;
+}
+
+.btn{
+display:inline-block;
+padding:10px 14px;
+background:#d4af37;
+color:black;
+font-weight:bold;
+text-decoration:none;
+border-radius:999px;
+}
+
+.sync-status{
+display:inline-block;
+margin:18px auto 0;
+padding:10px 14px;
+border-radius:999px;
+font-size:14px;
+font-weight:bold;
+}
+
+.sync-live{
+background:rgba(46,204,113,0.18);
+color:#7dffb1;
+}
+
+.sync-fallback{
+background:rgba(241,196,15,0.18);
+color:#ffe08a;
+}
+
+.empty-state{
+margin-top:40px;
+padding:24px;
+border-radius:16px;
+background:rgba(255,255,255,0.05);
+border:1px dashed rgba(212,175,55,0.35);
+text-align:center;
+color:#d8deeb;
+}
+
+h1,h2,h3,p{
+margin-top:0;
+}
+
+@media (max-width: 720px){
+.image-pair{
+grid-template-columns:1fr;
+}
+}
+.org-header{display:flex;align-items:center;gap:20px;padding:14px 20px;background:#0b1220;border-bottom:3px solid #d4af37;}
+.org-header img{height:92px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px #d4af37);}
+.org-info{display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.5;color:white;}
+.org-info strong{font-size:18px;}
+.org-info em{color:#d4af37;}
+@media print{body{background:white!important;color:black!important;}.org-header{background:white!important;border-bottom:3px solid #d4af37;}.org-info strong,.org-info span{color:black!important;}}</style>
+</head>
+<body>
+<div class="org-header"><img src="logo.png" alt="Busi Believers Incorporated"><div class="org-info"><strong>Busi Believers Incorporated</strong><span>Bonding Using Stewardship and Integrity</span><span>San Antonio, Texas</span><em>"No voice nor invoice will go unheard."</em></div><a href="index.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#d4af37;color:#0b1220;font-weight:bold;font-size:14px;border-radius:999px;text-decoration:none;">&#127968; Home</a></div>
+<div class="container">
+<h1 style="text-align:center">BUSI Community Stories</h1>
+<p style="text-align:center;max-width:700px;margin:auto">
+Stories and highlights from community service projects completed
+by Busi Believers Incorporated volunteers and partners.
+</p>
+<div id="syncStatus" class="sync-status sync-fallback">Checking live sync...</div>
+<div id="storiesGrid" class="grid"></div>
+<div id="emptyState" class="empty-state" hidden>No community stories are published yet. In the founder dashboard, click Publish Story on a completed case to feature it here automatically.</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+const sampleStories = [
+{ case_number: "BUSI-006", need_type: "Tree Removal", city: "San Antonio", status: "Completed", is_public: true, community_story: true, story_summary: "BUSI volunteers removed a dangerous tree and restored safety around the home.", before_photo_url: "", after_photo_url: "" },
+{ case_number: "BUSI-007", need_type: "Lawn Care", city: "San Antonio", status: "Completed", is_public: true, community_story: true, story_summary: "Volunteers worked together to clean and restore a resident's yard with care and encouragement.", before_photo_url: "", after_photo_url: "" }
+];
+
+function normalizeStatus(status){
+const normalized = String(status || "Pending Review").toLowerCase();
+if(normalized === "active") return "In Progress";
+if(normalized === "pending") return "Pending Review";
+if(normalized === "closed") return "Completed";
+if(normalized === "approved") return "Approved";
+if(normalized === "in progress") return "In Progress";
+if(normalized === "completed") return "Completed";
+return "Pending Review";
+}
+
+function escapeHtml(value){
+return String(value ?? "")
+.replace(/&/g, "&amp;")
+.replace(/</g, "&lt;")
+.replace(/>/g, "&gt;")
+.replace(/\"/g, "&quot;")
+.replace(/'/g, "&#39;");
+}
+
+const staffParam = new URLSearchParams(window.location.search).get("staff");
+if(staffParam === "1") localStorage.setItem("busiStaffMode", "1");
+if(staffParam === "0") localStorage.removeItem("busiStaffMode");
+const SHOW_SYNC_STATUS = staffParam === "1" || (staffParam !== "0" && localStorage.getItem("busiStaffMode") === "1");
+const syncStatusElement = document.getElementById("syncStatus");
+if(syncStatusElement && !SHOW_SYNC_STATUS){
+syncStatusElement.style.display = "none";
+}
+
+function setSyncStatus(message,isLive){
+const status = document.getElementById("syncStatus");
+if(!status || !SHOW_SYNC_STATUS) return;
+status.className = `sync-status ${isLive ? "sync-live" : "sync-fallback"}`;
+status.textContent = message;
+}
+
+function normalizeRow(row){
+return {
+case_number: row.case_number || row.caseID || "BUSI-UNASSIGNED",
+need_type: row.need_type || row.project || "General Assistance",
+city: row.city || row.location || "San Antonio",
+status: normalizeStatus(row.status),
+is_public: Boolean(row.is_public ?? row.isPublic ?? false),
+community_story: Boolean(row.community_story ?? row.communityStory ?? false),
+story_summary: row.story_summary || row.storySummary || "",
+before_photo_url: row.before_photo_url || row.beforePhotoUrl || row.beforePhoto || "",
+after_photo_url: row.after_photo_url || row.afterPhotoUrl || row.afterPhoto || ""
+};
+}
+
+function defaultStorySummary(row){
+return `${row.need_type} support was completed in ${row.city} through BUSI volunteers, partners, and stewardship care.`;
+}
+
+function isFeaturedStory(row){
+return row.is_public && row.community_story && normalizeStatus(row.status) === "Completed";
+}
+
+function renderStories(rows){
+const grid = document.getElementById("storiesGrid");
+const empty = document.getElementById("emptyState");
+if(!grid || !empty) return;
+
+if(!rows.length){
+grid.innerHTML = "";
+empty.hidden = false;
+return;
+}
+
+empty.hidden = true;
+grid.innerHTML = rows.map((row) => {
+const safeCase = escapeHtml(row.case_number);
+const safeTitle = escapeHtml(row.need_type);
+const safeCity = escapeHtml(row.city);
+const safeSummary = escapeHtml(row.story_summary || defaultStorySummary(row));
+const safeBefore = escapeHtml(row.before_photo_url);
+const safeAfter = escapeHtml(row.after_photo_url);
+const imageMarkup = row.before_photo_url || row.after_photo_url ? `
+<div class="image-pair">
+${row.before_photo_url ? `<div class="image-card"><img src="${safeBefore}" alt="Before photo for ${safeTitle}"><span>Before</span></div>` : ""}
+${row.after_photo_url ? `<div class="image-card"><img src="${safeAfter}" alt="After photo for ${safeTitle}"><span>After</span></div>` : ""}
+</div>` : "";
+
+return `
+<article class="story">
+${imageMarkup}
+<h3>${safeTitle}</h3>
+<div class="story-meta">${safeCase} • ${safeCity}</div>
+<p>${safeSummary}</p>
+<div class="story-actions">
+<a class="btn" href="project-story.html?case=${encodeURIComponent(row.case_number)}">Read Story</a>
+</div>
+</article>`;
+}).join("");
+}
+
+function loadLocalStories(){
+try{
+const stored = JSON.parse(localStorage.getItem("busiCases") || "[]");
+if(Array.isArray(stored) && stored.length){
+return stored.map(normalizeRow).filter(isFeaturedStory);
+}
+}catch(_){
+}
+return sampleStories.map(normalizeRow).filter(isFeaturedStory);
+}
+
+async function loadStories(){
+const client = window.BUSI_SUPABASE ? window.BUSI_SUPABASE.createClient() : null;
+
+if(!client){
+setSyncStatus("Using browser-only local data. Live story publishing not confirmed.", false);
+renderStories(loadLocalStories());
+return;
+}
+
+try{
+let { data, error } = await client
+.from("cases")
+.select("case_number, need_type, city, status, is_public, before_photo_url, after_photo_url, story_summary, community_story")
+.order("updated_at", { ascending: false })
+.limit(100);
+
+if(error && /story_summary|community_story|column/i.test(String(error.message || ""))){
+setSyncStatus("Supabase is connected, but the story columns are not live yet. Showing local fallback data.", false);
+renderStories(loadLocalStories());
+return;
+}
+
+if(error){
+setSyncStatus("Supabase connection failed. Showing local fallback data.", false);
+renderStories(loadLocalStories());
+return;
+}
+
+setSyncStatus("Connected to Supabase live stories.", true);
+renderStories((data || []).map(normalizeRow).filter(isFeaturedStory));
+}catch(_){
+setSyncStatus("Supabase connection failed. Showing local fallback data.", false);
+renderStories(loadLocalStories());
+}
+}
+
+loadStories();
+</script>
+
+<footer style="background:#0b1220;color:white;text-align:center;padding:40px 20px;margin-top:60px;border-top:2px solid #d4af37;">
+<p><strong>Busi Believers Incorporated</strong></p>
+<p>Bonding Using Stewardship and Integrity</p>
+<p style="font-style:italic;color:#d4af37;">"No voice nor invoice will go unheard."</p>
+<p>Empowering Faith &bull; Responsibility &bull; Leadership &bull; Community</p>
+<p>San Antonio, Texas</p>
+<p style="margin-top:20px;color:#aaa;">&copy; 2026 Busi Believers Incorporated</p>
+</footer>
+</body>
+</html>

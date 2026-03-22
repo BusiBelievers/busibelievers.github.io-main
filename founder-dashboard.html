@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BUSI Founder Control Center</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0b1220;
+color:white;
+margin:0;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+margin-top:30px;
+}
+
+.card{
+background:rgba(255,255,255,0.06);
+padding:25px;
+border-radius:16px;
+border:1px solid rgba(255,255,255,0.1);
+}
+
+input,select,textarea{
+width:100%;
+padding:10px;
+margin-bottom:10px;
+border-radius:8px;
+border:none;
+}
+
+textarea{
+min-height:88px;
+resize:vertical;
+}
+
+.helper-text{
+color:#d2d2d2;
+font-size:14px;
+margin:-2px 0 10px;
+}
+
+.hidden-field{
+display:none;
+}
+
+.btn{
+padding:10px 16px;
+background:#d4af37;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.case{
+background:#1c2233;
+padding:12px;
+border-radius:8px;
+margin-bottom:10px;
+}
+
+.case-filter-bar{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+margin:10px 0 14px;
+padding:10px 12px;
+border-radius:10px;
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.12);
+flex-wrap:wrap;
+}
+
+.filter-toggle-btn{
+padding:9px 16px;
+border-radius:999px;
+border:2px solid rgba(212,175,55,0.5);
+background:rgba(212,175,55,0.08);
+color:#f4e2a7;
+font-size:13px;
+font-weight:bold;
+cursor:pointer;
+transition:background 0.18s,border-color 0.18s;
+}
+.filter-toggle-btn:hover{
+background:rgba(212,175,55,0.2);
+border-color:#d4af37;
+}
+.filter-toggle-btn.active{
+background:#d4af37;
+color:#1a1a2e;
+border-color:#d4af37;
+}
+
+.sync-status{
+display:inline-block;
+margin:18px auto 0;
+padding:10px 14px;
+border-radius:999px;
+font-size:14px;
+font-weight:bold;
+}
+
+.sync-live{
+background:rgba(46,204,113,0.18);
+color:#7dffb1;
+}
+
+.sync-fallback{
+background:rgba(241,196,15,0.18);
+color:#ffe08a;
+}
+
+.track-selector{
+margin:18px 0 0;
+padding:16px;
+border:1px solid rgba(212,175,55,0.35);
+border-radius:14px;
+background:linear-gradient(180deg,rgba(28,34,51,.95),rgba(18,23,36,.95));
+}
+
+.track-selector h3{
+margin:0 0 8px;
+color:#f6e7b0;
+font-size:22px;
+}
+
+.track-selector p{
+margin:0;
+color:#d8deeb;
+}
+
+.track-grid{
+display:grid;
+grid-template-columns:repeat(2,minmax(240px,1fr));
+gap:12px;
+margin-top:12px;
+}
+
+.track-card{
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(246,215,107,0.3);
+border-radius:12px;
+padding:12px;
+}
+
+.track-card h4{
+margin:0 0 8px;
+color:#f6e7b0;
+font-size:18px;
+}
+
+.track-card p{
+margin:0 0 10px;
+color:#cfd6e5;
+font-size:14px;
+line-height:1.45;
+}
+
+.resource-grid{
+display:grid;
+grid-template-columns:repeat(2,minmax(240px,1fr));
+gap:12px;
+margin-top:12px;
+}
+
+.resource-grid .card{
+padding:18px;
+}
+
+.resource-actions{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:8px;
+}
+
+.resource-actions .btn{
+display:inline-block;
+text-decoration:none;
+color:black;
+}
+
+.action-row{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-top:8px;
+}
+
+.action-row .btn{
+display:inline-block;
+text-decoration:none;
+color:black;
+margin:0 !important;
+}
+
+.eligibility-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:12px;
+margin-top:12px;
+}
+
+.eligibility-list{
+max-height:260px;
+overflow:auto;
+padding-right:6px;
+}
+
+.eligibility-item{
+background:#1c2233;
+border:1px solid rgba(255,255,255,0.12);
+border-radius:10px;
+padding:10px;
+margin-bottom:8px;
+}
+
+.eligibility-ready{
+color:#7dffb1;
+font-weight:bold;
+}
+
+.eligibility-blocked{
+color:#ffe08a;
+font-weight:bold;
+}
+
+.enrollment-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:12px;
+margin-top:10px;
+}
+
+.roster-list{
+max-height:260px;
+overflow:auto;
+padding-right:6px;
+}
+
+.roster-item{
+background:#1c2233;
+border:1px solid rgba(255,255,255,0.12);
+border-radius:10px;
+padding:10px;
+margin-bottom:8px;
+}
+
+.roster-pill{
+display:inline-block;
+padding:3px 8px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
+margin-right:6px;
+}
+
+.roster-track-a{
+background:rgba(46,204,113,0.16);
+color:#9dffc0;
+}
+
+.roster-track-b{
+background:rgba(52,152,219,0.18);
+color:#9fd6ff;
+}
+
+.access-message{
+width:100%;
+min-height:96px;
+margin-top:10px;
+}
+
+.certificate-ready{
+color:#7dffb1;
+font-weight:bold;
+}
+
+.certificate-hold{
+color:#ffd76a;
+font-weight:bold;
+}
+
+@media (max-width: 760px){
+.track-grid{
+grid-template-columns:1fr;
+}
+
+.resource-grid{
+grid-template-columns:1fr;
+}
+
+.resource-actions{
+flex-direction:column;
+align-items:stretch;
+}
+
+.resource-actions .btn{
+width:100%;
+box-sizing:border-box;
+text-align:center;
+}
+
+.action-row{
+flex-direction:column;
+align-items:stretch;
+}
+
+.action-row .btn{
+width:100%;
+box-sizing:border-box;
+text-align:center;
+}
+
+.eligibility-grid{
+grid-template-columns:1fr;
+}
+}
+
+.org-header{display:flex;align-items:center;gap:20px;padding:14px 20px;background:#0b1220;border-bottom:3px solid #d4af37;}
+.org-header img{height:92px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px #d4af37);}
+.org-info{display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.5;color:white;}
+.org-info strong{font-size:18px;}
+.org-info em{color:#d4af37;}
+@media print{body{background:white!important;color:black!important;}.org-header{background:white!important;border-bottom:3px solid #d4af37;}.org-info strong,.org-info span{color:black!important;}}.quick-actions-strip{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.05);border-bottom:1px solid rgba(212,175,55,0.35);} 
+.quick-actions-strip strong{color:#f4e2a7;font-size:14px;}
+.quick-actions-links{display:flex;flex-wrap:wrap;gap:8px;}
+.quick-actions-links a{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.45);color:#f7e6b0;text-decoration:none;font-size:13px;font-weight:bold;}
+.quick-actions-links a:hover{background:rgba(212,175,55,0.22);} 
+@media print{.quick-actions-strip{display:none!important;}}
+</style>
+
+</head>
+
+<body>
+<div class="org-header"><img src="logo.png" alt="Busi Believers Incorporated"><div class="org-info"><strong>Busi Believers Incorporated</strong><span>Bonding Using Stewardship and Integrity</span><span>San Antonio, Texas</span><em>"No voice nor invoice will go unheard."</em></div><a href="index.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#d4af37;color:#0b1220;font-weight:bold;font-size:14px;border-radius:999px;text-decoration:none;">&#127968; Home</a></div>
+<div class="quick-actions-strip" aria-label="Internal quick actions">
+<strong>Quick Actions:</strong>
+<div class="quick-actions-links">
+<a href="operations-hub.html">Operations Hub</a>
+<a href="founder-dashboard.html">Founder Dashboard</a>
+<a href="invoice-center.html">Invoice Center</a>
+<a href="curriculum-implementation.html">Curriculum</a>
+<a href="community-service-timesheet.html">Time Sheet</a>
+<a href="quote-comparison.html">Quote &amp; Comparison</a>
+</div>
+</div>
+
+<div class="container">
+
+<h1 style="text-align:center">BUSI Founder Control Center</h1>
+
+<p style="text-align:center;max-width:700px;margin:auto">
+This dashboard allows leadership to manage community assistance projects,
+funding goals, volunteers, and project progress across the BUSI platform.
+</p>
+
+<div id="syncStatus" class="sync-status sync-fallback">Checking live sync...</div>
+
+<div class="track-selector" aria-label="Dashboard quick pathways">
+<h3>Choose Your Path</h3>
+<p>Route leadership tasks quickly into curriculum implementation or invoice processing.</p>
+
+<div class="track-grid">
+<div class="track-card">
+<h4>Program A: Curriculum Track</h4>
+<p>Open implementation guides and workbook resources for participant development.</p>
+<a class="btn" href="curriculum-implementation.html" style="display:inline-block;text-decoration:none;color:black;">Open Program A</a>
+</div>
+
+<div class="track-card">
+<h4>Program B: Invoice Track</h4>
+<p>Open fee and contribution invoice tools with PayPal-ready pathways.</p>
+<a class="btn" href="invoice-center.html" style="display:inline-block;text-decoration:none;color:black;">Open Program B</a>
+</div>
+
+<div class="track-card">
+<h4>Operations Hub</h4>
+<p>Use role-based queues to triage certificate holds, hours tracking, and documentation.</p>
+<a class="btn" href="operations-hub.html" style="display:inline-block;text-decoration:none;color:black;">Open Hub</a>
+</div>
+</div>
+</div>
+
+<div class="resource-grid">
+<div class="card">
+<h2>Leadership & Policy</h2>
+<div class="resource-actions">
+<a class="btn" href="leadership-dashboard.html">Leadership Dashboard</a>
+<a class="btn" href="program-operations-policy.html">Operations Policy</a>
+</div>
+</div>
+
+<div class="card">
+<h2>Growth & Sponsorship</h2>
+<div class="resource-actions">
+<a class="btn" href="participant-journey-map.html">Journey Maps</a>
+<a class="btn" href="sponsorship-tiers.html">Sponsorship Tiers</a>
+</div>
+</div>
+</div>
+
+<div class="card">
+<h2>Curriculum Access Eligibility</h2>
+<p style="color:#d2d2d2;max-width:760px;">This checker mirrors the curriculum access gate. Full access requires participant email, agreement accepted, and status in Approved or In Progress.</p>
+<div class="eligibility-grid">
+<div>
+<h3 style="margin:0 0 8px;">Eligible Now</h3>
+<div id="eligibleCases" class="eligibility-list"></div>
+</div>
+<div>
+<h3 style="margin:0 0 8px;">Blocked Cases</h3>
+<div id="blockedCases" class="eligibility-list"></div>
+</div>
+</div>
+</div>
+
+<div class="card" id="curriculumEnrollmentPanel">
+<h2>Add Participant to Curriculum</h2>
+<p style="color:#d2d2d2;max-width:760px;">Use this form instead of general project creation when enrolling participants into Program A or Program B.</p>
+<div class="enrollment-grid">
+<div>
+<label for="curriculumParticipantName">Participant Name</label>
+<input id="curriculumParticipantName" placeholder="Full name">
+</div>
+<div>
+<label for="curriculumParticipantEmail">Participant Email</label>
+<input id="curriculumParticipantEmail" type="email" placeholder="name@example.com">
+</div>
+<div>
+<label for="curriculumTrack">Program Track</label>
+<select id="curriculumTrack">
+<option value="A">Program A - Anger Management</option>
+<option value="B">Program B - Faith & Community</option>
+</select>
+</div>
+<div>
+<label for="curriculumStatus">Access Status</label>
+<select id="curriculumStatus">
+<option>Approved</option>
+<option>In Progress</option>
+<option>Pending Review</option>
+<option>On Hold</option>
+<option>Completed</option>
+</select>
+</div>
+<div>
+<label for="curriculumModule">Course / Module (optional)</label>
+<input id="curriculumModule" placeholder="Example: Stewardship Foundations">
+</div>
+<div>
+<label for="curriculumCitySelect">Participant City</label>
+<select id="curriculumCitySelect">
+<option>San Antonio</option>
+<option>Houston</option>
+<option>Dallas</option>
+<option>Austin</option>
+<option>Fort Worth</option>
+<option>El Paso</option>
+<option>Arlington</option>
+<option>Corpus Christi</option>
+<option>Lubbock</option>
+<option>Waco</option>
+<option>Other</option>
+</select>
+<input id="curriculumCityOther" class="hidden-field" placeholder="Enter Other Texas City / Area">
+</div>
+</div>
+<label style="display:block;margin:10px 0 0;">
+<input id="curriculumAgreementAccepted" type="checkbox" checked>
+Participant responsibility agreement accepted
+</label>
+<div class="action-row">
+<button class="btn" onclick="enrollParticipant()">Add Participant</button>
+<button class="btn" onclick="copyEnrollmentMessage()">Copy Access Instructions</button>
+<a class="btn" href="curriculum-implementation.html">Open Curriculum Center</a>
+</div>
+<textarea id="curriculumAccessMessage" class="access-message" readonly placeholder="Enrollment access instructions will appear here after you add a participant."></textarea>
+</div>
+
+<div class="card" id="curriculumRosterPanel">
+<h2>Curriculum Participant Roster</h2>
+<p id="curriculumRosterSummary" style="color:#d2d2d2;font-size:14px;">Showing 0 participants</p>
+<div id="curriculumRosterList" class="roster-list"></div>
+</div>
+
+<div class="card">
+
+<h2>Create New Project</h2>
+
+<input id="projectName" placeholder="Project Name">
+<input id="projectEmail" type="email" placeholder="Participant Email (required for curriculum access)">
+
+<select id="locationSelect">
+<option value="">Select Texas City</option>
+<option>San Antonio</option>
+<option>Houston</option>
+<option>Dallas</option>
+<option>Austin</option>
+<option>Fort Worth</option>
+<option>El Paso</option>
+<option>Arlington</option>
+<option>Corpus Christi</option>
+<option>Lubbock</option>
+<option>Waco</option>
+<option>Other</option>
+</select>
+<input id="locationOther" class="hidden-field" placeholder="Enter Other Texas City / Area">
+
+<select id="volunteersNeededSelect">
+<option value="">Volunteers Needed</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="Other">Other</option>
+</select>
+<input id="volunteersNeededOther" class="hidden-field" type="number" min="0" placeholder="Enter Other Volunteer Count">
+
+<p class="helper-text">Optional photo links are easiest when pasted from Google Drive, Dropbox, iCloud, or another shareable image URL.</p>
+<input id="beforePhotoUrl" placeholder="Before Photo Link (optional)">
+<input id="afterPhotoUrl" placeholder="After Photo Link (optional)">
+<textarea id="storySummary" placeholder="Community Story Summary (optional)"></textarea>
+
+<select id="status">
+<option>Pending Review</option>
+<option>Approved</option>
+<option>In Progress</option>
+<option>On Hold</option>
+<option>Completed</option>
+</select>
+
+<div class="action-row">
+<button class="btn" onclick="createCase()">Create Project</button>
+<a class="btn" href="quote-comparison.html">Quote Approval Tool</a>
+<a class="btn" href="invoice-center.html">Invoice Center</a>
+<a class="btn" href="curriculum-implementation.html">Program Implementation</a>
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card">
+
+<h2>Assistance Intake Review</h2>
+
+<p style="color:#ccc">
+Review incoming assistance requests and create BUSI cases.
+Requests arrive in the admin email inbox and can be converted
+into projects here.
+</p>
+
+<input id="intakeName" placeholder="Participant Name">
+<input id="intakeEmail" type="email" placeholder="Participant Email (required for curriculum access)">
+
+<input id="intakeProject" placeholder="Type of Assistance (Example: Vehicle Repair)">
+
+<select id="intakeLocationSelect">
+<option value="">Select Texas City</option>
+<option>San Antonio</option>
+<option>Houston</option>
+<option>Dallas</option>
+<option>Austin</option>
+<option>Fort Worth</option>
+<option>El Paso</option>
+<option>Arlington</option>
+<option>Corpus Christi</option>
+<option>Lubbock</option>
+<option>Waco</option>
+<option>Other</option>
+</select>
+<input id="intakeLocationOther" class="hidden-field" placeholder="Enter Other Texas City / Area">
+
+<select id="intakeVolunteersSelect">
+<option value="">Volunteers Needed</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="Other">Other</option>
+</select>
+<input id="intakeVolunteersOther" class="hidden-field" type="number" min="0" placeholder="Enter Other Volunteer Count">
+
+<input id="intakeBeforePhotoUrl" placeholder="Before Photo Link (optional)">
+<input id="intakeAfterPhotoUrl" placeholder="After Photo Link (optional)">
+<textarea id="intakeStorySummary" placeholder="Community Story Summary (optional)"></textarea>
+
+<select id="intakeStatus">
+<option>Pending Review</option>
+<option>Approved</option>
+<option>In Progress</option>
+<option>On Hold</option>
+<option>Completed</option>
+</select>
+
+<button class="btn" onclick="convertRequest()">Convert To BUSI Case</button>
+
+</div>
+  
+<h2>Active BUSI Projects</h2>
+
+<div class="case-filter-bar">
+<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+<button id="certificateHoldOnly" class="filter-toggle-btn" type="button">🔒 Certificate Hold Only</button>
+<button id="certificateEligibleOnly" class="filter-toggle-btn" type="button">✅ Certificate Eligible Only</button>
+<button id="hideArchivedCases" class="filter-toggle-btn" type="button">📦 Hide Archived</button>
+<button id="showArchivedOnly" class="filter-toggle-btn" type="button">🗂 Archived Only</button>
+<button id="deleteArchivedCases" class="filter-toggle-btn" type="button">🧹 Delete Archived Cases</button>
+</div>
+<span id="caseCountSummary" style="color:#d2d2d2;font-size:14px;">Showing 0 cases</span>
+</div>
+
+<div id="caseManager"></div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+const supabaseClient = window.BUSI_SUPABASE ? window.BUSI_SUPABASE.createClient() : null;
+const staffParam = new URLSearchParams(window.location.search).get("staff");
+if(staffParam === "1") localStorage.setItem("busiStaffMode", "1");
+if(staffParam === "0") localStorage.removeItem("busiStaffMode");
+const SHOW_SYNC_STATUS = staffParam === "1" || (staffParam !== "0" && localStorage.getItem("busiStaffMode") === "1");
+const syncStatusElement = document.getElementById("syncStatus");
+if(syncStatusElement && !SHOW_SYNC_STATUS){
+syncStatusElement.style.display = "none";
+}
+
+let cases = [];
+let hasPublicColumn = true;
+let hasPhotoColumns = true;
+let hasStoryColumns = true;
+let hasCertificateColumns = true;
+let certificateFilterMode = "all";
+let archivedFilterMode = "all";
+const ARCHIVE_KEY = "busiArchivedCaseIds";
+const STATUS_OPTIONS = ["Pending Review", "Approved", "In Progress", "On Hold", "Completed"];
+
+function getArchivedCaseIds(){
+try{
+const parsed = JSON.parse(localStorage.getItem(ARCHIVE_KEY) || "[]");
+return Array.isArray(parsed) ? parsed : [];
+}catch(_){
+return [];
+}
+}
+
+function setArchivedCase(caseID,isArchived){
+const ids = new Set(getArchivedCaseIds());
+if(isArchived){
+ids.add(caseID);
+}else{
+ids.delete(caseID);
+}
+localStorage.setItem(ARCHIVE_KEY, JSON.stringify(Array.from(ids)));
+}
+
+function isArchivedCase(caseID){
+return getArchivedCaseIds().includes(caseID);
+}
+
+function isMissingColumnError(error, pattern){
+return Boolean(error) && pattern.test(String(error.message || ""));
+}
+
+async function runCasesQuery(operation){
+let result = await operation();
+
+if(isMissingColumnError(result.error, /story_summary|community_story|column/i) && hasStoryColumns){
+hasStoryColumns = false;
+result = await operation();
+}
+
+if(isMissingColumnError(result.error, /payment_arrangement_documented|sliding_scale_approved|column/i) && hasCertificateColumns){
+hasCertificateColumns = false;
+result = await operation();
+}
+
+if(isMissingColumnError(result.error, /before_photo_url|after_photo_url|column/i) && hasPhotoColumns){
+hasPhotoColumns = false;
+result = await operation();
+}
+
+if(isMissingColumnError(result.error, /is_public|column/i) && hasPublicColumn){
+hasPublicColumn = false;
+result = await operation();
+}
+
+return result;
+}
+
+function toggleConditionalField(selectId, wrapperId){
+const select = document.getElementById(selectId);
+const wrapper = document.getElementById(wrapperId);
+if(!select || !wrapper) return;
+wrapper.style.display = select.value === "Other" ? "block" : "none";
+}
+
+function getSelectedLocation(selectId, otherId){
+const select = document.getElementById(selectId);
+const other = document.getElementById(otherId);
+if(!select) return "";
+if(select.value === "Other"){
+return String(other?.value || "").trim();
+}
+return String(select.value || "").trim();
+}
+
+function getVolunteerCount(selectId, otherId){
+const select = document.getElementById(selectId);
+const other = document.getElementById(otherId);
+if(!select) return 0;
+if(select.value === "Other"){
+return Number(other?.value || 0) || 0;
+}
+return Number(select.value || 0) || 0;
+}
+
+function normalizeStatus(value){
+const raw = String(value || "Pending Review").trim().toLowerCase();
+if(raw === "pending") return "Pending Review";
+if(raw === "active") return "In Progress";
+if(raw === "closed") return "Completed";
+if(raw === "approved") return "Approved";
+if(raw === "in progress") return "In Progress";
+if(raw === "on hold") return "On Hold";
+if(raw === "completed") return "Completed";
+return "Pending Review";
+}
+
+function statusOptionsMarkup(selectedValue){
+return STATUS_OPTIONS.map((status) => `<option ${selectedValue===status?"selected":""}>${status}</option>`).join("");
+}
+
+function normalizeCase(row){
+return {
+id: row.id || null,
+caseID: row.case_number || row.caseID || "BUSI-UNASSIGNED",
+project: row.need_type || row.project || "General Assistance",
+location: row.city || row.location || "San Antonio",
+status: normalizeStatus(row.status),
+email: row.contact_email || row.email || row.contactEmail || "",
+beforePhotoUrl: row.before_photo_url || row.beforePhotoUrl || "",
+afterPhotoUrl: row.after_photo_url || row.afterPhotoUrl || "",
+storySummary: row.story_summary || row.storySummary || "",
+volunteersNeeded: Number(row.volunteers_needed ?? row.volunteersNeeded ?? 0),
+fundingGoal: Number(row.funding_goal ?? row.fundingGoal ?? 0),
+fundingRaised: Number(row.funding_raised ?? row.fundingRaised ?? 0),
+agreementAccepted: Boolean(row.agreement_accepted ?? row.agreementAccepted ?? false),
+agreementAcceptedAt: row.agreement_accepted_at || row.agreementAcceptedAt || null,
+isPublic: Boolean(row.is_public ?? row.isPublic ?? false),
+communityStory: Boolean(row.community_story ?? row.communityStory ?? false),
+paymentArrangementDocumented: Boolean(row.payment_arrangement_documented ?? row.paymentArrangementDocumented ?? false),
+slidingScaleApproved: Boolean(row.sliding_scale_approved ?? row.slidingScaleApproved ?? false),
+archived: Boolean(row.archived ?? row.isArchived ?? isArchivedCase(row.case_number || row.caseID || ""))
+};
+}
+
+function certificateEligible(c){
+return Boolean(c.paymentArrangementDocumented) || Boolean(c.slidingScaleApproved);
+}
+
+function setSyncStatus(message,isLive){
+const status = document.getElementById("syncStatus");
+if(!status || !SHOW_SYNC_STATUS) return;
+status.className = `sync-status ${isLive ? "sync-live" : "sync-fallback"}`;
+status.textContent = message;
+}
+
+function nextCaseID(){
+const used = new Set();
+cases.forEach((c) => {
+const m = String(c.caseID).match(/^BUSI-(\d{1,3})$/);
+if(m){
+const value = Number(m[1]);
+if(value >= 1 && value <= 999){
+used.add(value);
+}
+}
+});
+
+for(let value = 1; value <= 999; value += 1){
+if(!used.has(value)){
+return "BUSI-" + String(value).padStart(3, "0");
+}
+}
+
+return null;
+}
+
+function setEnrollmentMessage(caseID,email,track,moduleName){
+const target = document.getElementById("curriculumAccessMessage");
+if(!target) return;
+const moduleLine = moduleName ? `Module: ${moduleName}\n` : "";
+target.value = `Participant Curriculum Access Instructions\nCase ID: ${caseID}\nEmail: ${email}\nTrack: ${track}\n${moduleLine}1) Open curriculum-implementation.html\n2) Enter Case ID and Email in Curriculum Access\n3) Click Verify Participant Access\n4) If access is denied, contact BUSI support.`;
+}
+
+async function copyEnrollmentMessage(){
+const target = document.getElementById("curriculumAccessMessage");
+if(!target || !target.value.trim()){
+alert("Add a participant first so access instructions can be generated.");
+return;
+}
+
+try{
+await navigator.clipboard.writeText(target.value);
+alert("Access instructions copied.");
+}catch(_){
+target.focus();
+target.select();
+alert("Copy failed automatically. Press Ctrl+C to copy the selected text.");
+}
+}
+
+function saveCases(){
+localStorage.setItem("busiCases",JSON.stringify(cases));
+}
+
+function caseSelectColumns(){
+const base = "id, case_number, need_type, city, status, contact_email, volunteers_needed, funding_goal, funding_raised, agreement_accepted, agreement_accepted_at";
+const optional = [];
+if(hasPublicColumn) optional.push("is_public");
+if(hasPhotoColumns) optional.push("before_photo_url", "after_photo_url");
+if(hasStoryColumns) optional.push("story_summary", "community_story");
+if(hasCertificateColumns) optional.push("payment_arrangement_documented", "sliding_scale_approved");
+return optional.length ? `${base}, ${optional.join(", ")}` : base;
+}
+
+function buildCasePayload(c){
+const payload = {
+need_type: c.project,
+city: c.location,
+status: normalizeStatus(c.status),
+contact_email: c.email || null,
+volunteers_needed: Number(c.volunteersNeeded || 0),
+funding_goal: Number(c.fundingGoal || 0),
+funding_raised: Number(c.fundingRaised || 0),
+agreement_accepted: Boolean(c.agreementAccepted),
+agreement_accepted_at: c.agreementAcceptedAt
+};
+
+if(hasPublicColumn){
+payload.is_public = Boolean(c.isPublic);
+}
+
+if(hasPhotoColumns){
+payload.before_photo_url = c.beforePhotoUrl || null;
+payload.after_photo_url = c.afterPhotoUrl || null;
+}
+
+if(hasStoryColumns){
+payload.story_summary = c.storySummary || null;
+payload.community_story = Boolean(c.communityStory);
+}
+
+if(hasCertificateColumns){
+payload.payment_arrangement_documented = Boolean(c.paymentArrangementDocumented);
+payload.sliding_scale_approved = Boolean(c.slidingScaleApproved);
+}
+
+return payload;
+}
+
+async function loadCases(){
+if(!supabaseClient){
+setSyncStatus("Supabase not active. Founder dashboard is using browser-only local data.", false);
+cases = (JSON.parse(localStorage.getItem("busiCases")) || []).map(normalizeCase);
+renderCases();
+return;
+}
+
+try{
+const { data, error } = await runCasesQuery(() => supabaseClient
+.from("cases")
+.select(caseSelectColumns())
+.order("created_at", { ascending: false })
+.limit(300));
+
+if(error){
+setSyncStatus("Supabase read failed. Founder dashboard is showing local fallback data.", false);
+cases = (JSON.parse(localStorage.getItem("busiCases")) || []).map(normalizeCase);
+renderCases();
+return;
+}
+
+setSyncStatus(hasPublicColumn ? "Connected to Supabase live data." : "Connected to Supabase live data (legacy schema: public listing toggle disabled).", true);
+cases = (data || []).map(normalizeCase);
+saveCases();
+renderCases();
+}catch(_){
+setSyncStatus("Supabase read failed. Founder dashboard is showing local fallback data.", false);
+cases = (JSON.parse(localStorage.getItem("busiCases")) || []).map(normalizeCase);
+renderCases();
+}
+}
+
+async function createCase(){
+
+let caseID = nextCaseID();
+if(!caseID){
+alert("All BUSI-001 to BUSI-999 IDs are currently in use. Please archive or remove older records before adding new ones.");
+return;
+}
+
+let project = document.getElementById("projectName").value;
+let email = document.getElementById("projectEmail").value.trim();
+let location = getSelectedLocation("locationSelect", "locationOther");
+let volunteers = getVolunteerCount("volunteersNeededSelect", "volunteersNeededOther");
+let status = document.getElementById("status").value;
+let beforePhotoUrl = document.getElementById("beforePhotoUrl").value.trim();
+let afterPhotoUrl = document.getElementById("afterPhotoUrl").value.trim();
+let storySummary = document.getElementById("storySummary").value.trim();
+
+if(!project || !location){
+alert("Please enter both Project Name and Location.");
+return;
+}
+
+const newCase = normalizeCase({
+caseID:caseID,
+project:project,
+email:email,
+location:location,
+status:status,
+volunteersNeeded:volunteers,
+beforePhotoUrl:beforePhotoUrl,
+afterPhotoUrl:afterPhotoUrl,
+storySummary:storySummary,
+fundingGoal:0,
+fundingRaised:0,
+agreementAccepted:false,
+agreementAcceptedAt:null,
+isPublic:false,
+communityStory:false,
+paymentArrangementDocumented:false,
+slidingScaleApproved:false
+});
+
+if(supabaseClient){
+try{
+const { data, error } = await runCasesQuery(() => supabaseClient
+.from("cases")
+.insert({
+case_number: newCase.caseID,
+...buildCasePayload(newCase)
+})
+.select(caseSelectColumns())
+.single());
+
+if(!error && data){
+cases.unshift(normalizeCase(data));
+saveCases();
+renderCases();
+return;
+}
+}catch(_){
+}
+}
+
+cases.unshift(newCase);
+
+saveCases();
+
+renderCases();
+
+}
+
+function renderCases(){
+
+let container=document.getElementById("caseManager");
+const summary = document.getElementById("caseCountSummary");
+
+const archiveFilteredCases = archivedFilterMode === "hide"
+? cases.filter((c) => !Boolean(c.archived))
+: archivedFilterMode === "only"
+? cases.filter((c) => Boolean(c.archived))
+: cases;
+
+const filteredCases = certificateFilterMode === "hold"
+? archiveFilteredCases.filter((c) => !certificateEligible(c))
+: certificateFilterMode === "eligible"
+? archiveFilteredCases.filter((c) => certificateEligible(c))
+: archiveFilteredCases;
+
+container.innerHTML="";
+
+if(summary){
+const modeLabel = certificateFilterMode === "hold" ? " (Certificate Hold)" : certificateFilterMode === "eligible" ? " (Certificate Eligible)" : "";
+const archiveLabel = archivedFilterMode === "hide" ? " (Hidden Archived)" : archivedFilterMode === "only" ? " (Archived Only)" : "";
+summary.textContent = `Showing ${filteredCases.length} case${filteredCases.length === 1 ? "" : "s"}${modeLabel}${archiveLabel}`;
+}
+
+filteredCases.forEach((c)=>{
+
+const index = cases.indexOf(c);
+
+container.innerHTML+=`
+
+<div class="case">
+
+<strong>${c.caseID}</strong> — ${c.project}<br>
+Location: ${c.location}<br>
+Status: ${c.status}${c.archived ? " (Archived)" : ""}<br>
+Agreement: ${c.agreementAccepted ? "Accepted" : "Not Captured"}${c.agreementAcceptedAt ? ` (${new Date(c.agreementAcceptedAt).toLocaleDateString()})` : ""}<br>
+Participant Email:
+<input type="email" value="${c.email || ""}" placeholder="Enter participant email" onchange="updateEmail(${index},this.value)"><br>
+${c.beforePhotoUrl ? `<a href="${c.beforePhotoUrl}" target="_blank" rel="noopener noreferrer">Before Photo</a><br>` : ""}
+${c.afterPhotoUrl ? `<a href="${c.afterPhotoUrl}" target="_blank" rel="noopener noreferrer">After Photo</a><br>` : ""}
+
+${hasPublicColumn ? `<label style="display:block;margin:8px 0;">
+<input type="checkbox" ${c.isPublic ? "checked" : ""} onchange="updatePublic(${index},this.checked)">
+Public Listing (show on public pages)
+</label>` : `<p style="margin:8px 0;color:#ffe08a">Public Listing toggle unavailable until schema update is applied.</p>`}
+
+${hasStoryColumns ? `<label style="display:block;margin:8px 0;">
+<input type="checkbox" ${c.communityStory ? "checked" : ""} onchange="updateCommunityStory(${index},this.checked)">
+Feature In Community Stories
+</label>` : `<p style="margin:8px 0;color:#ffe08a">Community Stories publishing fields are local-only until schema update is applied.</p>`}
+
+<div style="display:block;margin:8px 0;padding:10px;border:1px solid rgba(212,175,55,0.35);border-radius:10px;background:rgba(212,175,55,0.08);">
+<div style="font-weight:bold;margin-bottom:6px;">Certificate Release Checklist</div>
+<label style="display:block;margin:6px 0;">
+<input type="checkbox" ${c.paymentArrangementDocumented ? "checked" : ""} onchange="updatePaymentArrangement(${index},this.checked)">
+Payment arrangements documented
+</label>
+<label style="display:block;margin:6px 0;">
+<input type="checkbox" ${c.slidingScaleApproved ? "checked" : ""} onchange="updateSlidingScaleApproval(${index},this.checked)">
+Sliding-scale approval completed
+</label>
+<div class="${certificateEligible(c) ? "certificate-ready" : "certificate-hold"}">${certificateEligible(c) ? "Certificate Eligible" : "Certificate Hold: document payment arrangement or complete sliding-scale approval"}</div>
+${hasCertificateColumns ? "" : `<p style="margin:6px 0 0;color:#ffe08a;font-size:13px;">Checklist is local-only until schema update is applied.</p>`}
+</div>
+
+Funding Goal:
+<input type="number" value="${c.fundingGoal}" onchange="updateGoal(${index},this.value)">
+
+Funding Raised:
+<input type="number" value="${c.fundingRaised}" onchange="updateRaised(${index},this.value)">
+
+Volunteers Needed:
+<input type="number" value="${c.volunteersNeeded}" onchange="updateVolunteers(${index},this.value)">
+
+Before Photo Link:
+<input type="text" value="${c.beforePhotoUrl || ""}" onchange="updateBeforePhoto(${index},this.value)">
+
+After Photo Link:
+<input type="text" value="${c.afterPhotoUrl || ""}" onchange="updateAfterPhoto(${index},this.value)">
+
+Community Story Summary:
+<textarea onchange="updateStorySummary(${index},this.value)" placeholder="Short public story summary for Community Stories">${c.storySummary || ""}</textarea>
+
+<select onchange="updateStatus(${index},this.value)">
+${statusOptionsMarkup(c.status)}
+</select>
+
+<br><br>
+
+<div class="action-row">
+<button class="btn" onclick="publishStory(${index})">Publish Story</button>
+<a class="btn" href="project-story.html?case=${encodeURIComponent(c.caseID)}">View Story</a>
+<button class="btn" onclick="toggleArchive(${index})">${c.archived ? "Unarchive" : "Archive"}</button>
+<button class="btn" onclick="deleteCase(${index})">Delete</button>
+</div>
+
+</div>
+
+`;
+
+});
+
+renderEligibilityPanel();
+
+}
+
+function caseEligibility(c){
+const blockers = [];
+if(!String(c.email || "").trim()) blockers.push("Missing participant email");
+if(!Boolean(c.agreementAccepted)) blockers.push("Agreement not accepted");
+if(!["Approved", "In Progress"].includes(normalizeStatus(c.status))) blockers.push("Status must be Approved or In Progress");
+return {
+ready: blockers.length === 0,
+blockers
+};
+}
+
+function renderEligibilityPanel(){
+const eligibleContainer = document.getElementById("eligibleCases");
+const blockedContainer = document.getElementById("blockedCases");
+if(!eligibleContainer || !blockedContainer) return;
+
+const eligible = [];
+const blocked = [];
+
+cases.forEach((c) => {
+const result = caseEligibility(c);
+if(result.ready){
+eligible.push(c);
+}else{
+blocked.push({ case: c, blockers: result.blockers });
+}
+});
+
+eligibleContainer.innerHTML = eligible.length ? eligible.map((c) => `
+<div class="eligibility-item">
+<div><strong>${c.caseID}</strong> - ${c.project}</div>
+<div style="font-size:13px;color:#cfd6e5;">${c.email || "No email"} | ${c.status}</div>
+<div class="eligibility-ready">Ready for full curriculum access</div>
+</div>
+`).join("") : '<div class="eligibility-item">No cases are currently eligible.</div>';
+
+blockedContainer.innerHTML = blocked.length ? blocked.map((entry) => `
+<div class="eligibility-item">
+<div><strong>${entry.case.caseID}</strong> - ${entry.case.project}</div>
+<div style="font-size:13px;color:#cfd6e5;">${entry.case.email || "No email"} | ${entry.case.status}</div>
+<div class="eligibility-blocked">${entry.blockers.join("; ")}</div>
+</div>
+`).join("") : '<div class="eligibility-item">No blocked cases. All visible cases are access-ready.</div>';
+}
+
+function curriculumTrackLabel(projectName){
+const text = String(projectName || "");
+if(/Program A|Anger Management/i.test(text)) return "Program A";
+if(/Program B|Faith & Community/i.test(text)) return "Program B";
+return "Other";
+}
+
+function isCurriculumParticipantCase(c){
+const text = String(c.project || "");
+return /Program A|Program B|Anger Management|Faith & Community|Curriculum/i.test(text);
+}
+
+function renderCurriculumRoster(){
+const list = document.getElementById("curriculumRosterList");
+const summary = document.getElementById("curriculumRosterSummary");
+if(!list || !summary) return;
+
+const roster = cases.filter(isCurriculumParticipantCase);
+summary.textContent = `Showing ${roster.length} participant${roster.length === 1 ? "" : "s"}`;
+
+if(!roster.length){
+list.innerHTML = '<div class="roster-item">No curriculum participants yet. Use Add Participant to Curriculum above.</div>';
+return;
+}
+
+list.innerHTML = roster.map((c) => {
+const track = curriculumTrackLabel(c.project);
+const trackClass = track === "Program A" ? "roster-track-a" : track === "Program B" ? "roster-track-b" : "";
+return `
+<div class="roster-item">
+<div><span class="roster-pill ${trackClass}">${track}</span><strong>${c.caseID}</strong></div>
+<div style="font-size:13px;color:#cfd6e5;margin-top:6px;">${c.project}</div>
+<div style="font-size:13px;color:#cfd6e5;">${c.email || "No email"} | ${c.status}</div>
+</div>`;
+}).join("");
+}
+
+async function enrollParticipant(){
+const participantName = String(document.getElementById("curriculumParticipantName").value || "").trim();
+const participantEmail = String(document.getElementById("curriculumParticipantEmail").value || "").trim();
+const track = String(document.getElementById("curriculumTrack").value || "A");
+const moduleName = String(document.getElementById("curriculumModule").value || "").trim();
+const status = String(document.getElementById("curriculumStatus").value || "Approved");
+const agreementAccepted = Boolean(document.getElementById("curriculumAgreementAccepted").checked);
+const location = getSelectedLocation("curriculumCitySelect", "curriculumCityOther") || "San Antonio";
+
+if(!participantEmail){
+alert("Participant email is required to add enrollment and verify curriculum access.");
+return;
+}
+
+const baseTrack = track === "A" ? "Program A - Anger Management" : "Program B - Faith & Community";
+const projectLabel = moduleName ? `${baseTrack} (${moduleName})` : baseTrack;
+const caseID = nextCaseID();
+if(!caseID){
+alert("All BUSI-001 to BUSI-999 IDs are currently in use. Please archive or remove older records before adding new ones.");
+return;
+}
+const agreementAcceptedAt = agreementAccepted ? new Date().toISOString() : null;
+
+const newCase = normalizeCase({
+caseID: caseID,
+project: projectLabel,
+email: participantEmail,
+location: location,
+status: status,
+volunteersNeeded: 0,
+beforePhotoUrl: "",
+afterPhotoUrl: "",
+storySummary: participantName ? `Participant: ${participantName}` : "",
+fundingGoal: 0,
+fundingRaised: 0,
+agreementAccepted: agreementAccepted,
+agreementAcceptedAt: agreementAcceptedAt,
+isPublic: false,
+communityStory: false,
+paymentArrangementDocumented: false,
+slidingScaleApproved: false
+});
+
+if(supabaseClient){
+try{
+const payload = {
+case_number: newCase.caseID,
+...buildCasePayload(newCase),
+person_name: participantName || null,
+request_notes: moduleName ? `Curriculum module: ${moduleName}` : null
+};
+
+const { data, error } = await runCasesQuery(() => supabaseClient
+.from("cases")
+.insert(payload)
+.select(caseSelectColumns())
+.single());
+
+if(!error && data){
+cases.unshift(normalizeCase(data));
+saveCases();
+renderCases();
+setEnrollmentMessage(newCase.caseID, participantEmail, baseTrack, moduleName);
+alert(`Participant enrolled. Case ID: ${newCase.caseID}`);
+document.getElementById("curriculumParticipantName").value = "";
+document.getElementById("curriculumParticipantEmail").value = "";
+document.getElementById("curriculumModule").value = "";
+return;
+}
+}catch(_){
+}
+}
+
+cases.unshift(newCase);
+saveCases();
+renderCases();
+setEnrollmentMessage(newCase.caseID, participantEmail, baseTrack, moduleName);
+alert(`Participant enrolled locally. Case ID: ${newCase.caseID}`);
+document.getElementById("curriculumParticipantName").value = "";
+document.getElementById("curriculumParticipantEmail").value = "";
+document.getElementById("curriculumModule").value = "";
+}
+
+async function persistCase(index){
+const c = cases[index];
+if(!c){
+return;
+}
+
+saveCases();
+
+if(!supabaseClient || !c.id){
+return;
+}
+
+try{
+await runCasesQuery(() => supabaseClient
+.from("cases")
+.update(buildCasePayload(c))
+.eq("id", c.id));
+}catch(_){
+}
+}
+
+function updateEmail(index,value){
+cases[index].email=String(value || "").trim();
+persistCase(index);
+renderEligibilityPanel();
+renderCurriculumRoster();
+}
+
+function updateGoal(index,value){
+cases[index].fundingGoal=Number(value);
+persistCase(index);
+}
+
+function updateRaised(index,value){
+cases[index].fundingRaised=Number(value);
+persistCase(index);
+}
+
+function updateVolunteers(index,value){
+cases[index].volunteersNeeded=Number(value);
+persistCase(index);
+}
+
+function updateBeforePhoto(index,value){
+cases[index].beforePhotoUrl=String(value || "").trim();
+persistCase(index);
+renderCases();
+}
+
+function updateAfterPhoto(index,value){
+cases[index].afterPhotoUrl=String(value || "").trim();
+persistCase(index);
+renderCases();
+}
+
+function updateStorySummary(index,value){
+cases[index].storySummary=String(value || "").trim();
+persistCase(index);
+}
+
+function updateCommunityStory(index,value){
+cases[index].communityStory=Boolean(value);
+persistCase(index);
+}
+
+function updatePaymentArrangement(index,value){
+cases[index].paymentArrangementDocumented=Boolean(value);
+persistCase(index);
+renderCases();
+}
+
+function updateSlidingScaleApproval(index,value){
+cases[index].slidingScaleApproved=Boolean(value);
+persistCase(index);
+renderCases();
+}
+
+function updateStatus(index,value){
+cases[index].status=value;
+persistCase(index);
+renderCases();
+}
+
+function updatePublic(index,value){
+cases[index].isPublic=Boolean(value);
+persistCase(index);
+}
+
+function publishStory(index){
+cases[index].status="Completed";
+cases[index].communityStory=true;
+if(hasPublicColumn){
+cases[index].isPublic=true;
+}
+persistCase(index);
+renderCases();
+}
+
+async function deleteCase(index){
+const c = cases[index];
+if(!c){
+return;
+}
+
+if(supabaseClient && c.id){
+try{
+await supabaseClient.from("cases").delete().eq("id", c.id);
+}catch(_){
+}
+}
+
+setArchivedCase(c.caseID, false);
+cases.splice(index,1);
+saveCases();
+renderCases();
+}
+
+function toggleArchive(index){
+const c = cases[index];
+if(!c){
+return;
+}
+
+const nextValue = !Boolean(c.archived);
+c.archived = nextValue;
+setArchivedCase(c.caseID, nextValue);
+saveCases();
+renderCases();
+}
+
+async function deleteArchivedCases(){
+const archivedCases = cases.filter((c) => Boolean(c.archived));
+if(!archivedCases.length){
+alert("No archived cases to delete.");
+return;
+}
+
+const confirmed = window.confirm(`Delete ${archivedCases.length} archived case(s)? This cannot be undone.`);
+if(!confirmed){
+return;
+}
+
+let liveDeleteFailures = 0;
+if(supabaseClient){
+for(const c of archivedCases){
+if(!c.id) continue;
+try{
+await supabaseClient.from("cases").delete().eq("id", c.id);
+}catch(_){
+liveDeleteFailures += 1;
+}
+}
+}
+
+const removedIds = new Set(archivedCases.map((c) => c.caseID));
+cases = cases.filter((c) => !removedIds.has(c.caseID));
+const remainingArchivedIds = getArchivedCaseIds().filter((id) => !removedIds.has(id));
+localStorage.setItem(ARCHIVE_KEY, JSON.stringify(remainingArchivedIds));
+saveCases();
+renderCases();
+
+if(liveDeleteFailures > 0){
+alert(`Archived cases deleted locally. ${liveDeleteFailures} live delete operation(s) may not have completed.`);
+return;
+}
+
+alert("Archived cases deleted.");
+}
+
+async function convertRequest(){
+
+let caseID = nextCaseID();
+if(!caseID){
+alert("All BUSI-001 to BUSI-999 IDs are currently in use. Please archive or remove older records before adding new ones.");
+return;
+}
+
+let project = document.getElementById("intakeProject").value;
+let email = document.getElementById("intakeEmail").value.trim();
+let location = getSelectedLocation("intakeLocationSelect", "intakeLocationOther");
+let volunteers = getVolunteerCount("intakeVolunteersSelect", "intakeVolunteersOther");
+let status = document.getElementById("intakeStatus").value;
+let beforePhotoUrl = document.getElementById("intakeBeforePhotoUrl").value.trim();
+let afterPhotoUrl = document.getElementById("intakeAfterPhotoUrl").value.trim();
+let storySummary = document.getElementById("intakeStorySummary").value.trim();
+
+if(!project || !location){
+alert("Please enter both assistance type and city/area.");
+return;
+}
+
+const newCase = normalizeCase({
+caseID:caseID,
+project:project,
+email:email,
+location:location,
+status:status,
+volunteersNeeded:volunteers,
+beforePhotoUrl:beforePhotoUrl,
+afterPhotoUrl:afterPhotoUrl,
+storySummary:storySummary,
+fundingGoal:0,
+fundingRaised:0,
+agreementAccepted:false,
+agreementAcceptedAt:null,
+isPublic:false,
+communityStory:false,
+paymentArrangementDocumented:false,
+slidingScaleApproved:false
+});
+
+if(supabaseClient){
+try{
+const { data, error } = await runCasesQuery(() => supabaseClient
+.from("cases")
+.insert({
+case_number: newCase.caseID,
+...buildCasePayload(newCase)
+})
+.select(caseSelectColumns())
+.single());
+
+if(!error && data){
+cases.unshift(normalizeCase(data));
+saveCases();
+renderCases();
+alert("Assistance request converted to BUSI project.");
+return;
+}
+}catch(_){
+}
+}
+
+cases.unshift(newCase);
+
+saveCases();
+
+renderCases();
+
+alert("Assistance request converted to BUSI project.");
+
+}
+
+["locationSelect","intakeLocationSelect","volunteersNeededSelect","intakeVolunteersSelect","curriculumCitySelect"].forEach((id) => {
+const element = document.getElementById(id);
+if(!element) return;
+element.addEventListener("change", () => {
+if(id === "locationSelect") toggleConditionalField("locationSelect", "locationOther");
+if(id === "intakeLocationSelect") toggleConditionalField("intakeLocationSelect", "intakeLocationOther");
+if(id === "volunteersNeededSelect") toggleConditionalField("volunteersNeededSelect", "volunteersNeededOther");
+if(id === "intakeVolunteersSelect") toggleConditionalField("intakeVolunteersSelect", "intakeVolunteersOther");
+if(id === "curriculumCitySelect") toggleConditionalField("curriculumCitySelect", "curriculumCityOther");
+});
+});
+
+toggleConditionalField("locationSelect", "locationOther");
+toggleConditionalField("intakeLocationSelect", "intakeLocationOther");
+toggleConditionalField("volunteersNeededSelect", "volunteersNeededOther");
+toggleConditionalField("intakeVolunteersSelect", "intakeVolunteersOther");
+toggleConditionalField("curriculumCitySelect", "curriculumCityOther");
+
+const certificateHoldOnly = document.getElementById("certificateHoldOnly");
+const certificateEligibleOnly = document.getElementById("certificateEligibleOnly");
+const hideArchivedCases = document.getElementById("hideArchivedCases");
+const showArchivedOnly = document.getElementById("showArchivedOnly");
+const deleteArchivedCasesButton = document.getElementById("deleteArchivedCases");
+
+if(certificateHoldOnly && certificateEligibleOnly){
+certificateHoldOnly.addEventListener("click", function(){
+if(certificateFilterMode === "hold"){
+certificateFilterMode = "all";
+certificateHoldOnly.classList.remove("active");
+}else{
+certificateFilterMode = "hold";
+certificateHoldOnly.classList.add("active");
+certificateEligibleOnly.classList.remove("active");
+}
+renderCases();
+});
+
+certificateEligibleOnly.addEventListener("click", function(){
+if(certificateFilterMode === "eligible"){
+certificateFilterMode = "all";
+certificateEligibleOnly.classList.remove("active");
+}else{
+certificateFilterMode = "eligible";
+certificateEligibleOnly.classList.add("active");
+certificateHoldOnly.classList.remove("active");
+}
+renderCases();
+});
+}
+
+if(hideArchivedCases && showArchivedOnly){
+hideArchivedCases.addEventListener("click", function(){
+if(archivedFilterMode === "hide"){
+archivedFilterMode = "all";
+hideArchivedCases.classList.remove("active");
+}else{
+archivedFilterMode = "hide";
+hideArchivedCases.classList.add("active");
+showArchivedOnly.classList.remove("active");
+}
+renderCases();
+});
+
+showArchivedOnly.addEventListener("click", function(){
+if(archivedFilterMode === "only"){
+archivedFilterMode = "all";
+showArchivedOnly.classList.remove("active");
+}else{
+archivedFilterMode = "only";
+showArchivedOnly.classList.add("active");
+hideArchivedCases.classList.remove("active");
+}
+renderCases();
+});
+}
+
+if(deleteArchivedCasesButton){
+deleteArchivedCasesButton.addEventListener("click", deleteArchivedCases);
+}
+
+loadCases();
+  
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUSI Suggested Contribution Invoice</title>
+<style>
+body{font-family:Arial;background:#0b1220;color:white;margin:0;}
+.container{max-width:860px;margin:auto;padding:40px 20px;}
+.card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:22px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+label{display:block;font-weight:bold;margin-bottom:6px;}
+input,select,textarea{width:100%;padding:10px;border:none;border-radius:8px;box-sizing:border-box;margin-bottom:12px;}
+.btn{display:inline-block;padding:12px 16px;background:#d4af37;color:black;border:none;border-radius:10px;text-decoration:none;font-weight:bold;cursor:pointer;margin-right:8px;}
+.quick-links{margin:0 0 12px;}
+.action-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+.action-row .btn{margin-right:0;}
+.helper-text{color:#d7d7d7;font-size:14px;margin:-4px 0 12px;}
+.hidden-field{display:none;}
+.print-header{display:flex;align-items:center;gap:20px;margin-bottom:22px;padding-bottom:16px;border-bottom:3px solid #d4af37;}
+.print-header img{height:65px;}
+.print-org-info{display:flex;flex-direction:column;gap:3px;font-size:13px;line-height:1.5;}
+@media print{
+  body{background:white!important;color:black!important;}
+  .quick-links,.btn{display:none!important;}
+  footer{display:none!important;}
+  .print-header{padding-bottom:14px;border-bottom:3px solid #d4af37;}
+  .card{background:white!important;border:1px solid #ccc;color:black!important;}
+  input,textarea,select{background:#f5f5f5!important;color:black!important;border:1px solid #bbb;}
+}
+@media (max-width: 760px){
+  .action-row{flex-direction:column;align-items:stretch;}
+  .action-row .btn{width:100%;box-sizing:border-box;text-align:center;}
+}
+.quick-actions-strip{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.05);border-bottom:1px solid rgba(212,175,55,0.35);} 
+.quick-actions-strip strong{color:#f4e2a7;font-size:14px;}
+.quick-actions-links{display:flex;flex-wrap:wrap;gap:8px;}
+.quick-actions-links a{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.45);color:#f7e6b0;text-decoration:none;font-size:13px;font-weight:bold;}
+.quick-actions-links a:hover{background:rgba(212,175,55,0.22);} 
+@media print{.quick-actions-strip{display:none!important;}}
+</style>
+</head>
+<body>
+<div class="quick-actions-strip" aria-label="Internal quick actions">
+<strong>Quick Actions:</strong>
+<div class="quick-actions-links">
+<a href="operations-hub.html">Operations Hub</a>
+<a href="founder-dashboard.html">Founder Dashboard</a>
+<a href="invoice-center.html">Invoice Center</a>
+<a href="curriculum-implementation.html">Curriculum</a>
+<a href="community-service-timesheet.html">Time Sheet</a>
+<a href="quote-comparison.html">Quote &amp; Comparison</a>
+</div>
+</div>
+<div class="container">
+<div class="print-header">
+  <img src="logo.png" alt="Busi Believers Incorporated">
+  <div class="print-org-info">
+    <strong style="font-size:16px;">Busi Believers Incorporated</strong>
+    <span>Bonding Using Stewardship and Integrity</span>
+    <span>San Antonio, Texas</span>
+    <em style="color:#a08020;">"No voice nor invoice will go unheard."</em>
+  </div>
+</div>
+<div class="quick-links action-row">
+<a class="btn" href="founder-dashboard.html">Back to Founder Dashboard</a>
+<a class="btn" href="invoice-center.html">Go to Invoice Center</a>
+<a class="btn" href="operations-hub.html">Operations Hub</a>
+</div>
+<h1>BUSI Suggested Contribution Invoice</h1>
+<p style="color:#d6d6d6;max-width:760px;">Use for voluntary participation or community outreach. This form uses <strong>Suggested Contribution</strong> language to support clean nonprofit donation recordkeeping.</p>
+<div class="card">
+<p class="helper-text">Choose the closest program module and payment method from the lists below. If nothing fits, select <strong>Other</strong> and add a simple custom note.</p>
+<div class="grid">
+<div><label>Invoice Number</label><input type="text" placeholder="BUSI-SC-001"></div>
+<div><label>Invoice Date</label><input type="date"></div>
+<div><label>Participant Name</label><input type="text" placeholder="Full name"></div>
+<div><label for="programModule">Program Module</label><select id="programModule">
+<option value="">Select Program Module</option>
+<option>Orientation and Intake</option>
+<option>Stewardship Foundations</option>
+<option>Faith and Identity Development</option>
+<option>Communication and Conflict Resolution</option>
+<option>Accountability and Responsibility</option>
+<option>Community Engagement and Service</option>
+<option>Financial Stewardship</option>
+<option>Life Planning and Goal Setting</option>
+<option>Restoration and Reflection Session</option>
+<option>Program Completion Follow-Up</option>
+<option>Other</option>
+</select></div>
+<div id="customModuleWrap" class="hidden-field"><label for="customModule">Custom Module Name</label><input id="customModule" type="text" placeholder="Enter custom module name"></div>
+</div>
+<label>Curriculum Participation Summary</label><textarea rows="3" placeholder="Describe curriculum participation and support services."></textarea>
+<div class="grid">
+<div><label>Suggested Contribution ($)</label><input type="number" min="0" step="0.01" placeholder="0.00"></div>
+<div><label>Contribution Received ($)</label><input type="number" min="0" step="0.01" placeholder="0.00"></div>
+<div><label for="contributionMethod">Contribution Method</label><select id="contributionMethod">
+<option value="">Select Contribution Method</option>
+<option>PayPal</option>
+<option>Cash</option>
+<option>Sponsor</option>
+<option>Church Partner</option>
+<option>Scholarship Support</option>
+<option>Other</option>
+</select></div>
+<div id="customMethodWrap" class="hidden-field"><label for="customMethod">Custom Contribution Method</label><input id="customMethod" type="text" placeholder="Enter custom contribution method"></div>
+</div>
+<label>Nonprofit Note</label><textarea rows="2">Contributions support BUSI faith and community curriculum programming. This document is for internal contribution records and stewardship tracking.</textarea>
+<div class="action-row">
+<button class="btn" onclick="window.print()">Print / Save PDF</button>
+<a class="btn" href="invoice-center.html">Back to Invoice Center</a>
+</div>
+</div>
+</div>
+<footer style="background:#0b1220;color:white;text-align:center;padding:40px 20px;margin-top:60px;border-top:2px solid #d4af37;">
+<p><strong>Busi Believers Incorporated</strong></p>
+<p>Bonding Using Stewardship and Integrity</p>
+<p style="font-style:italic;color:#d4af37;">"No voice nor invoice will go unheard."</p>
+<p>Empowering Faith &bull; Responsibility &bull; Leadership &bull; Community</p>
+<p>San Antonio, Texas</p>
+<p style="margin-top:20px;color:#aaa;">&copy; 2026 Busi Believers Incorporated</p>
+</footer>
+<script>
+function toggleConditionalField(selectId, wrapperId){
+const select = document.getElementById(selectId);
+const wrapper = document.getElementById(wrapperId);
+if(!select || !wrapper) return;
+wrapper.style.display = select.value === "Other" ? "block" : "none";
+}
+
+document.getElementById("programModule").addEventListener("change", () => {
+toggleConditionalField("programModule", "customModuleWrap");
+});
+
+document.getElementById("contributionMethod").addEventListener("change", () => {
+toggleConditionalField("contributionMethod", "customMethodWrap");
+});
+
+toggleConditionalField("programModule", "customModuleWrap");
+toggleConditionalField("contributionMethod", "customMethodWrap");
+</script>
+</body>
+</html>
+
+

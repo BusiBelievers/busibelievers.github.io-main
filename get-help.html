@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Request Assistance | Busi Believers</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0b1220;
+color:white;
+margin:0;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:40px 20px;
+text-align:center;
+}
+
+form{
+margin-top:30px;
+}
+
+input,select,textarea{
+width:100%;
+padding:12px;
+margin-bottom:12px;
+border-radius:8px;
+border:none;
+}
+
+button{
+padding:14px 22px;
+background:#d4af37;
+border:none;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.quick-links{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+justify-content:center;
+margin-bottom:14px;
+}
+
+.quick-links a{
+display:inline-block;
+padding:10px 14px;
+background:#d4af37;
+color:black;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+}
+
+.agreement-check{
+display:flex;
+align-items:flex-start;
+gap:10px;
+text-align:left;
+margin:10px 0 14px;
+}
+
+.agreement-check input{
+width:auto;
+margin-top:3px;
+}
+
+.agreement-check label{
+font-size:14px;
+color:#d7d7d7;
+}
+
+.sync-status{
+display:inline-block;
+margin:18px auto 0;
+padding:10px 14px;
+border-radius:999px;
+font-size:14px;
+font-weight:bold;
+}
+
+.sync-live{
+background:rgba(46,204,113,0.18);
+color:#7dffb1;
+}
+
+.sync-fallback{
+background:rgba(241,196,15,0.18);
+color:#ffe08a;
+}
+
+.helper-text{
+color:#d7d7d7;
+font-size:14px;
+margin:-4px 0 12px;
+}
+
+.hidden-field{
+display:none;
+}
+
+.org-header{display:flex;align-items:center;gap:20px;padding:14px 20px;background:#0b1220;border-bottom:3px solid #d4af37;}
+.org-header img{height:92px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px #d4af37);}
+.org-info{display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.5;color:white;}
+.org-info strong{font-size:18px;}
+.org-info em{color:#d4af37;}
+@media print{body{background:white!important;color:black!important;}.org-header{background:white!important;border-bottom:3px solid #d4af37;}.org-info strong,.org-info span{color:black!important;}}</style>
+
+</head>
+
+<body>
+<div class="org-header"><img src="logo.png" alt="Busi Believers Incorporated"><div class="org-info"><strong>Busi Believers Incorporated</strong><span>Bonding Using Stewardship and Integrity</span><span>San Antonio, Texas</span><em>"No voice nor invoice will go unheard."</em></div><a href="index.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#d4af37;color:#0b1220;font-weight:bold;font-size:14px;border-radius:999px;text-decoration:none;">&#127968; Home</a></div>
+
+<div class="container">
+
+<div class="quick-links" aria-label="Public quick links">
+<a href="index.html">Back to Home</a>
+<a href="participant-responsibility.html">Participant Agreement</a>
+<a href="support.html">Support BUSI</a>
+</div>
+
+<h1>Request Assistance</h1>
+
+<p style="max-width:650px;margin:auto">
+If you are experiencing hardship and need help with home repair,
+vehicle repair, property maintenance, or other essential needs,
+please submit a request below.
+</p>
+
+<p style="max-width:650px;margin:12px auto 0;font-size:13px;color:rgba(255,255,255,0.65);">
+<strong>Busi Believers Incorporated</strong> is a faith-based <strong>501(c)(3) nonprofit organization</strong> (EIN: 88-1788881) dedicated to serving our community with integrity and transparency.
+</p>
+
+<p style="max-width:650px;margin:18px auto 0;color:#d4af37;">
+Before submitting, please review the
+<a href="participant-responsibility.html" style="color:#d4af37;font-weight:bold;">Participant Responsibility Agreement</a>
+including scheduling expectations, stewardship, and referral commitment.
+</p>
+
+<div style="max-width:720px;margin:22px auto 16px;padding:20px;border-radius:14px;border:1px solid rgba(212,175,55,0.55);background:rgba(212,175,55,0.08);text-align:left;">
+<h2 style="margin:0 0 10px;color:#d4af37;font-size:24px;">Participant Intake Form Requirement</h2>
+<p style="margin:0 0 10px;color:#d7d7d7;">Every participant must complete this form before attending class.</p>
+<p style="margin:0 0 12px;">
+<a href="busi_participant_intake_form.pdf" style="display:inline-block;padding:12px 18px;background:#d4af37;color:black;text-decoration:none;border-radius:10px;font-weight:bold;" target="_blank" rel="noopener noreferrer" download>BUSI Participant Intake &amp; Agreement Form (PDF)</a>
+</p>
+<p style="margin:0 0 8px;color:#d7d7d7;">This form documents:</p>
+<ul style="margin:0 0 12px 20px;color:#d7d7d7;line-height:1.7;">
+<li>Identity information</li>
+<li>Court referral information</li>
+<li>Emergency contact</li>
+<li>Behavior agreement</li>
+<li>Program understanding (not therapy)</li>
+<li>Payment acknowledgment</li>
+<li>Liability notice</li>
+<li>Signed consent</li>
+</ul>
+<p style="margin:0;color:#ffd76a;font-weight:bold;">Never allow someone into class without this completed first.</p>
+<p style="margin:8px 0 0;color:#d7d7d7;">This single document prevents most future problems.</p>
+</div>
+
+<div id="syncStatus" class="sync-status sync-fallback">Checking live sync...</div>
+
+<form id="busiHelpForm">
+
+<input type="text" name="name" placeholder="Full Name" required>
+
+<input type="email" name="email" placeholder="Email Address" required>
+
+<input type="text" name="phone" placeholder="Phone Number">
+
+<select name="citySelect" id="citySelect" required>
+<option value="">Select Texas City</option>
+<option>San Antonio</option>
+<option>Houston</option>
+<option>Dallas</option>
+<option>Austin</option>
+<option>Fort Worth</option>
+<option>El Paso</option>
+<option>Arlington</option>
+<option>Corpus Christi</option>
+<option>Lubbock</option>
+<option>Waco</option>
+<option>Other</option>
+</select>
+
+<input type="text" name="cityOther" id="cityOther" class="hidden-field" placeholder="Enter Other Texas City / Area">
+
+<p class="helper-text">Choose the closest Texas city. If your area is not listed, choose Other and type it in.</p>
+
+<select name="assistance">
+
+<option value="">Type of Assistance</option>
+<option>Home Repair</option>
+<option>Vehicle Repair</option>
+<option>Tree Removal</option>
+<option>Lawn Care</option>
+<option>Plumbing</option>
+<option>Other</option>
+
+</select>
+
+<textarea name="description" placeholder="Describe the help needed"></textarea>
+
+<div class="agreement-check">
+<input type="checkbox" id="agreementReviewed" name="agreementReviewed" required>
+<label for="agreementReviewed">
+I confirm I reviewed the
+<a href="participant-responsibility.html" style="color:#d4af37;font-weight:bold;">Participant Responsibility Agreement</a>
+and understand participant responsibilities.
+</label>
+</div>
+
+<button type="submit">Submit Request</button>
+
+</form>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+
+const supabaseClient = window.BUSI_SUPABASE ? window.BUSI_SUPABASE.createClient() : null;
+const staffParam = new URLSearchParams(window.location.search).get("staff");
+if(staffParam === "1") localStorage.setItem("busiStaffMode", "1");
+if(staffParam === "0") localStorage.removeItem("busiStaffMode");
+const SHOW_SYNC_STATUS = staffParam === "1" || (staffParam !== "0" && localStorage.getItem("busiStaffMode") === "1");
+const syncStatusElement = document.getElementById("syncStatus");
+if(syncStatusElement && !SHOW_SYNC_STATUS){
+syncStatusElement.style.display = "none";
+}
+
+function setSyncStatus(message,isLive){
+const status = document.getElementById("syncStatus");
+if(!status || !SHOW_SYNC_STATUS) return;
+status.className = `sync-status ${isLive ? "sync-live" : "sync-fallback"}`;
+status.textContent = message;
+}
+
+setSyncStatus(supabaseClient ? "Supabase configured. Submission will attempt live sync." : "Supabase not active. Requests will save locally only.", Boolean(supabaseClient));
+
+let cases = JSON.parse(localStorage.getItem("busiCases")) || [];
+
+function getSelectedCity(form){
+if(form.citySelect.value === "Other"){
+return form.cityOther.value.trim();
+}
+return form.citySelect.value.trim();
+}
+
+document.getElementById("citySelect").addEventListener("change", function(){
+document.getElementById("cityOther").style.display = this.value === "Other" ? "block" : "none";
+});
+
+function generateCase(){
+const used = new Set();
+cases.forEach((c) => {
+const m = String(c.caseID || "").match(/^BUSI-(\d{1,3})$/);
+if(m){
+const value = Number(m[1]);
+if(value >= 1 && value <= 999){
+used.add(value);
+}
+}
+});
+
+for(let value = 1; value <= 999; value += 1){
+if(!used.has(value)){
+return "BUSI-" + String(value).padStart(3, "0");
+}
+}
+
+return null;
+}
+
+document.getElementById("busiHelpForm").addEventListener("submit", async function(e){
+
+e.preventDefault();
+
+let form = e.target;
+
+if(!form.agreementReviewed.checked){
+alert("Please review and acknowledge the Participant Responsibility Agreement before submitting.");
+return;
+}
+
+let caseID = generateCase();
+if(!caseID){
+alert("All BUSI-001 to BUSI-999 IDs are currently in use on this device. Please contact BUSI support.");
+return;
+}
+let selectedCity = getSelectedCity(form) || "San Antonio";
+
+let newCase = {
+caseID: caseID,
+project: form.assistance.value,
+location: selectedCity,
+status: "Pending Review",
+agreementAccepted: true,
+agreementAcceptedAt: new Date().toISOString()
+};
+
+cases.push(newCase);
+
+localStorage.setItem("busiCases", JSON.stringify(cases));
+
+if(supabaseClient){
+try{
+const { error } = await supabaseClient
+.from("cases")
+.insert({
+case_number: newCase.caseID,
+person_name: form.name.value,
+city: selectedCity,
+need_type: form.assistance.value || "General Assistance",
+status: "Pending Review",
+agreement_accepted: true,
+agreement_accepted_at: newCase.agreementAcceptedAt,
+contact_email: form.email.value,
+contact_phone: form.phone.value || null,
+request_notes: form.description.value || null
+});
+
+if(error){
+const reason = error.message ? ` (${error.message})` : "";
+setSyncStatus(`Live sync failed${reason}. Request saved locally only.`, false);
+alert(`Request submitted locally only. Live sharing was not confirmed${reason}.`);
+form.reset();
+return;
+}
+
+setSyncStatus("Request synced to Supabase live database.", true);
+}catch(_){
+setSyncStatus("Live sync failed due to a network or configuration error. Request saved locally only.", false);
+alert("Request submitted locally only. Live sharing was not confirmed due to a network or configuration error.");
+form.reset();
+return;
+}
+}
+
+alert("Request submitted. Your case number is "+caseID);
+
+form.reset();
+
+});
+
+</script>
+
+<footer style="background:#0b1220;color:white;text-align:center;padding:40px 20px;margin-top:60px;border-top:2px solid #d4af37;">
+<p><strong>Busi Believers Incorporated</strong></p>
+<p>Bonding Using Stewardship and Integrity</p>
+<p style="font-style:italic;color:#d4af37;">"No voice nor invoice will go unheard."</p>
+<p>Empowering Faith &bull; Responsibility &bull; Leadership &bull; Community</p>
+<p>San Antonio, Texas</p>
+<p style="margin-top:20px;color:#aaa;">&copy; 2026 Busi Believers Incorporated</p>
+</footer>
+
+</body>
+</html>

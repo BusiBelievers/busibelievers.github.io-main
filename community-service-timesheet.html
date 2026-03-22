@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUSI Community Service Time Sheet</title>
+<style>
+body{font-family:Arial;background:#0b1220;color:white;margin:0;}
+.container{max-width:1050px;margin:auto;padding:36px 20px;}
+.card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:22px;margin-top:16px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+input,textarea{width:100%;padding:10px;border:none;border-radius:8px;box-sizing:border-box;}
+textarea{min-height:110px;resize:vertical;}
+table{width:100%;border-collapse:collapse;margin-top:10px;background:rgba(255,255,255,0.03);}
+th,td{border:1px solid rgba(255,255,255,0.18);padding:8px;text-align:left;}
+th{background:rgba(212,175,55,0.18);}
+.btn{display:inline-block;padding:12px 16px;background:#d4af37;color:black;border-radius:10px;text-decoration:none;font-weight:bold;margin:6px 8px 6px 0;border:none;cursor:pointer;}
+.quick-links{margin:0 0 12px;}
+.warning{color:#ffd76a;font-weight:bold;}
+.org-header{display:flex;align-items:center;gap:20px;padding:14px 20px;background:#0b1220;border-bottom:3px solid #d4af37;}
+.org-header img{height:92px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px #d4af37);}
+.org-info{display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.5;color:white;}
+.org-info strong{font-size:18px;}
+.org-info em{color:#d4af37;}
+@media print{
+body{background:white!important;color:black!important;}
+.org-header{background:white!important;border-bottom:3px solid #d4af37;}
+.org-info strong,.org-info span{color:black!important;}
+.quick-links,.print-hide{display:none!important;}
+.card{background:white!important;border:1px solid #bcbcbc!important;}
+th{background:#f1f1f1!important;color:black!important;}
+}
+.quick-actions-strip{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.05);border-bottom:1px solid rgba(212,175,55,0.35);} 
+.quick-actions-strip strong{color:#f4e2a7;font-size:14px;}
+.quick-actions-links{display:flex;flex-wrap:wrap;gap:8px;}
+.quick-actions-links a{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.45);color:#f7e6b0;text-decoration:none;font-size:13px;font-weight:bold;}
+.quick-actions-links a:hover{background:rgba(212,175,55,0.22);} 
+@media print{.quick-actions-strip{display:none!important;}}
+</style>
+</head>
+<body>
+<div class="org-header"><img src="logo.png" alt="Busi Believers Incorporated"><div class="org-info"><strong>Busi Believers Incorporated</strong><span>Bonding Using Stewardship and Integrity</span><span>San Antonio, Texas</span><em>"No voice nor invoice will go unheard."</em></div><a href="index.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#d4af37;color:#0b1220;font-weight:bold;font-size:14px;border-radius:999px;text-decoration:none;">&#127968; Home</a></div>
+<div class="quick-actions-strip" aria-label="Internal quick actions">
+<strong>Quick Actions:</strong>
+<div class="quick-actions-links">
+<a href="operations-hub.html">Operations Hub</a>
+<a href="founder-dashboard.html">Founder Dashboard</a>
+<a href="invoice-center.html">Invoice Center</a>
+<a href="curriculum-implementation.html">Curriculum</a>
+<a href="community-service-timesheet.html">Time Sheet</a>
+<a href="quote-comparison.html">Quote &amp; Comparison</a>
+</div>
+</div>
+<div class="container">
+<div class="quick-links">
+<a class="btn" href="founder-dashboard.html">Back to Founder Dashboard</a>
+<a class="btn" href="program-operations-policy.html">Operations Policy</a>
+<a class="btn" href="curriculum-implementation.html">Curriculum Implementation</a>
+<a class="btn" href="operations-hub.html">Operations Hub</a>
+</div>
+
+<h1>Community Service Time Sheet</h1>
+<p style="max-width:900px;color:#d7d7d7;">Court-style tracking template aligned to the Texas Municipal Courts community service format for consistent documentation and accountability.</p>
+
+<div class="card">
+<h2>Court and Participant Information</h2>
+<div class="grid">
+<div><label>Municipal Court Name</label><input type="text" placeholder="Court name"></div>
+<div><label>Court Phone</label><input type="text" placeholder="Court phone"></div>
+<div><label>Court Address</label><input type="text" placeholder="Court address"></div>
+<div><label>Defendant Name</label><input type="text" placeholder="Participant full name"></div>
+<div><label>Date of Birth</label><input type="date"></div>
+<div><label>Total Hours Assigned</label><input type="number" min="0" step="0.25" placeholder="0.00"></div>
+<div><label>Cause Number(s)</label><input type="text" placeholder="Cause numbers"></div>
+<div><label>BUSI Case ID</label><input type="text" placeholder="Example: BUSI-012"></div>
+</div>
+</div>
+
+<div class="card">
+<h2>Service Hours Log</h2>
+<p style="color:#d7d7d7;">Enter each service date with sign-in/sign-out and initials.</p>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Time In</th>
+<th>Time Out</th>
+<th>Total Hours</th>
+<th>Supervisor Initials</th>
+<th>Defendant Initials</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><input type="date"></td><td><input type="time"></td><td><input type="time"></td><td><input type="number" min="0" step="0.25" placeholder="0.00"></td><td><input type="text" placeholder="SV"></td><td><input type="text" placeholder="DF"></td></tr>
+<tr><td><input type="date"></td><td><input type="time"></td><td><input type="time"></td><td><input type="number" min="0" step="0.25" placeholder="0.00"></td><td><input type="text" placeholder="SV"></td><td><input type="text" placeholder="DF"></td></tr>
+<tr><td><input type="date"></td><td><input type="time"></td><td><input type="time"></td><td><input type="number" min="0" step="0.25" placeholder="0.00"></td><td><input type="text" placeholder="SV"></td><td><input type="text" placeholder="DF"></td></tr>
+<tr><td><input type="date"></td><td><input type="time"></td><td><input type="time"></td><td><input type="number" min="0" step="0.25" placeholder="0.00"></td><td><input type="text" placeholder="SV"></td><td><input type="text" placeholder="DF"></td></tr>
+<tr><td><input type="date"></td><td><input type="time"></td><td><input type="time"></td><td><input type="number" min="0" step="0.25" placeholder="0.00"></td><td><input type="text" placeholder="SV"></td><td><input type="text" placeholder="DF"></td></tr>
+<tr><td><input type="date"></td><td><input type="time"></td><td><input type="time"></td><td><input type="number" min="0" step="0.25" placeholder="0.00"></td><td><input type="text" placeholder="SV"></td><td><input type="text" placeholder="DF"></td></tr>
+<tr><td><input type="date"></td><td><input type="time"></td><td><input type="time"></td><td><input type="number" min="0" step="0.25" placeholder="0.00"></td><td><input type="text" placeholder="SV"></td><td><input type="text" placeholder="DF"></td></tr>
+<tr><td><input type="date"></td><td><input type="time"></td><td><input type="time"></td><td><input type="number" min="0" step="0.25" placeholder="0.00"></td><td><input type="text" placeholder="SV"></td><td><input type="text" placeholder="DF"></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="card">
+<h2>Certification and Signatures</h2>
+<p>I certify that the hours entered above were completed under supervision and recorded accurately.</p>
+<div class="grid">
+<div><label>Supervisor Name</label><input type="text" placeholder="Supervisor full name"></div>
+<div><label>Supervisor Signature</label><input type="text" placeholder="Type full name"></div>
+<div><label>Supervisor Date</label><input type="date"></div>
+<div><label>Defendant Signature</label><input type="text" placeholder="Type full name"></div>
+<div><label>Defendant Date</label><input type="date"></div>
+</div>
+
+<p class="warning" style="margin-top:16px;">Warning: False reporting of community service time may be prosecuted as a Class A misdemeanor.</p>
+
+<div class="print-hide" style="margin-top:14px;">
+<button class="btn" onclick="window.print()">Print / Save PDF</button>
+<a class="btn" href="invoice-center.html">Invoice Center</a>
+<a class="btn" href="participant-journey-map.html">Participant Journey Maps</a>
+</div>
+</div>
+</div>
+</body>
+</html>
+
+

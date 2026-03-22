@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUSI Facilitator Session Template</title>
+<style>
+body{font-family:Arial;background:#0b1220;color:white;margin:0;}
+.container{max-width:980px;margin:auto;padding:40px 20px;}
+.card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:22px;margin-top:16px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;}
+label{display:block;font-weight:bold;margin-bottom:6px;}
+input,select,textarea{width:100%;padding:10px;border:none;border-radius:8px;box-sizing:border-box;margin-bottom:12px;}
+h1,h2{margin-top:0;}
+.btn{display:inline-block;padding:12px 16px;background:#d4af37;color:black;border:none;border-radius:10px;text-decoration:none;font-weight:bold;cursor:pointer;margin:6px 8px 6px 0;}
+.quick-links{margin:0 0 12px;}
+.org-header{display:flex;align-items:center;gap:20px;padding:14px 20px;background:#0b1220;border-bottom:3px solid #d4af37;}
+.org-header img{height:92px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px #d4af37);}
+.org-info{display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.5;color:white;}
+.org-info strong{font-size:18px;}
+.org-info em{color:#d4af37;}
+@media print{body{background:white!important;color:black!important;}.org-header{background:white!important;border-bottom:3px solid #d4af37;}.org-info strong,.org-info span{color:black!important;}}.quick-actions-strip{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.05);border-bottom:1px solid rgba(212,175,55,0.35);} 
+.quick-actions-strip strong{color:#f4e2a7;font-size:14px;}
+.quick-actions-links{display:flex;flex-wrap:wrap;gap:8px;}
+.quick-actions-links a{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.45);color:#f7e6b0;text-decoration:none;font-size:13px;font-weight:bold;}
+.quick-actions-links a:hover{background:rgba(212,175,55,0.22);} 
+@media print{.quick-actions-strip{display:none!important;}}
+</style>
+</head>
+<body>
+<div class="org-header"><img src="logo.png" alt="Busi Believers Incorporated"><div class="org-info"><strong>Busi Believers Incorporated</strong><span>Bonding Using Stewardship and Integrity</span><span>San Antonio, Texas</span><em>"No voice nor invoice will go unheard."</em></div><a href="index.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#d4af37;color:#0b1220;font-weight:bold;font-size:14px;border-radius:999px;text-decoration:none;">&#127968; Home</a></div>
+<div class="quick-actions-strip" aria-label="Internal quick actions">
+<strong>Quick Actions:</strong>
+<div class="quick-actions-links">
+<a href="operations-hub.html">Operations Hub</a>
+<a href="founder-dashboard.html">Founder Dashboard</a>
+<a href="invoice-center.html">Invoice Center</a>
+<a href="curriculum-implementation.html">Curriculum</a>
+<a href="community-service-timesheet.html">Time Sheet</a>
+<a href="quote-comparison.html">Quote &amp; Comparison</a>
+</div>
+</div>
+<div class="container">
+<div class="quick-links">
+<a class="btn" href="founder-dashboard.html">Back to Founder Dashboard</a>
+<a class="btn" href="curriculum-implementation.html">Back to Program Implementation</a>
+<a class="btn" href="operations-hub.html">Operations Hub</a>
+</div>
+
+<h1>BUSI Facilitator Session Template</h1>
+<p style="max-width:840px;color:#d7d7d7;">Use this form to standardize session delivery, timing, and documentation across both program tracks.</p>
+
+<div class="card">
+<h2>Session Setup</h2>
+<div class="grid">
+<div><label>Session Number</label><input type="text" placeholder="Example: Session 3"></div>
+<div><label>Program Track</label><select><option>Program A - Anger Management</option><option>Program B - Faith & Community</option></select></div>
+<div><label>Date</label><input type="date"></div>
+<div><label>Facilitator</label><input type="text" placeholder="Facilitator name"></div>
+<div><label>Case ID</label><input type="text" placeholder="BUSI-000"></div>
+<div><label>Duration (minutes)</label><input type="number" min="15" step="5" placeholder="60"></div>
+</div>
+<label>Learning Objective</label>
+<textarea rows="2" placeholder="State the measurable objective for this session."></textarea>
+</div>
+
+<div class="card">
+<h2>Delivery Plan</h2>
+<label>Opening / Check-In (10-15 minutes)</label>
+<textarea rows="2" placeholder="Mood, accountability updates, previous action review."></textarea>
+<label>Core Instruction (20-30 minutes)</label>
+<textarea rows="2" placeholder="Topic, scripture/theme, concept teaching."></textarea>
+<label>Guided Practice (15-20 minutes)</label>
+<textarea rows="2" placeholder="Worksheet, role-play, scenario, or journaling."></textarea>
+<label>Commitments Before Next Session</label>
+<textarea rows="2" placeholder="Specific action items and due date."></textarea>
+</div>
+
+<div class="card">
+<h2>Session Quality Checklist</h2>
+<div class="grid">
+<div><label><input type="checkbox"> Objective reviewed</label></div>
+<div><label><input type="checkbox"> Participation documented</label></div>
+<div><label><input type="checkbox"> Risk flags checked</label></div>
+<div><label><input type="checkbox"> Next steps assigned</label></div>
+</div>
+<button class="btn" onclick="window.print()">Print / Save PDF</button>
+</div>
+</div>
+
+<footer style="background:#0b1220;color:white;text-align:center;padding:40px 20px;margin-top:60px;border-top:2px solid #d4af37;">
+<p><strong>Busi Believers Incorporated</strong></p>
+<p>Bonding Using Stewardship and Integrity</p>
+<p style="font-style:italic;color:#d4af37;">"No voice nor invoice will go unheard."</p>
+<p>Empowering Faith &bull; Responsibility &bull; Leadership &bull; Community</p>
+<p>San Antonio, Texas</p>
+<p style="margin-top:20px;color:#aaa;">&copy; 2026 Busi Believers Incorporated</p>
+</footer>
+</body>
+</html>
+
+

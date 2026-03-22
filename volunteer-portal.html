@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BUSI Volunteer Portal</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0b1220;
+color:white;
+margin:0;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:40px 20px;
+text-align:center;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+margin-top:40px;
+}
+
+.card{
+background:rgba(255,255,255,0.06);
+padding:25px;
+border-radius:16px;
+border:1px solid rgba(255,255,255,0.1);
+text-align:left;
+}
+
+.btn{
+display:inline-block;
+padding:10px 18px;
+background:#d4af37;
+color:black;
+border-radius:8px;
+text-decoration:none;
+margin-top:10px;
+font-weight:bold;
+}
+
+.status-open{color:#f1c40f;}
+.status-progress{color:#3498db;}
+.status-complete{color:#2ecc71;}
+
+.sync-status{
+display:inline-block;
+margin-top:16px;
+padding:10px 14px;
+border-radius:999px;
+font-size:14px;
+font-weight:bold;
+}
+
+.sync-live{
+background:rgba(46,204,113,0.18);
+color:#7dffb1;
+}
+
+.sync-fallback{
+background:rgba(241,196,15,0.18);
+color:#ffe08a;
+}
+
+.org-header{display:flex;align-items:center;gap:20px;padding:14px 20px;background:#0b1220;border-bottom:3px solid #d4af37;}
+.org-header img{height:92px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px #d4af37);}
+.org-info{display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.5;color:white;}
+.org-info strong{font-size:18px;}
+.org-info em{color:#d4af37;}
+@media print{body{background:white!important;color:black!important;}.org-header{background:white!important;border-bottom:3px solid #d4af37;}.org-info strong,.org-info span{color:black!important;}}</style>
+
+</head>
+
+<body>
+<div class="org-header"><img src="logo.png" alt="Busi Believers Incorporated"><div class="org-info"><strong>Busi Believers Incorporated</strong><span>Bonding Using Stewardship and Integrity</span><span>San Antonio, Texas</span><em>"No voice nor invoice will go unheard."</em></div><a href="index.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#d4af37;color:#0b1220;font-weight:bold;font-size:14px;border-radius:999px;text-decoration:none;">&#127968; Home</a></div>
+
+<div class="container">
+
+<h1>BUSI Volunteer Portal</h1>
+
+<p style="max-width:700px;margin:auto">
+Browse community projects coordinated by Busi Believers Incorporated
+and volunteer where help is needed most.
+</p>
+
+<div id="syncStatus" class="sync-status sync-fallback">Checking live sync...</div>
+
+<div id="volunteerBoard" class="grid"></div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+const supabaseClient = window.BUSI_SUPABASE ? window.BUSI_SUPABASE.createClient() : null;
+const PUBLIC_STATUSES = ["Approved", "In Progress", "Completed", "Active"];
+
+let board = document.getElementById("volunteerBoard");
+
+function normalizeStatus(status){
+const normalized = String(status || "Pending Review").toLowerCase();
+if(normalized === "active") return "In Progress";
+if(normalized === "pending") return "Pending Review";
+if(normalized === "closed") return "Completed";
+if(normalized === "approved") return "Approved";
+if(normalized === "in progress") return "In Progress";
+if(normalized === "on hold") return "On Hold";
+if(normalized === "completed") return "Completed";
+return "Pending Review";
+}
+
+function isPublicCase(row){
+const status = normalizeStatus(row.status);
+const publicFlag = row.is_public ?? row.isPublic;
+return publicFlag === false ? false : PUBLIC_STATUSES.includes(status);
+}
+
+function normalizeCase(row){
+return {
+caseID: row.caseID || row.case_number || "BUSI-UNASSIGNED",
+project: row.project || row.need_type || "General Assistance",
+location: row.location || row.city || "San Antonio",
+status: normalizeStatus(row.status),
+volunteersNeeded: Number(row.volunteersNeeded ?? row.volunteers_needed ?? 0),
+volunteersAssigned: Array.isArray(row.volunteersAssigned) ? row.volunteersAssigned : [],
+is_public: Boolean(row.is_public ?? row.isPublic ?? false)
+};
+}
+
+const staffParam = new URLSearchParams(window.location.search).get("staff");
+if(staffParam === "1") localStorage.setItem("busiStaffMode", "1");
+if(staffParam === "0") localStorage.removeItem("busiStaffMode");
+const SHOW_SYNC_STATUS = staffParam === "1" || (staffParam !== "0" && localStorage.getItem("busiStaffMode") === "1");
+const syncStatusElement = document.getElementById("syncStatus");
+if(syncStatusElement && !SHOW_SYNC_STATUS){
+syncStatusElement.style.display = "none";
+}
+
+function setSyncStatus(message,isLive){
+const status = document.getElementById("syncStatus");
+if(!status || !SHOW_SYNC_STATUS) return;
+status.className = `sync-status ${isLive ? "sync-live" : "sync-fallback"}`;
+status.textContent = message;
+}
+
+function renderCases(cases){
+if(!cases.length){
+board.innerHTML = `
+<div class="card">
+<h3>No Active Projects Yet</h3>
+<p>Projects will appear here once they are created and approved.</p>
+</div>
+`;
+return;
+}
+
+board.innerHTML = "";
+
+cases.forEach(c => {
+
+let assigned = c.volunteersAssigned ? c.volunteersAssigned.length : 0;
+let needed = Number(c.volunteersNeeded) || 0;
+
+let volunteerButton = `
+<a class="btn" href="index.html?project=${encodeURIComponent(c.caseID)}#volunteer">
+Volunteer
+</a>
+`;
+
+if(assigned >= needed && needed > 0){
+
+volunteerButton = `
+<p style="color:#2ecc71;font-weight:bold">
+Volunteer Slots Full
+</p>
+`;
+
+}
+
+let capacity = `<p><strong>Volunteers:</strong> ${assigned} / ${needed}</p>`;
+
+board.innerHTML += `
+
+<div class="card">
+
+<h3>${c.caseID}</h3>
+
+<p><strong>${c.project}</strong></p>
+
+<p>Location: ${c.location}</p>
+
+<p>Status: ${c.status}</p>
+
+${capacity}
+
+${volunteerButton}
+
+</div>
+
+`;
+
+});
+}
+
+async function loadCases(){
+if(!supabaseClient){
+setSyncStatus("Using browser-only local data. Live sharing not confirmed.", false);
+const localCases = (JSON.parse(localStorage.getItem("busiCases")) || []).map(normalizeCase);
+renderCases(localCases.filter(isPublicCase));
+return;
+}
+
+try{
+const { data, error } = await supabaseClient
+.from("cases")
+.select("case_number, need_type, city, status, volunteers_needed, is_public")
+.order("created_at", { ascending: false })
+.limit(200);
+
+if(error){
+setSyncStatus("Supabase connection failed. Showing local fallback data.", false);
+const localCases = (JSON.parse(localStorage.getItem("busiCases")) || []).map(normalizeCase);
+renderCases(localCases);
+return;
+}
+
+setSyncStatus("Connected to Supabase live data.", true);
+renderCases((data || []).map(normalizeCase).filter(isPublicCase));
+}catch(_){
+setSyncStatus("Supabase connection failed. Showing local fallback data.", false);
+const localCases = (JSON.parse(localStorage.getItem("busiCases")) || []).map(normalizeCase);
+renderCases(localCases.filter(isPublicCase));
+}
+}
+
+loadCases();
+
+</script>
+
+<footer style="background:#0b1220;color:white;text-align:center;padding:40px 20px;margin-top:60px;border-top:2px solid #d4af37;">
+<p><strong>Busi Believers Incorporated</strong></p>
+<p>Bonding Using Stewardship and Integrity</p>
+<p style="font-style:italic;color:#d4af37;">"No voice nor invoice will go unheard."</p>
+<p>Empowering Faith &bull; Responsibility &bull; Leadership &bull; Community</p>
+<p>San Antonio, Texas</p>
+<p style="margin-top:20px;color:#aaa;">&copy; 2026 Busi Believers Incorporated</p>
+</footer>
+
+</body>
+</html>

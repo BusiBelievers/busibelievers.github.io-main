@@ -1,0 +1,51 @@
+name: Validate Site
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check all HTML files close properly
+        run: |
+          echo "Checking HTML files for </body> and </html> closing tags..."
+          failed=0
+          for f in *.html; do
+            if ! grep -q "</body>" "$f"; then
+              echo "MISSING </body> in $f"
+              failed=1
+            fi
+            if ! grep -q "</html>" "$f"; then
+              echo "MISSING </html> in $f"
+              failed=1
+            fi
+          done
+          if [ $failed -eq 1 ]; then exit 1; fi
+          echo "All HTML files look good."
+
+      - name: Check PayPal buttons use business email
+        run: |
+          echo "Checking PayPal buttons are not using placeholder button IDs..."
+          if grep -r "574SN98JVSZ2A\|YOUR_PAYPAL_BUTTON_ID" *.html; then
+            echo "ERROR: Found old hosted_button_id references - update to use business email directly."
+            exit 1
+          fi
+          echo "PayPal buttons OK."
+
+      - name: Check BUSI motto is present in key pages
+        run: |
+          echo "Checking motto in key pages..."
+          for f in index.html support.html; do
+            if ! grep -q "No voice nor invoice" "$f"; then
+              echo "MISSING motto in $f"
+              exit 1
+            fi
+          done
+          echo "Motto checks passed."

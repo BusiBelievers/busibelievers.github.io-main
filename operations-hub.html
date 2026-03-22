@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUSI Operations Hub</title>
+<style>
+:root{
+--bg:#0b1220;
+--card:rgba(255,255,255,0.06);
+--border:rgba(255,255,255,0.14);
+--gold:#d4af37;
+--muted:#d7dce9;
+}
+body{font-family:Arial;background:radial-gradient(circle at 20% 0%,rgba(212,175,55,0.14),transparent 40%),var(--bg);color:white;margin:0;}
+.container{max-width:1120px;margin:auto;padding:34px 20px 46px;}
+.btn{display:inline-block;padding:12px 16px;background:var(--gold);color:black;border-radius:10px;text-decoration:none;font-weight:bold;margin:6px 8px 6px 0;border:none;cursor:pointer;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;align-items:stretch;margin-top:10px;}
+.hero h1{margin:0 0 8px;font-size:34px;}
+.hero p{margin:0;color:var(--muted);line-height:1.45;}
+.queue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:14px;}
+.queue-item{background:rgba(28,34,51,.88);border:1px solid rgba(212,175,55,.4);border-radius:12px;padding:12px;}
+.queue-item h3{margin:0 0 6px;font-size:17px;color:#f6e7b0;}
+.queue-item p{margin:0;color:var(--muted);font-size:14px;}
+.tab-bar{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;}
+.tab-btn{padding:10px 14px;border-radius:999px;border:1px solid rgba(212,175,55,.55);background:rgba(212,175,55,.08);color:#f8e8b1;font-weight:bold;cursor:pointer;}
+.tab-btn.active{background:var(--gold);color:black;}
+.role-panel{display:none;margin-top:14px;}
+.role-panel.active{display:block;}
+.task-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-top:10px;}
+.task-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.14);border-radius:12px;padding:12px;}
+.task-card h4{margin:0 0 8px;color:#f5e2a4;}
+.task-card p{margin:0 0 8px;color:var(--muted);font-size:14px;}
+.quick-links{margin:0 0 8px;}
+.org-header{display:flex;align-items:center;gap:20px;padding:14px 20px;background:#0b1220;border-bottom:3px solid var(--gold);}
+.org-header img{height:92px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px #d4af37);}
+.org-info{display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.5;color:white;}
+.org-info strong{font-size:18px;}
+.org-info em{color:var(--gold);}
+@media (max-width:860px){
+.hero{grid-template-columns:1fr;}
+}
+.quick-actions-strip{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.05);border-bottom:1px solid rgba(212,175,55,0.35);} 
+.quick-actions-strip strong{color:#f4e2a7;font-size:14px;}
+.quick-actions-links{display:flex;flex-wrap:wrap;gap:8px;}
+.quick-actions-links a{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.45);color:#f7e6b0;text-decoration:none;font-size:13px;font-weight:bold;}
+.quick-actions-links a:hover{background:rgba(212,175,55,0.22);} 
+@media print{.quick-actions-strip{display:none!important;}}
+</style>
+</head>
+<body>
+<div class="org-header"><img src="logo.png" alt="Busi Believers Incorporated"><div class="org-info"><strong>Busi Believers Incorporated</strong><span>Bonding Using Stewardship and Integrity</span><span>San Antonio, Texas</span><em>"No voice nor invoice will go unheard."</em></div><a href="index.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#d4af37;color:#0b1220;font-weight:bold;font-size:14px;border-radius:999px;text-decoration:none;">&#127968; Home</a></div>
+<div class="quick-actions-strip" aria-label="Internal quick actions">
+<strong>Quick Actions:</strong>
+<div class="quick-actions-links">
+<a href="operations-hub.html">Operations Hub</a>
+<a href="founder-dashboard.html">Founder Dashboard</a>
+<a href="invoice-center.html">Invoice Center</a>
+<a href="curriculum-implementation.html">Curriculum</a>
+<a href="community-service-timesheet.html">Time Sheet</a>
+<a href="quote-comparison.html">Quote &amp; Comparison</a>
+</div>
+</div>
+<div class="container">
+<div class="quick-links">
+<a class="btn" href="index.html">Back to Home</a>
+<a class="btn" href="founder-dashboard.html">Founder Dashboard</a>
+<a class="btn" href="program-operations-policy.html">Operations Policy</a>
+</div>
+
+<div class="hero">
+<div class="card">
+<h1>BUSI Operations Hub</h1>
+<p>Use this screen as the non-linear starting point. Work from action queues first, then open documents only when needed. This reduces reading overload and keeps compliance steps in front of staff at decision time.</p>
+</div>
+<div class="card">
+<h3 style="margin:0 0 8px;color:#f6e7b0;">Primary Rule Gate</h3>
+<p style="margin:0;color:var(--muted);">No certificate is issued until payment arrangements are documented or sliding-scale approval is completed.</p>
+<a class="btn" href="founder-dashboard.html" style="margin-top:12px;">Open Certificate Queue</a>
+</div>
+</div>
+
+<div class="queue-grid">
+<div class="queue-item"><h3>Certificate Hold Queue</h3><p>Cases missing payment arrangement or sliding-scale approval.</p><a class="btn" href="founder-dashboard.html">Review Queue</a></div>
+<div class="queue-item"><h3>Certificate Eligible Queue</h3><p>Cases ready for closeout and release steps.</p><a class="btn" href="founder-dashboard.html">Open Ready Cases</a></div>
+<div class="queue-item"><h3>Court Service Hours</h3><p>Track time logs, initials, and signatures.</p><a class="btn" href="community-service-timesheet.html">Time Sheet</a></div>
+<div class="queue-item"><h3>Invoice Routing</h3><p>Apply required fee, contribution, or sliding scale.</p><a class="btn" href="invoice-center.html">Invoice Center</a></div>
+</div>
+
+<div class="tab-bar" aria-label="Role views">
+<button class="tab-btn active" data-tab="founder">Founder</button>
+<button class="tab-btn" data-tab="coordinator">Coordinator</button>
+<button class="tab-btn" data-tab="facilitator">Facilitator</button>
+<button class="tab-btn" data-tab="finance">Finance</button>
+</div>
+
+<div id="founder" class="role-panel active card">
+<h3 style="margin-top:0;">Founder View</h3>
+<div class="task-grid">
+<div class="task-card"><h4>Daily Priorities</h4><p>Clear Certificate Hold queue, verify documentation, then finalize closeout.</p><a class="btn" href="founder-dashboard.html">Open Founder Dashboard</a></div>
+<div class="task-card"><h4>Policy Controls</h4><p>Use policy, journey maps, and quarterly review to enforce standards.</p><a class="btn" href="program-operations-policy.html">Policy Suite</a></div>
+<div class="task-card"><h4>Public Visibility</h4><p>Only approved/public cases should appear on shared pages.</p><a class="btn" href="project-database.html">Project Database</a></div>
+</div>
+</div>
+
+<div id="coordinator" class="role-panel card">
+<h3 style="margin-top:0;">Coordinator View</h3>
+<div class="task-grid">
+<div class="task-card"><h4>Intake to Case</h4><p>Convert requests, verify email/agreement, assign city and need type.</p><a class="btn" href="founder-dashboard.html">Convert Intake</a></div>
+<div class="task-card"><h4>Journey Step Check</h4><p>Keep participants informed on current status, next step, and missing docs.</p><a class="btn" href="participant-journey-map.html">Journey Map</a></div>
+<div class="task-card"><h4>Court Service Tracking</h4><p>Capture Date, In/Out, total hours, initials, and signatures.</p><a class="btn" href="community-service-timesheet.html">Use Time Sheet</a></div>
+</div>
+</div>
+
+<div id="facilitator" class="role-panel card">
+<h3 style="margin-top:0;">Facilitator View</h3>
+<div class="task-grid">
+<div class="task-card"><h4>Session Delivery</h4><p>Run curriculum sessions with notes and progress evidence.</p><a class="btn" href="curriculum-implementation.html">Curriculum Center</a></div>
+<div class="task-card"><h4>Assessment Pack</h4><p>Pre/post forms and outcomes tracking for measurable progress.</p><a class="btn" href="curriculum-pre-post-assessment.html">Assessment Form</a></div>
+<div class="task-card"><h4>Case Notes</h4><p>Document each session clearly for quality and compliance.</p><a class="btn" href="session-case-note-template.html">Case Note Template</a></div>
+</div>
+</div>
+
+<div id="finance" class="role-panel card">
+<h3 style="margin-top:0;">Finance View</h3>
+<div class="task-grid">
+<div class="task-card"><h4>Invoice Selection</h4><p>Apply the correct invoice type for each participant context.</p><a class="btn" href="invoice-center.html">Invoice Center</a></div>
+<div class="task-card"><h4>Sliding Scale Records</h4><p>Document hardship approvals before certificate release.</p><a class="btn" href="invoice-sliding-scale.html">Sliding Scale Form</a></div>
+<div class="task-card"><h4>Closeout Rule</h4><p>No certificate release without documented payment arrangement or approved sliding scale.</p><a class="btn" href="founder-dashboard.html">Check Release Gate</a></div>
+</div>
+</div>
+</div>
+
+<script>
+const buttons = Array.from(document.querySelectorAll('.tab-btn'));
+const panels = Array.from(document.querySelectorAll('.role-panel'));
+buttons.forEach((btn) => {
+btn.addEventListener('click', () => {
+buttons.forEach((b) => b.classList.remove('active'));
+btn.classList.add('active');
+const tab = btn.getAttribute('data-tab');
+panels.forEach((p) => p.classList.toggle('active', p.id === tab));
+});
+});
+</script>
+</body>
+</html>
+

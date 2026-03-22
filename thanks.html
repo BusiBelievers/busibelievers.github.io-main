@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You | Busi Believers Incorporated</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #0b1220, #121a2f);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+    .card {
+      max-width: 520px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 28px;
+    }
+    p {
+      color: rgba(255,255,255,0.85);
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 14px;
+      background: linear-gradient(90deg, #4da3ff, #7dd3fc);
+      color: #061023;
+      font-weight: bold;
+      margin: 6px;
+    }
+    .btn.secondary {
+      background: rgba(255,255,255,0.1);
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+  .org-header{display:flex;align-items:center;gap:20px;padding:14px 20px;background:#0b1220;border-bottom:3px solid #d4af37;}
+.org-header img{height:92px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px #d4af37);}
+.org-info{display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.5;color:white;}
+.org-info strong{font-size:18px;}
+.org-info em{color:#d4af37;}
+@media print{body{background:white!important;color:black!important;}.org-header{background:white!important;border-bottom:3px solid #d4af37;}.org-info strong,.org-info span{color:black!important;}}</style>
+</head>
+
+<body>
+<div class="org-header"><img src="logo.png" alt="Busi Believers Incorporated"><div class="org-info"><strong>Busi Believers Incorporated</strong><span>Bonding Using Stewardship and Integrity</span><span>San Antonio, Texas</span><em>"No voice nor invoice will go unheard."</em></div><a href="index.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#d4af37;color:#0b1220;font-weight:bold;font-size:14px;border-radius:999px;text-decoration:none;">&#127968; Home</a></div>
+  <div class="card">
+    <h1>Thank You for Reaching Out</h1>
+    <p style="margin-top:20px;font-size:18px">
+<strong>Your BUSI Case Number:</strong>
+<span id="caseNumberDisplay"></span>
+</p>
+
+    <p>
+      We’ve received your message and truly appreciate you taking the time
+      to connect with <strong>Busi Believers Incorporated</strong>.
+    </p>
+    <p>
+      Someone from our ministry will review your submission and follow up with
+      you as soon as possible.
+    </p>    <p style="margin-top:20px;padding:15px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.2);border-radius:8px;font-size:13px;">
+      <strong>Busi Believers Incorporated</strong> is a federally recognized <strong>501(c)(3) nonprofit organization</strong> (EIN: 88-1788881).<br>
+      If you made a donation, it is <strong>tax-deductible</strong> as allowed by law.
+    </p>    <h2 style="margin-top:30px;">Your BUSI Case Number</h2>
+
+<h1 id="caseDisplay" style="color:#d4af37;"></h1>
+
+<p>
+Please save this case number. You can use it to check the status of your
+assistance request.
+</p>
+
+<a class="btn secondary" href="case-status.html">Check Case Status</a>
+    <p>
+      <em>
+        “Carry each other’s burdens, and in this way you will fulfill the law of Christ.”
+        — Galatians 6:2
+      </em>
+    </p>
+
+    <a class="btn" href="https://busib.net">Return to Homepage</a>
+    <a class="btn secondary" href="mailto:admin@busib.net">Email Us</a>
+  </div>
+
+  <script>
+
+let caseNumber = localStorage.getItem("busiCaseNumber");
+
+if(caseNumber){
+let formatted = "BUSI-" + String(caseNumber).padStart(3,'0');
+document.getElementById("caseDisplay").innerText = formatted;
+}
+
+</script>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+if(params.has("caseID")){
+document.getElementById("caseNumberDisplay").innerText = params.get("caseID");
+}
+
+</script>
+
+<footer style="background:#0b1220;color:white;text-align:center;padding:40px 20px;margin-top:60px;border-top:2px solid #d4af37;">
+<p><strong>Busi Believers Incorporated</strong></p>
+<p>Bonding Using Stewardship and Integrity</p>
+<p style="font-style:italic;color:#d4af37;">"No voice nor invoice will go unheard."</p>
+<p>Empowering Faith &bull; Responsibility &bull; Leadership &bull; Community</p>
+<p>San Antonio, Texas</p>
+<p style="margin-top:20px;color:#aaa;">&copy; 2026 Busi Believers Incorporated</p>
+</footer>
+
+</body>
+</html>

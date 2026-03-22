@@ -1,0 +1,2 @@
+Case ID,Participant Name,Service Type,Review Date,Vendor 1,Vendor 1 Quote,Vendor 2,Vendor 2 Quote,Vendor 3,Vendor 3 Quote,Average Estimated Cost,BUSI Approved Assistance,Participant Contribution,Remaining Gap,Director Name,Director Approval Date,Board/Committee Representative,Board/Committee Date,Internal Notes
+BUSI-001,,,,Vendor A,0,Vendor B,0,Vendor C,0,=ROUND((F2+H2+J2)/3,2),0,0,=MAX(K2-L2-M2,0),,,,,

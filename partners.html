@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BUSI Community Partners</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0b1220;
+color:white;
+margin:0;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+text-align:center;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+margin-top:40px;
+}
+
+.card{
+background:rgba(255,255,255,0.06);
+padding:25px;
+border-radius:16px;
+border:1px solid rgba(255,255,255,0.1);
+}
+
+.org-header{display:flex;align-items:center;gap:20px;padding:14px 20px;background:#0b1220;border-bottom:3px solid #d4af37;}
+.org-header img{height:92px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px #d4af37);}
+.org-info{display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.5;color:white;}
+.org-info strong{font-size:18px;}
+.org-info em{color:#d4af37;}
+@media print{body{background:white!important;color:black!important;}.org-header{background:white!important;border-bottom:3px solid #d4af37;}.org-info strong,.org-info span{color:black!important;}}</style>
+
+</head>
+
+<body>
+<div class="org-header"><img src="logo.png" alt="Busi Believers Incorporated"><div class="org-info"><strong>Busi Believers Incorporated</strong><span>Bonding Using Stewardship and Integrity</span><span>San Antonio, Texas</span><em>"No voice nor invoice will go unheard."</em></div><a href="index.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#d4af37;color:#0b1220;font-weight:bold;font-size:14px;border-radius:999px;text-decoration:none;">&#127968; Home</a></div>
+
+<div class="container">
+
+<h1>BUSI Community Partners</h1>
+
+<p style="max-width:700px;margin:auto">
+Busi Believers Incorporated works alongside churches, volunteers,
+and community organizations committed to strengthening families,
+mentorship, and community service.
+</p>
+
+<div id="partnerDirectory" class="grid"></div>
+
+</div>
+
+<script>
+
+/* Example Partner List */
+
+let partners = [
+
+{
+name:"Faith Community Church",
+city:"San Antonio, TX",
+type:"Church",
+description:"Community outreach and mentorship support."
+},
+
+{
+name:"River City Volunteers",
+city:"San Antonio, TX",
+type:"Volunteer Group",
+description:"Local volunteers assisting with community projects."
+},
+
+{
+name:"Kingdom Builders Ministry",
+city:"Austin, TX",
+type:"Church",
+description:"Faith-based mentorship and leadership development."
+},
+
+{
+name:"Community Trade Network",
+city:"Houston, TX",
+type:"Business Network",
+description:"Local businesses supporting community projects."
+}
+
+];
+
+/* Render Partner Directory */
+
+let container = document.getElementById("partnerDirectory");
+
+partners.forEach(p => {
+
+container.innerHTML += `
+
+<div class="card">
+
+<h3>${p.name}</h3>
+
+<p><strong>${p.type}</strong></p>
+
+<p>${p.city}</p>
+
+<p style="font-size:14px;color:#ccc">
+${p.description}
+</p>
+
+</div>
+
+`;
+
+});
+
+</script>
+
+<footer style="background:#0b1220;color:white;text-align:center;padding:40px 20px;margin-top:60px;border-top:2px solid #d4af37;">
+<p><strong>Busi Believers Incorporated</strong></p>
+<p>Bonding Using Stewardship and Integrity</p>
+<p style="font-style:italic;color:#d4af37;">"No voice nor invoice will go unheard."</p>
+<p>Empowering Faith &bull; Responsibility &bull; Leadership &bull; Community</p>
+<p>San Antonio, Texas</p>
+<p style="margin-top:20px;color:#aaa;">&copy; 2026 Busi Believers Incorporated</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUSI Program Implementation Center</title>
+<style>
+body{font-family:Arial;background:#0b1220;color:white;margin:0;}
+.container{max-width:1040px;margin:auto;padding:40px 20px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:16px;}
+.card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:22px;}
+h1,h2,h3{margin-top:0;}
+p{line-height:1.5;}
+ul{padding-left:20px;}
+li{margin-bottom:8px;}
+.btn{display:inline-block;padding:12px 16px;background:#d4af37;color:black;border-radius:10px;text-decoration:none;font-weight:bold;margin:6px 8px 6px 0;border:none;cursor:pointer;}
+.quick-links{margin:0 0 12px;}
+.muted{color:#d2d2d2;}
+.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(212,175,55,0.16);color:#f1d988;font-size:12px;font-weight:bold;}
+input[type="number"]{padding:10px;border:none;border-radius:8px;width:140px;}
+.access-input{padding:10px;border:none;border-radius:8px;width:100%;max-width:320px;margin:8px 8px 8px 0;}
+.access-status{display:inline-block;margin:8px 0 0;padding:10px 14px;border-radius:999px;font-size:14px;font-weight:bold;}
+.access-preview{background:rgba(241,196,15,0.18);color:#ffe08a;}
+.access-full{background:rgba(46,204,113,0.18);color:#7dffb1;}
+.participant-only.locked{display:none !important;}
+.preview-note{background:rgba(241,196,15,0.14);border:1px solid rgba(241,196,15,0.35);padding:12px;border-radius:12px;margin-top:10px;color:#ffe08a;}
+.action-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
+.action-row .btn{margin:0;}
+hr{border-color:rgba(255,255,255,0.16);margin:26px 0;}
+@media (max-width: 760px){
+.action-row{flex-direction:column;align-items:stretch;}
+.action-row .btn{text-align:center;}
+}
+.org-header{display:flex;align-items:center;gap:20px;padding:14px 20px;background:#0b1220;border-bottom:3px solid #d4af37;}
+.org-header img{height:92px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px #d4af37);}
+.org-info{display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.5;color:white;}
+.org-info strong{font-size:18px;}
+.org-info em{color:#d4af37;}
+@media print{body{background:white!important;color:black!important;}.org-header{background:white!important;border-bottom:3px solid #d4af37;}.org-info strong,.org-info span{color:black!important;}}.quick-actions-strip{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.05);border-bottom:1px solid rgba(212,175,55,0.35);} 
+.quick-actions-strip strong{color:#f4e2a7;font-size:14px;}
+.quick-actions-links{display:flex;flex-wrap:wrap;gap:8px;}
+.quick-actions-links a{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.45);color:#f7e6b0;text-decoration:none;font-size:13px;font-weight:bold;}
+.quick-actions-links a:hover{background:rgba(212,175,55,0.22);} 
+@media print{.quick-actions-strip{display:none!important;}}
+</style>
+</head>
+<body>
+<div class="org-header"><img src="logo.png" alt="Busi Believers Incorporated"><div class="org-info"><strong>Busi Believers Incorporated</strong><span>Bonding Using Stewardship and Integrity</span><span>San Antonio, Texas</span><em>"No voice nor invoice will go unheard."</em></div><a href="index.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#d4af37;color:#0b1220;font-weight:bold;font-size:14px;border-radius:999px;text-decoration:none;">&#127968; Home</a></div>
+<div class="quick-actions-strip" aria-label="Internal quick actions">
+<strong>Quick Actions:</strong>
+<div class="quick-actions-links">
+<a href="operations-hub.html">Operations Hub</a>
+<a href="founder-dashboard.html">Founder Dashboard</a>
+<a href="invoice-center.html">Invoice Center</a>
+<a href="curriculum-implementation.html">Curriculum</a>
+<a href="community-service-timesheet.html">Time Sheet</a>
+<a href="quote-comparison.html">Quote &amp; Comparison</a>
+</div>
+</div>
+<div class="container">
+<div class="quick-links">
+<a class="btn" href="founder-dashboard.html">Back to Founder Dashboard</a>
+<a class="btn" href="invoice-center.html">Go to Invoice Center</a>
+<a class="btn" href="operations-hub.html">Operations Hub</a>
+<a class="btn" href="leadership-dashboard.html">Leadership Dashboard</a>
+</div>
+<h1>BUSI Program Implementation Center</h1>
+<p class="muted" style="max-width:850px;">
+Balanced deployment model: one mission, two distinct program tracks, and three invoice/payment pathways.
+This structure supports court clarity, ministry alignment, donor confidence, and clean audit records.
+</p>
+
+<div class="card">
+<h2>Start Here: Add Participant In 4 Steps</h2>
+<p class="muted">Use this quick flow to avoid guesswork and get participants into the correct curriculum track fast.</p>
+<ol>
+<li>Open Founder Dashboard and complete <strong>Add Participant to Curriculum</strong>.</li>
+<li>Select track: Program A (Anger Management) or Program B (Faith & Community).</li>
+<li>Set participant status to <strong>Approved</strong> or <strong>In Progress</strong> and keep agreement accepted.</li>
+<li>Share case ID and participant email, then verify access in the Curriculum Access panel below.</li>
+</ol>
+<div class="action-row">
+<a class="btn" href="founder-dashboard.html#curriculumEnrollmentPanel">Add Participant to Curriculum</a>
+<a class="btn" href="founder-dashboard.html#curriculumRosterPanel">Open Participant Roster</a>
+<a class="btn" href="get-help.html">Public Enrollment Request Form</a>
+</div>
+</div>
+
+<div class="card" id="curriculumAccessCard">
+<h2>Curriculum Access</h2>
+<p class="muted">Public visitors can review the program overview below. Full curriculum materials are available to active participants with verified case access.</p>
+<div>
+<input id="accessCaseId" class="access-input" type="text" placeholder="Case ID (Example: BUSI-012)">
+<input id="accessEmail" class="access-input" type="email" placeholder="Participant Email">
+</div>
+<button class="btn" id="verifyAccessBtn" type="button">Verify Participant Access</button>
+<button class="btn" id="clearAccessBtn" type="button">Return to Read-Only Preview</button>
+<a class="btn" href="get-help.html">Request Participant Enrollment</a>
+<div id="accessStatus" class="access-status access-preview">Read-only preview mode is active.</div>
+</div>
+
+<div class="card">
+<h2>One-Sentence Program Distinction</h2>
+<p><strong>BUSI runs two distinct tracks:</strong> Program A is Anger Management for behavioral accountability (including court/agency referrals), and Program B is the BUSI Faith & Community Curriculum for mentorship, stewardship, and community restoration funded through donations, sponsorships, or approved program fees.</p>
+<p style="font-style:italic;color:#d4af37;">"No voice nor invoice will go unheard."</p>
+</div>
+
+<div class="grid">
+<div class="card">
+<span class="pill">Program A</span>
+<h3>Anger Management Track</h3>
+<p>Court/agency aligned behavioral education with required service fee handling.</p>
+<div class="preview-note">Read-only preview: This track focuses on behavioral accountability, structured exercises, and guided reflection.</div>
+<a class="btn participant-only" href="BUSI_Anger_Management_Full_Program.pdf" target="_blank">Download Full Program PDF</a>
+<a class="btn participant-only" href="invoice-required-service-fee.html">Open Required Fee Invoice</a>
+
+<h4 class="participant-only">Pay Required Service Fee</h4>
+<form class="participant-only" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="business" value="admin@busib.net">
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="item_name" value="BUSI Required Program Service Fee">
+<label for="requiredAmount">Amount ($)</label><br>
+<input id="requiredAmount" type="number" name="amount" min="1" step="0.01" value="50.00"><br>
+<button class="btn" type="submit">Pay Service Fee</button>
+</form>
+</div>
+
+<div class="card">
+<span class="pill">Program B</span>
+<h3>Faith & Community Curriculum Track</h3>
+<p>Mentorship and stewardship curriculum for voluntary participants, outreach cohorts, and sponsored participants.</p>
+<div class="preview-note">Read-only preview: This track includes restoration modules, stewardship development, and community accountability practice.</div>
+<a class="btn participant-only" href="BUSI_Complete_Curriculum_Workbook_With_TOC.pdf" target="_blank">Workbook with TOC</a>
+<a class="btn participant-only" href="BUSI_Complete_Curriculum_Workbook_Fillable_v2.pdf" target="_blank">Fillable Workbook</a>
+<a class="btn participant-only" href="BUSI_Complete_Curriculum_Workbook_Branded.pdf" target="_blank">Branded Workbook</a>
+<a class="btn participant-only" href="BUSI_Program_Evaluation_and_Outcomes_Form.pdf" target="_blank">Outcomes Form</a>
+<a class="btn participant-only" href="invoice-suggested-contribution.html">Suggested Contribution Invoice</a>
+
+<h4 class="participant-only">Contribute to Curriculum Fund</h4>
+<form class="participant-only" action="https://www.paypal.com/donate" method="post" target="_top">
+<input type="hidden" name="business" value="admin@busib.net">
+<input type="hidden" name="currency_code" value="USD">
+<button class="btn" name="amount" value="25" type="submit">Contribute $25</button>
+<button class="btn" name="amount" value="50" type="submit">Contribute $50</button>
+<button class="btn" name="amount" value="100" type="submit">Contribute $100</button>
+</form>
+</div>
+</div>
+
+<hr>
+
+<div class="grid">
+<div class="card">
+<h3>Sliding Scale / Hardship</h3>
+<p>Use the sliding scale invoice when cost reductions are approved due to hardship. This protects participant expectations and your bookkeeping integrity.</p>
+<a class="btn" href="invoice-sliding-scale.html">Open Sliding Scale Invoice</a>
+</div>
+
+<div class="card">
+<h3>Internal Approval & Stewardship Pack</h3>
+<p>Use these documents together for consistency and audit readiness across projects and curriculum participants.</p>
+<a class="btn" href="quote-comparison.html">Quote Comparison Tool</a>
+<a class="btn" href="quote-comparison-template.csv" download>CSV Template</a>
+<a class="btn" href="participant-responsibility.html">Participant Responsibility</a>
+</div>
+</div>
+
+<div class="card">
+<h2>Curriculum Operations Toolkit</h2>
+<p class="muted">Use these standard templates to maintain program quality, measurable outcomes, and audit-ready records each quarter.</p>
+<a class="btn" href="curriculum-standards.html">Curriculum Standards</a>
+<a class="btn" href="curriculum-pre-post-assessment.html">Pre/Post Assessment Form</a>
+<a class="btn" href="facilitator-session-template.html">Facilitator Session Template</a>
+<a class="btn" href="session-case-note-template.html">Session Case Note Template</a>
+<a class="btn" href="community-service-timesheet.html">Community Service Time Sheet</a>
+<a class="btn" href="quarterly-curriculum-review-checklist.html">Quarterly Review Checklist</a>
+<a class="btn" href="program-operations-policy.html">Operations Policy</a>
+<a class="btn" href="participant-journey-map.html">Participant Journey Maps</a>
+</div>
+
+<div class="card">
+<h2>Balanced Workflow (Recommended)</h2>
+<ul>
+<li>Step 1: Identify track at intake: Program A (required behavioral) or Program B (voluntary curriculum/community support).</li>
+<li>Step 2: Apply matching invoice type: Required Fee, Suggested Contribution, or Sliding Scale.</li>
+<li>Step 3: Document quote/approval decisions with the quote comparison summary and attach supporting records.</li>
+<li>Step 4: Before certificate issuance, confirm payment arrangements are documented or sliding-scale approval is completed.</li>
+<li>Step 5: Capture outcomes in the evaluation form and keep all files tied to the case ID.</li>
+<li>Step 6: Use founder dashboard for visibility control and public listing only when approved.</li>
+</ul>
+<a class="btn" href="founder-dashboard.html">Go to Founder Dashboard</a>
+<a class="btn" href="invoice-center.html">Go to Invoice Center</a>
+</div>
+</div>
+
+<footer style="background:#0b1220;color:white;text-align:center;padding:40px 20px;margin-top:60px;border-top:2px solid #d4af37;">
+<p><strong>Busi Believers Incorporated</strong></p>
+<p>Bonding Using Stewardship and Integrity</p>
+<p style="font-style:italic;color:#d4af37;">"No voice nor invoice will go unheard."</p>
+<p>Empowering Faith &bull; Responsibility &bull; Leadership &bull; Community</p>
+<p>San Antonio, Texas</p>
+<p style="margin-top:20px;color:#aaa;">&copy; 2026 Busi Believers Incorporated</p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+const supabaseClient = window.BUSI_SUPABASE ? window.BUSI_SUPABASE.createClient() : null;
+const ACCESS_KEY = "busiCurriculumAccess";
+
+function getStoredAccess(){
+try{
+const raw = sessionStorage.getItem(ACCESS_KEY);
+if(!raw) return null;
+const parsed = JSON.parse(raw);
+if(!parsed || !parsed.expiresAt) return null;
+if(Date.now() > Number(parsed.expiresAt)){
+sessionStorage.removeItem(ACCESS_KEY);
+return null;
+}
+return parsed;
+}catch(_){
+return null;
+}
+}
+
+function setStoredAccess(caseId,email){
+sessionStorage.setItem(ACCESS_KEY, JSON.stringify({
+caseId,
+email,
+expiresAt: Date.now() + (1000 * 60 * 60 * 8)
+}));
+}
+
+function setAccessState(isFull,message){
+const status = document.getElementById("accessStatus");
+if(status){
+status.className = `access-status ${isFull ? "access-full" : "access-preview"}`;
+status.textContent = message;
+}
+document.querySelectorAll(".participant-only").forEach((node) => {
+if(isFull){
+node.classList.remove("locked");
+}else{
+node.classList.add("locked");
+}
+});
+}
+
+async function verifyAccess(){
+const caseId = String(document.getElementById("accessCaseId").value || "").trim();
+const email = String(document.getElementById("accessEmail").value || "").trim();
+if(!caseId || !email){
+setAccessState(false, "Read-only preview mode. Enter both Case ID and participant email to verify access.");
+return;
+}
+
+if(!supabaseClient){
+setAccessState(false, "Read-only preview mode. Live verification is not available right now.");
+return;
+}
+
+try{
+const { data, error } = await supabaseClient.rpc("verify_curriculum_access", {
+p_case_number: caseId,
+p_email: email
+});
+
+if(error){
+setAccessState(false, "Read-only preview mode. Verification service is not configured yet.");
+return;
+}
+
+const result = Array.isArray(data) ? data[0] : data;
+if(result && result.allowed){
+setStoredAccess(caseId,email);
+setAccessState(true, "Full participant curriculum access verified.");
+return;
+}
+
+const reason = result && result.message ? result.message : "Access not approved for this case/email.";
+setAccessState(false, `Read-only preview mode. ${reason}`);
+}catch(_){
+setAccessState(false, "Read-only preview mode. Verification check failed.");
+}
+}
+
+document.getElementById("verifyAccessBtn").addEventListener("click", verifyAccess);
+document.getElementById("clearAccessBtn").addEventListener("click", () => {
+sessionStorage.removeItem(ACCESS_KEY);
+setAccessState(false, "Read-only preview mode is active.");
+});
+
+const stored = getStoredAccess();
+if(stored){
+document.getElementById("accessCaseId").value = stored.caseId || "";
+document.getElementById("accessEmail").value = stored.email || "";
+setAccessState(true, "Full participant curriculum access verified.");
+}else{
+setAccessState(false, "Read-only preview mode is active.");
+}
+</script>
+</body>
+</html>
+
+
