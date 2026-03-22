@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BUSI Annual Impact Report</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0b1220;
+color:white;
+margin:0;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+text-align:center;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:25px;
+margin-top:40px;
+}
+
+.card{
+background:rgba(255,255,255,0.06);
+padding:25px;
+border-radius:16px;
+border:1px solid rgba(255,255,255,0.1);
+}
+
+.stat{
+font-size:36px;
+font-weight:bold;
+color:#d4af37;
+}
+
+.section{
+margin-top:60px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>BUSI Annual Community Impact Report</h1>
+
+<p style="max-width:700px;margin:auto">
+This report highlights the impact of Busi Believers Incorporated
+through mentorship, stewardship education, and community service.
+</p>
+
+<div class="grid">
+
+<div class="card">
+<div class="stat" id="totalProjects">0</div>
+<p>Total Community Projects</p>
+</div>
+
+<div class="card">
+<div class="stat" id="completedProjects">0</div>
+<p>Projects Completed</p>
+</div>
+
+<div class="card">
+<div class="stat" id="volunteersServing">0</div>
+<p>Community Volunteers</p>
+</div>
+
+<div class="card">
+<div class="stat" id="citiesServed">1</div>
+<p>Cities Served</p>
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>Mission & Service</h2>
+
+<p style="max-width:700px;margin:auto">
+Busi Believers Incorporated works to strengthen individuals and
+families through mentorship, stewardship education, leadership
+development, and community support programs.
+</p>
+
+</div>
+
+<div class="section">
+
+<h2>Community Assistance Programs</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Home Assistance</h3>
+<p>Supporting families with home repair and maintenance projects.</p>
+</div>
+
+<div class="card">
+<h3>Vehicle Assistance</h3>
+<p>Helping individuals maintain transportation needed for employment.</p>
+</div>
+
+<div class="card">
+<h3>Community Volunteers</h3>
+<p>Local volunteers serving through mentorship and service projects.</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>Looking Ahead</h2>
+
+<p style="max-width:700px;margin:auto">
+Busi Believers Incorporated continues expanding community support
+efforts and mentorship programs while developing new partnerships
+across additional cities and communities.
+</p>
+
+</div>
+
+<div class="section" style="background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.2);padding:25px;border-radius:10px;margin-top:40px;">
+
+<h3>Organization Status</h3>
+
+<p style="max-width:700px;margin:auto;font-size:14px;">
+This report is filed by <strong>Busi Believers Incorporated</strong>, a <strong>federally recognized 501(c)(3) nonprofit organization</strong> (EIN: 88-1788881). Donations and contributions to our mission are <strong>tax-deductible</strong> as allowed by law. Our organization is committed to transparency, stewardship, and ethical use of all resources entrusted to us.
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+/* Load BUSI case database */
+
+let cases = JSON.parse(localStorage.getItem("busiCases")) || [];
+
+let total = cases.length;
+let completed = 0;
+let volunteers = 0;
+
+cases.forEach(c => {
+
+if(c.status === "Completed"){
+completed++;
+}
+
+volunteers += Number(c.volunteersNeeded) || 0;
+
+});
+
+document.getElementById("totalProjects").innerText = total;
+document.getElementById("completedProjects").innerText = completed;
+document.getElementById("volunteersServing").innerText = volunteers;
+
+</script>
+
+</body>
+</html>

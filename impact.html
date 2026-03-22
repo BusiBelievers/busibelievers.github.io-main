@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BUSI Community Impact</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<style>
+
+body{
+font-family:Arial, sans-serif;
+background:#0b1220;
+color:white;
+margin:0;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+text-align:center;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-top:40px;
+}
+
+.card{
+background:rgba(255,255,255,0.06);
+padding:25px;
+border-radius:16px;
+border:1px solid rgba(255,255,255,0.12);
+}
+
+.counter{
+font-size:36px;
+font-weight:bold;
+color:#d4af37;
+}
+
+.btn{
+display:inline-block;
+padding:12px 22px;
+border-radius:10px;
+text-decoration:none;
+background:#d4af37;
+color:black;
+font-weight:bold;
+margin-top:10px;
+}
+
+#map{
+height:500px;
+border-radius:16px;
+margin-top:40px;
+}
+
+.legend{
+background:#1c2233;
+padding:10px;
+border-radius:8px;
+margin-top:15px;
+font-size:14px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>BUSI Community Impact</h1>
+
+<p style="max-width:700px;margin:auto">
+Busi Believers Incorporated strengthens individuals and families through
+mentorship, stewardship education, and practical community support.
+</p>
+
+<p style="max-width:700px;margin:auto;font-size:13px;color:rgba(255,255,255,0.65);margin-top:15px;">
+As a federally recognized 501(c)(3) nonprofit (EIN: 88-1788881), our impact is built on transparency, community partnership, and stewardship.
+</p>
+
+<div style="margin-top:30px;">
+<a class="btn" href="projects.html">View Community Project Gallery</a>
+</div>
+
+</div>
+
+<section>
+
+<div class="container">
+
+<h2>BUSI Community Impact Tracker</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3 class="counter" id="homes">0</h3>
+<p>Homes Assisted</p>
+</div>
+
+<div class="card">
+<h3 class="counter" id="vehicles">0</h3>
+<p>Vehicles Repaired</p>
+</div>
+
+<div class="card">
+<h3 class="counter" id="trees">0</h3>
+<p>Trees Trimmed / Removed</p>
+</div>
+
+<div class="card">
+<h3 class="counter" id="volunteers">0</h3>
+<p>Community Volunteers</p>
+</div>
+
+<div class="card">
+<h3 class="counter" id="mentorship">0</h3>
+<p>Mentorship Participants</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="container">
+
+<h2>Program Impact</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3 class="counter" id="projects">0</h3>
+<p>Total Projects</p>
+</div>
+
+<div class="card">
+<h3 class="counter" id="completed">0</h3>
+<p>Projects Completed</p>
+</div>
+
+<div class="card">
+<h3 class="counter" id="active">0</h3>
+<p>Active Projects</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="container">
+
+<h2>BUSI Community Impact Map</h2>
+
+<p style="max-width:700px;margin:auto">
+Community assistance projects coordinated through Busi Believers
+Incorporated across San Antonio.
+</p>
+
+<div id="map"></div>
+
+<div class="legend">
+
+🟡 Pending Review
+🔵 Approved
+🟠 In Progress
+🟢 Completed
+
+</div>
+
+</div>
+
+</section>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+/* Load BUSI cases */
+
+let cases = JSON.parse(localStorage.getItem("busiCases")) || [];
+
+/* Counters */
+
+let homes = 0;
+let vehicles = 0;
+let trees = 0;
+let volunteers = 0;
+let completed = 0;
+let active = 0;
+
+/* Analyze cases */
+
+cases.forEach(c => {
+
+let project = (c.project || "").toLowerCase();
+
+if(project.includes("home")) homes++;
+if(project.includes("vehicle")) vehicles++;
+if(project.includes("tree")) trees++;
+
+if(c.status === "Completed") completed++;
+else active++;
+
+volunteers += Number(c.volunteersNeeded) || 0;
+
+});
+
+/* Update counters */
+
+document.getElementById("homes").innerText = homes;
+document.getElementById("vehicles").innerText = vehicles;
+document.getElementById("trees").innerText = trees;
+document.getElementById("volunteers").innerText = volunteers;
+document.getElementById("mentorship").innerText = cases.length;
+
+document.getElementById("projects").innerText = cases.length;
+document.getElementById("completed").innerText = completed;
+document.getElementById("active").innerText = active;
+
+/* Create map */
+
+var map = L.map('map').setView([29.4241, -98.4936], 11);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+attribution:'© OpenStreetMap'
+}).addTo(map);
+
+/* Marker icons */
+
+var greenIcon = new L.Icon({
+iconUrl:'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
+shadowUrl:'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+iconSize:[25,41],
+iconAnchor:[12,41]
+});
+
+var blueIcon = new L.Icon({
+iconUrl:'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+shadowUrl:'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+iconSize:[25,41],
+iconAnchor:[12,41]
+});
+
+var yellowIcon = new L.Icon({
+iconUrl:'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png',
+shadowUrl:'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+iconSize:[25,41],
+iconAnchor:[12,41]
+});
+
+var orangeIcon = new L.Icon({
+iconUrl:'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png',
+shadowUrl:'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+iconSize:[25,41],
+iconAnchor:[12,41]
+});
+
+/* Add markers */
+
+cases.forEach(c => {
+
+let lat = 29.4241 + (Math.random()-0.5)*0.1;
+let lng = -98.4936 + (Math.random()-0.5)*0.1;
+
+let icon = yellowIcon;
+
+if(c.status === "Approved") icon = blueIcon;
+if(c.status === "In Progress") icon = orangeIcon;
+if(c.status === "Completed") icon = greenIcon;
+
+L.marker([lat,lng],{icon:icon}).addTo(map)
+
+.bindPopup(`
+
+<b>${c.caseID}</b><br>
+Project: ${c.project}<br>
+Location: ${c.location}<br>
+Status: ${c.status}
+
+`);
+
+});
+
+</script>
+
+</body>
+</html>

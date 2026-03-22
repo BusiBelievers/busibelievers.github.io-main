@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BUSI Volunteer Portal</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0b1220;
+color:white;
+margin:0;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:40px 20px;
+text-align:center;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+margin-top:40px;
+}
+
+.card{
+background:rgba(255,255,255,0.06);
+padding:25px;
+border-radius:16px;
+border:1px solid rgba(255,255,255,0.1);
+text-align:left;
+}
+
+.btn{
+display:inline-block;
+padding:10px 18px;
+background:#d4af37;
+color:black;
+border-radius:8px;
+text-decoration:none;
+margin-top:10px;
+font-weight:bold;
+}
+
+.status-open{color:#f1c40f;}
+.status-progress{color:#3498db;}
+.status-complete{color:#2ecc71;}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>BUSI Volunteer Portal</h1>
+
+<p style="max-width:700px;margin:auto">
+Browse community projects coordinated by Busi Believers Incorporated
+and volunteer where help is needed most.
+</p>
+
+<div id="volunteerBoard" class="grid"></div>
+
+</div>
+
+<script>
+
+let cases = JSON.parse(localStorage.getItem("busiCases")) || [];
+
+let board = document.getElementById("volunteerBoard");
+
+cases.forEach(c => {
+
+let assigned = c.volunteersAssigned ? c.volunteersAssigned.length : 0;
+let needed = Number(c.volunteersNeeded) || 0;
+
+let volunteerButton = `
+<a class="btn" href="index.html#volunteer?project=${c.caseID}">
+Volunteer
+</a>
+`;
+
+if(assigned >= needed && needed > 0){
+
+volunteerButton = `
+<p style="color:#2ecc71;font-weight:bold">
+Volunteer Slots Full
+</p>
+`;
+
+}
+
+let capacity = `<p><strong>Volunteers:</strong> ${assigned} / ${needed}</p>`;
+
+board.innerHTML += `
+
+<div class="card">
+
+<h3>${c.caseID}</h3>
+
+<p><strong>${c.project}</strong></p>
+
+<p>Location: ${c.location}</p>
+
+<p>Status: ${c.status}</p>
+
+${capacity}
+
+${volunteerButton}
+
+</div>
+
+`;
+
+});
+
+</script>
+
+</body>
+</html>
