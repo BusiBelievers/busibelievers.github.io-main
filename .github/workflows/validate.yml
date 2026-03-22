@@ -9,12 +9,15 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Check all HTML files close properly
         run: |
+          shopt -s nullglob
           echo "Checking HTML files for </body> and </html> closing tags..."
           failed=0
           for f in *.html; do
@@ -33,7 +36,7 @@ jobs:
       - name: Check PayPal buttons use business email
         run: |
           echo "Checking PayPal buttons are not using placeholder button IDs..."
-          if grep -r "574SN98JVSZ2A\|YOUR_PAYPAL_BUTTON_ID" *.html; then
+          if grep -nE "574SN98JVSZ2A|YOUR_PAYPAL_BUTTON_ID" *.html; then
             echo "ERROR: Found old hosted_button_id references - update to use business email directly."
             exit 1
           fi
@@ -43,7 +46,7 @@ jobs:
         run: |
           echo "Checking motto in key pages..."
           for f in index.html support.html; do
-            if ! grep -q "No voice nor invoice" "$f"; then
+            if ! grep -Fqi "No voice nor invoice" "$f"; then
               echo "MISSING motto in $f"
               exit 1
             fi
