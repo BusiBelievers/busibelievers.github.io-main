@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BUSI Invoice Center | Busi Believers Incorporated</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #0b1220, #121a2f);
+      color: #ffffff;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+      border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+    }
+
+    header h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .nonprofit-header {
+      background: rgba(212, 175, 55, 0.08);
+      border: 2px solid rgba(212, 175, 55, 0.3);
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .nonprofit-header strong {
+      color: #d4af37;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #d4af37;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .policy-notice {
+      background: rgba(231, 76, 60, 0.1);
+      border: 2px solid rgba(231, 76, 60, 0.4);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+    }
+
+    .policy-notice h3 {
+      color: #e74c3c;
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+
+    .policy-notice ul {
+      margin-left: 20px;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .policy-notice li {
+      margin-bottom: 8px;
+    }
+
+    .invoice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .invoice-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+
+    .invoice-card:hover {
+      border-color: rgba(212, 175, 55, 0.4);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .invoice-card h3 {
+      font-size: 18px;
+      color: #d4af37;
+      margin-bottom: 15px;
+    }
+
+    .invoice-card p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .invoice-card .badge {
+      display: inline-block;
+      background: rgba(212, 175, 55, 0.2);
+      color: #d4af37;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      width: fit-content;
+    }
+
+    .invoice-card .features {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.6;
+    }
+
+    .invoice-card .features strong {
+      color: rgba(212, 175, 55, 0.9);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      background: linear-gradient(90deg, #d4af37, #f0c85f);
+      color: #0b1220;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .documentation-section {
+      background: rgba(46, 204, 113, 0.08);
+      border: 1px solid rgba(46, 204, 113, 0.2);
+      padding: 25px;
+      border-radius: 12px;
+      margin-top: 40px;
+    }
+
+    .documentation-section h3 {
+      color: #2ecc71;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+
+    .documentation-section p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 13px;
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .nav-buttons a {
+      padding: 10px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    a {
+      color: #d4af37;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>BUSI Invoice Center</h1>
+      <p><strong>Busi Believers Incorporated</strong></p>
+      <p>Operations Hub for Program Invoicing & Compliance</p>
+
+      <div class="nonprofit-header">
+        <p>
+          <strong>Busi Believers Incorporated</strong> is a
+          <strong>federally recognized 501(c)(3) nonprofit organization</strong>
+          (EIN: 88-1788881). All invoices and contributions support our
+          mission of faith-based mentorship, stewardship education, and
+          community service.
+        </p>
+      </div>
+    </header>
+
+    <!-- Critical Policy -->
+    <div class="policy-notice">
+      <h3>⚠️ Very Important Policy</h3>
+      <ul>
+        <li>
+          <strong>No certificate is issued</strong> until either payment
+          arrangements are documented or a sliding-scale approval is completed.
+        </li>
+        <li>
+          <strong>Prevents participant departure:</strong> Ensures
+          accountability after program completion.
+        </li>
+        <li>
+          <strong>Audit-ready documentation:</strong> Provides proof when
+          officers request verification.
+        </li>
+      </ul>
+    </div>
+
+    <!-- Invoice Types -->
+    <div class="section-title">Choose the Correct Invoice Type</div>
+
+    <p style="max-width:800px;margin:auto;color:rgba(255,255,255,0.8);font-size:13px;line-height:1.8;margin-bottom:30px;">
+      Use the correct invoice type based on participation context to maintain
+      compliance, clarity, and clean bookkeeping. Each invoice type serves a
+      specific purpose while ensuring BUSI remains audit-ready and legally
+      compliant.
+    </p>
+
+    <div class="invoice-grid">
+      <!-- Invoice Type 1 -->
+      <div class="invoice-card">
+        <div class="badge">Court / Agency Required</div>
+        <h3>Required Service Fee Invoice</h3>
+        <p>
+          Use when payment is mandatory by court order, agency directive, or
+          program requirement.
+        </p>
+        <div class="features">
+          <strong>Features:</strong><br />
+          • Not labeled as donation<br />
+          • Court-compliant wording<br />
+          • Program service fee language<br />
+          • Legally binding documentation
+        </div>
+        <a href="required-service-invoice.html" class="btn">
+          Open Service Fee Invoice
+        </a>
+      </div>
+
+      <!-- Invoice Type 2 -->
+      <div class="invoice-card">
+        <div class="badge">Voluntary Participation</div>
+        <h3>Suggested Contribution Invoice</h3>
+        <p>
+          Use when someone attends voluntarily or through community outreach.
+          Frames participation as optional and charitable.
+        </p>
+        <div class="features">
+          <strong>Features:</strong><br />
+          • Suggested contribution language<br />
+          • Supports nonprofit framing<br />
+          • Clean donation record structure<br />
+          • Tax-deductible for donors
+        </div>
+        <a href="contribution-form.html" class="btn">
+          Open Contribution Form
+        </a>
+      </div>
+
+      <!-- Invoice Type 3 -->
+      <div class="invoice-card">
+        <div class="badge">Financial Hardship</div>
+        <h3>Sliding Scale Invoice</h3>
+        <p>
+          Use when cost is reduced due to financial hardship or vulnerability.
+          Documents reduced amount agreement for dispute prevention.
+        </p>
+        <div class="features">
+          <strong>Features:</strong><br />
+          • Documents reduced amount<br />
+          • Protects against disputes<br />
+          • Hardship approval records<br />
+          • Audit-ready documentation
+        </div>
+        <a href="sliding-scale-invoice.html" class="btn">
+          Open Sliding Scale Invoice
+        </a>
+      </div>
+    </div>
+
+    <!-- Documentation & Compliance -->
+    <div class="documentation-section">
+      <h3>📋 Documentation & Compliance</h3>
+      <p>
+        <strong>Why This Matters:</strong> Proper invoice documentation is
+        critical for nonprofit compliance, tax accountability, and dispute
+        prevention. Each invoice type builds an audit trail that protects both
+        BUSI and participants.
+      </p>
+      <p>
+        <strong>When officers, auditors, or agencies request
+        documentation,</strong> BUSI can provide clear, legally compliant
+        records that verify:
+      </p>
+      <ul
+        style="margin-left:25px;color:rgba(255,255,255,0.8);font-size:12px;line-height:1.7;"
+      >
+        <li>Program participation and fees</li>
+        <li>Payment arrangements or hardship status</li>
+        <li>Nonprofit tax-deductible contributions</li>
+        <li>Certificate issuance triggers and accountability</li>
+      </ul>
+      <p style="margin-top:15px;font-size:12px;color:rgba(46,204,113,0.8);">
+        ✓ All invoices created through this center automatically maintain
+        compliance standards and feed into BUSI's records system.
+      </p>
+    </div>
+
+    <!-- Tax Notice -->
+    <div
+      style="background:rgba(52,152,219,0.08);border:1px solid rgba(52,152,219,0.2);padding:20px;border-radius:10px;margin-top:30px;"
+    >
+      <p style="font-size:12px;color:rgba(255,255,255,0.8);line-height:1.8;">
+        <strong style="color:#3498db;">Tax Notice:</strong> Contributions to
+        Busi Believers Incorporated (EIN: 88-1788881), a federally recognized
+        501(c)(3) nonprofit organization, are tax-deductible as allowed by law
+        (when applicable invoice type is used). Service fees and adjusted
+        amounts may have different tax treatment — consult your tax advisor.
+      </p>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-buttons">
+      <a href="founder-dashboard.html" class="btn btn-secondary">
+        ← Back to Founder Dashboard
+      </a>
+      <a href="index.html" class="btn btn-secondary"> Go to Homepage </a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        <strong>Busi Believers Incorporated</strong><br />
+        Bonding Using Stewardship and Integrity<br />
+        San Antonio, Texas<br />
+        <br />
+        EIN: 88-1788881 | Phone: 888-287-4215 |
+        <a href="mailto:admin@busib.net">Email: admin@busib.net</a><br />
+        <br />
+        © 2026 Busi Believers Incorporated. All rights reserved.<br />
+        <em>"No voice nor invoice will go unheard."</em>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

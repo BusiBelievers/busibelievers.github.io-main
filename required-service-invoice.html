@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Required Service Fee Invoice | Busi Believers Incorporated</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #0b1220, #121a2f);
+      color: #ffffff;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+      border-bottom: 2px solid rgba(231, 76, 60, 0.3);
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .notice {
+      background: rgba(231, 76, 60, 0.1);
+      border: 2px solid rgba(231, 76, 60, 0.3);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .notice strong {
+      color: #e74c3c;
+    }
+
+    form {
+      background: rgba(255, 255, 255, 0.06);
+      padding: 30px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-row.full {
+      grid-template-columns: 1fr;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    input,
+    select,
+    textarea {
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #e74c3c;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: bold;
+      color: #e74c3c;
+      margin-top: 20px;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(231, 76, 60, 0.2);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    button {
+      flex: 1;
+      padding: 14px 22px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-submit {
+      background: linear-gradient(90deg, #e74c3c, #c0392b);
+      color: white;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(231, 76, 60, 0.3);
+    }
+
+    .btn-back {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-back:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .compliance-notice {
+      background: rgba(52, 152, 219, 0.1);
+      border: 1px solid rgba(52, 152, 219, 0.3);
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.7;
+    }
+
+    .compliance-notice strong {
+      color: #3498db;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    a {
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Required Service Fee Invoice</h1>
+      <p><strong>Busi Believers Incorporated</strong></p>
+      <p>Court / Agency Mandated Payment Documentation</p>
+    </header>
+
+    <!-- Legal Notice -->
+    <div class="notice">
+      <p>
+        <strong>IMPORTANT:</strong> This invoice documents a required service
+        fee mandated by court order, agency directive, or program requirement.
+        This is <strong>not a donation</strong> and uses legally compliant
+        service fee language.
+      </p>
+      <p style="margin-top: 12px;">
+        <strong>Busi Believers Incorporated</strong> (EIN: 88-1788881) is a
+        501(c)(3) nonprofit. Service fees support program administration,
+        mentorship delivery, and community outreach.
+      </p>
+    </div>
+
+    <form id="serviceInvoiceForm">
+      <!-- Invoice Information -->
+      <div class="section-title">Invoice Information</div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="invoiceNumber">Invoice Number</label>
+          <input
+            type="text"
+            id="invoiceNumber"
+            name="invoiceNumber"
+            placeholder="Auto-generated"
+            readonly
+          />
+        </div>
+        <div class="form-group">
+          <label for="invoiceDate">Invoice Date</label>
+          <input
+            type="date"
+            id="invoiceDate"
+            name="invoiceDate"
+            required
+          />
+        </div>
+      </div>
+
+      <!-- Service Information -->
+      <div class="section-title">Service Information</div>
+
+      <div class="form-row full">
+        <div class="form-group">
+          <label for="participantName">Participant Name</label>
+          <input
+            type="text"
+            id="participantName"
+            name="participantName"
+            placeholder="Enter participant full name"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="your@email.com"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="(555) 123-4567"
+          />
+        </div>
+      </div>
+
+      <div class="form-row full">
+        <div class="form-group">
+          <label for="serviceType">Service/Program Type</label>
+          <select id="serviceType" name="serviceType" required>
+            <option value="">-- Select Service Type --</option>
+            <option value="mentorship">Mentorship Program</option>
+            <option value="stewardship">Stewardship Education</option>
+            <option value="community-service">Community Service Program</option>
+            <option value="court-ordered">Court-Ordered Program</option>
+            <option value="agency-referral">Agency-Referred Program</option>
+            <option value="other">Other (specify below)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row full">
+        <div class="form-group">
+          <label for="description">Service Description & Authority</label>
+          <textarea
+            id="description"
+            name="description"
+            placeholder="Describe the service provided and the court/agency authority requiring this fee"
+            required
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- Fee Information -->
+      <div class="section-title">Service Fee</div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="requiredAmount">Required Service Fee ($)</label>
+          <input
+            type="number"
+            id="requiredAmount"
+            name="requiredAmount"
+            placeholder="0.00"
+            min="0"
+            step="0.01"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="paidAmount">Amount Paid ($)</label>
+          <input
+            type="number"
+            id="paidAmount"
+            name="paidAmount"
+            placeholder="0.00"
+            min="0"
+            step="0.01"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-row full">
+        <div class="form-group">
+          <label for="dueDate">Payment Due Date</label>
+          <input type="date" id="dueDate" name="dueDate" required />
+        </div>
+      </div>
+
+      <!-- Payment Terms -->
+      <div class="section-title">Payment Terms</div>
+
+      <div class="form-row full">
+        <div class="form-group">
+          <label for="paymentTerms">Payment Arrangement</label>
+          <select id="paymentTerms" name="paymentTerms" required>
+            <option value="">-- Select Payment Term --</option>
+            <option value="full-payment">Full Payment</option>
+            <option value="paid-in-full">Already Paid in Full</option>
+            <option value="payment-plan">Payment Plan</option>
+            <option value="court-waived">Court/Agency Waived</option>
+            <option value="partial-paid">Partial Payment</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Compliance Notice -->
+      <div class="compliance-notice">
+        <p>
+          <strong>Legal Compliance:</strong> This invoice documents a mandated
+          service fee and creates an audit trail for court/agency verification.
+          Payment arrangements are binding and documented for compliance
+          purposes. No certificate will be issued until payment arrangements
+          are documented or fee is waived by appropriate authority.
+        </p>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="button-group">
+        <button type="reset" class="btn-back">Clear Form</button>
+        <button type="submit" class="btn-submit">Submit Service Invoice</button>
+      </div>
+    </form>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        <strong>Busi Believers Incorporated</strong><br />
+        EIN: 88-1788881 | Phone: 888-287-4215 |
+        <a href="mailto:admin@busib.net">Email: admin@busib.net</a><br />
+        <br />
+        © 2026 Busi Believers Incorporated. All rights reserved.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // Auto-generate invoice number
+    function generateInvoiceNumber() {
+      const date = new Date();
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const random = Math.floor(Math.random() * 10000)
+        .toString()
+        .padStart(4, "0");
+      return `BUSI-SF-${year}${month}${day}-${random}`;
+    }
+
+    function initializeForm() {
+      document.getElementById("invoiceNumber").value = generateInvoiceNumber();
+      const today = new Date().toISOString().split("T")[0];
+      document.getElementById("invoiceDate").value = today;
+    }
+
+    document.getElementById("serviceInvoiceForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const formData = {
+        invoiceNumber: document.getElementById("invoiceNumber").value,
+        invoiceDate: document.getElementById("invoiceDate").value,
+        participantName: document.getElementById("participantName").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        serviceType: document.getElementById("serviceType").value,
+        description: document.getElementById("description").value,
+        requiredAmount: parseFloat(document.getElementById("requiredAmount").value),
+        paidAmount: parseFloat(document.getElementById("paidAmount").value),
+        dueDate: document.getElementById("dueDate").value,
+        paymentTerms: document.getElementById("paymentTerms").value,
+        submittedAt: new Date().toISOString(),
+      };
+
+      let invoices = JSON.parse(localStorage.getItem("busiServiceInvoices")) || [];
+      invoices.push(formData);
+      localStorage.setItem("busiServiceInvoices", JSON.stringify(invoices));
+
+      alert(
+        `Service Invoice Created!\n\nInvoice Number: ${formData.invoiceNumber}\n\nThis invoice has been documented and is ready for court/agency verification.`
+      );
+
+      this.reset();
+      initializeForm();
+    });
+
+    window.addEventListener("DOMContentLoaded", initializeForm);
+  </script>
+</body>
+</html>
